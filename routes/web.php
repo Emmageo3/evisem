@@ -24,6 +24,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('/admin')->namespace('Admin')->group(function() {
     //toutes les routes de l'admin seront définies ici...
-    Route::get('login',[App\Http\Controllers\Admin\AdminController::class, 'login']);
+    Route::match(['get', 'post'],   '/',[App\Http\Controllers\Admin\AdminController::class, 'login']);
+    Route::group(['middleware' => ['admin']],function() {
+
+    });
     Route::get('dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard']);
 });
