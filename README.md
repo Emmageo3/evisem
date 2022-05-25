@@ -13,3 +13,4 @@
 
 -Administration
     -importer un template pour l'admin via adminlte
+    -creer un controleur "php artisan make:controller Admin/AdminController"
