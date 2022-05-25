@@ -4,3 +4,7 @@
     3-creer le projet laravel via la commande "composer create-project laravel/laravel nomdevotreprojet"
     4-creer une base de données
     5-connecter la base de données avec votre projet
+
+-L'authentification
+    -"composer require laravel/ui --dev"
+    -"php artisan ui vue --auth"
