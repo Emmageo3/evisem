@@ -14,3 +14,4 @@
 -Administration
     -importer un template pour l'admin via adminlte
     -creer un controleur "php artisan make:controller Admin/AdminController"
+    -Ecrire les routes qui permettent d'acceder a l'interface admin
