@@ -10,3 +10,6 @@
     -"php artisan ui vue --auth"
     -"npm install"
     -"npm run dev"
+
+-Administration
+    -importer un template pour l'admin via adminlte
