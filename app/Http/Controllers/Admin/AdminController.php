@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Hash;
 use Auth;
+use Image;
 use App\Models\Admin;
 
 class AdminController extends Controller
@@ -78,5 +79,37 @@ class AdminController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect('/admin');
+    }
+
+    public function updateAdminDetails(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $rules = [
+                'admin_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'admin_mobile' => 'required|numeric',
+                'admin_image' => 'image'
+            ];
+            $this->validate($request, $rules);
+
+            if($request->hasFile('admin_image')){
+                $image_tmp = $request->file('admin_image');
+                if($image_tmp->isValid()){
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $imagePath = 'images/admin_images/admin_photos/'.$imageName;
+                    Image::make($image_tmp)->save($imagePath);
+                }else if(!empty($data['current_admin_image'])){
+                    $imageName = $data['current_admin_image'];
+                }else {
+                    $imageName = "";
+                }
+            }
+
+            Admin::where('email',Auth::guard('admin')->user()->email)->update(['name'=>$data['admin_name'],'mobile'=>$data['admin_mobile'],'image'=>$imageName]);
+            $request->session()->flash('success_message', 'L\'administrateur a été mis a jour avec succes');
+            return redirect()->back();
+        }
+        return view('admin.update_admin_details');
     }
 }
