@@ -25,10 +25,13 @@ $(document).ready(function(){
         $.ajax({
             type:'post',
             url: '/admin/update-section-status',
-            data:{status: status,section_id:section_id},
+            data:{status:status,section_id:section_id},
             success:function(resp){
-                alert(resp['status']);
-                alert(resp['section_id']);
+                if(resp['status']==0){
+                    $("#section-"+section_id).html("<a href='javascript:void(0)' class='updateSectionStatus'>Inactif</a>")
+                }else if(resp['status']==1){
+                    $("#section-"+section_id).html("<a href='javascript:void(0)' class='updateSectionStatus'>Actif</a>")
+                }
             },error:function(){
                 alert("Erreur")
             }
