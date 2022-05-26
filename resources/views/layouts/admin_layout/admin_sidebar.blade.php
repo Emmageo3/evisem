@@ -110,7 +110,7 @@
               <li class="nav-item">
                 <a href="{{ url('admin/sections') }}" class="nav-link {{ $active }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Sections</p>
+                  <p>Catégories</p>
                 </a>
               </li>
               @if (Session::get('page') == "categories")
@@ -121,7 +121,7 @@
               <li class="nav-item">
                 <a href="{{ url('admin/categories') }}" class="nav-link {{ $active }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Catégories</p>
+                  <p>Sous-catégories</p>
                 </a>
               </li>
             </ul>

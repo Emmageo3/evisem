@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Catégories</h1>
+            <h1>Sous-catégories</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-              <li class="breadcrumb-item active">Categories</li>
+              <li class="breadcrumb-item active">Sous-catégories</li>
             </ol>
           </div>
         </div>
@@ -33,27 +33,30 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Sections</h3>
+                <a href="{{ url('admin/add-edit-category') }}" style="max-width: 200px; float: right;display: inline-block" class="btn btn-block btn-success">Ajouter une sous-catégorie</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="sections" class="table table-bordered table-striped">
+                <table id="categories" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Id</th>
                     <th>Nom</th>
+                    <th>url</th>
                     <th>Statut</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($sections as $section)
+                    @foreach ($categories as $category)
                     <tr>
-                        <td>{{ $section->id }}</td>
-                        <td>{{ $section->name }}</td>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->category_name }}</td>
+                        <td>{{ $category->url }}</td>
                         <td>
-                         @if($section->status==1)
-                         <a href="javascript:void(0)" class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}">Actif</a>
+                         @if($category->status==1)
+                         <a href="javascript:void(0)" class="updateCategoryStatus" id="category-{{ $category->id }}" category_id="{{ $category->id }}">Actif</a>
                          @else
-                         <a href="javascript:void(0)" class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}">Inactif</a>
+                         <a href="javascript:void(0)" class="updateCategoryStatus" id="category-{{ $category->id }}" category_id="{{ $category->id }}">Inactif</a>
                          @endif
                         </td>
                     </tr>
@@ -75,6 +78,5 @@
     </section>
     <!-- /.content -->
 </div>
-
 
 @endsection

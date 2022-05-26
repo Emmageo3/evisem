@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -101,10 +103,26 @@
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<script>
+   //Initialize Select2 Elements
+   $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+    theme: 'bootstrap4'
+    })
+</script>
 
 <script>
     $(function () {
       $("#sections").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+    $(function () {
+      $("#categories").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
