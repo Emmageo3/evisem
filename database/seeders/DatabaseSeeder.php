@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,17 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+
+        DB::table('admins')->insert([
+            'id'=>1,
+            'name'=>'admin',
+            'type'=>'admin',
+            'mobile'=>'+221771166073',
+            'email'=>'admin@gmail.com',
+            'password'=>'$2y$10$NQKu.3XAxewfpVFkb.zyReHExtMgzXqzR7N31nA6Jy8rcWyM5TV.q',
+            'image'=>'',
+            'status'=>1
+         ]);
     }
 }

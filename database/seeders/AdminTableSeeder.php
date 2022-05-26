@@ -14,6 +14,13 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('admins')->delete();
+        $adminRecords = [
+            ['id'=>1,'name'=>'admin','type'=>'admin','mobile'=>'+221771166073','email'=>'admin@gmail.com','password'=>'','image'=>'','status'=>1],
+        ];
+
+        foreach ($adminRecords as $key => $record) {
+            \App\Admin::create($record);
+        }
     }
 }
