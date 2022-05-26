@@ -26,7 +26,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
     //toutes les routes de l'admin seront définies ici...
     Route::match(['get', 'post'],   '/',[App\Http\Controllers\Admin\AdminController::class, 'login']);
     Route::group(['middleware' => ['admin']],function() {
-
+        Route::get('dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard']);
+        Route::get('logout', [App\Http\Controllers\Admin\AdminController::class, 'logout']);
     });
-    Route::get('dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard']);
+
 });
