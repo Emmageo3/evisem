@@ -8,17 +8,20 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Hash;
 use Auth;
 use Image;
+use Session;
 use App\Models\Admin;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
+        Session::put('page', 'dashboard');
         return view('admin.admin_dashboard');
     }
 
     public function settings()
     {
+        Session::put('page', 'settings');
         $adminDetails = Admin::where('email',Auth::guard('admin')->user()->email)->first();
         return view('admin.admin_settings',compact('adminDetails'));
     }
@@ -83,6 +86,7 @@ class AdminController extends Controller
 
     public function updateAdminDetails(Request $request)
     {
+        Session::put('page', 'update-admin-details');
         if($request->isMethod('post')){
             $data = $request->all();
             $rules = [
