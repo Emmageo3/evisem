@@ -29,6 +29,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::get('dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard']);
         Route::get('logout', [App\Http\Controllers\Admin\AdminController::class, 'logout']);
         Route::get('settings', [App\Http\Controllers\Admin\AdminController::class, 'settings']);
+        Route::post('check-current-pwd', [App\Http\Controllers\Admin\AdminController::class, 'checkCurrentPassword']);
     });
 
 });
