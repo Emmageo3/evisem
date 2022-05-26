@@ -22,16 +22,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-
-        DB::table('admins')->insert([
-            ['id'=>2,
-            'name'=>'subadmin',
-            'type'=>'subadmin',
-            'mobile'=>'+221776900713',
-            'email'=>'subadmin@gmail.com',
-            'password'=>'$2y$10$NQKu.3XAxewfpVFkb.zyReHExtMgzXqzR7N31nA6Jy8rcWyM5TV.q',
-            'image'=>'',
-            'status'=>1],
-         ]);
+        $this->call(SectionsTableSeeder::class);
     }
 }
