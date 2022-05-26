@@ -31,14 +31,32 @@
                   <h3 class="card-title">Mettre a jour le mot de passe</h3>
                 </div>
                 <!-- /.card-header -->
+                @if(Session::has('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px">
+                    {{ Session::get('error_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+
+                @if(Session::has('success_message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+                    {{ Session::get('success_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
                 <!-- form start -->
-                <form method="post" role="form" action="{{ url('/admin/update-pwd') }}" name="updatePasswordForm" id="updatePasswordForm">
+                <form method="post" role="form" action="{{ url('/admin/update-current-pwd') }}" name="updatePasswordForm" id="updatePasswordForm">
                     @csrf
-                  <div class="card-body">
+                    <div class="card-body">
+                 <?php /*
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nom</label>
                         <input class="form-control" value="{{ $adminDetails->name }}" readonly>
-                    </div>
+                    </div>*/?>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Adresse email</label>
                       <input class="form-control" value="{{ $adminDetails->email }}" readonly>
@@ -49,16 +67,16 @@
                       </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Mot de passe actuel</label>
-                      <input type="password" class="form-control" name="current_pwd" id="current_pwd" placeholder="Mot de passe actuel">
+                      <input type="password" class="form-control" name="current_pwd" id="current_pwd" placeholder="Mot de passe actuel" required>
                       <span id="checkCurrentPwd"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Nouveau mot de passe</label>
-                        <input type="password" class="form-control" id="new_pwd" name="new_pwd" placeholder="Changer le mot de passe">
+                        <input type="password" class="form-control" id="new_pwd" name="new_pwd" placeholder="Changer le mot de passe" required>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Confirmer le mot de passe</label>
-                        <input type="password" class="form-control" name="confirm_pwd" id="confirm_pwd" placeholder="Confirmer le nouveau mot de passe">
+                        <input type="password" class="form-control" name="confirm_pwd" id="confirm_pwd" placeholder="Confirmer le nouveau mot de passe" required>
                       </div>
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">

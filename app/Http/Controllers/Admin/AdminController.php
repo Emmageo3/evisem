@@ -33,6 +33,25 @@ class AdminController extends Controller
         }
     }
 
+    public function updateCurrentPassword(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+           // echo "<pre>"; print_r($data); die;
+           if(Hash::check($data['current_pwd'],Auth::guard('admin')->user()->password)){
+                if($data['new_pwd'] == $data['confirm_pwd']){
+                    Admin::where('id',Auth::guard('admin')->user()->id)->update(['password'=>bcrypt($data['new_pwd'])]);
+                    $request->session()->flash('success_message', 'Votre mot de passe a été modifié avec succes!');
+                }else{
+                    $request->session()->flash('error_message', 'Vos mots de passe ne correspondent pas');
+                }
+           }else{
+               $request->session()->flash('error_message', 'Votre mot de passe actuel est incorrect');
+           }
+           return redirect()->back();
+        }
+    }
+
     public function login(Request $request)
     {
         if($request->isMethod('post')){
