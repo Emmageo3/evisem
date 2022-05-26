@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('admins')->insert([
-            'id'=>1,
-            'name'=>'admin',
-            'type'=>'admin',
-            'mobile'=>'+221771166073',
-            'email'=>'admin@gmail.com',
+            ['id'=>2,
+            'name'=>'subadmin',
+            'type'=>'subadmin',
+            'mobile'=>'+221776900713',
+            'email'=>'subadmin@gmail.com',
             'password'=>'$2y$10$NQKu.3XAxewfpVFkb.zyReHExtMgzXqzR7N31nA6Jy8rcWyM5TV.q',
             'image'=>'',
-            'status'=>1
+            'status'=>1],
          ]);
     }
 }
