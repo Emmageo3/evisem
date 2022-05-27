@@ -24,75 +24,112 @@
       <div class="container-fluid">
 
         <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-          <div class="card-header">
-            <h3 class="card-title">Ajouter une sous-catégorie</h3>
+        <form action="{{ url('/admin/add-edit-category') }}" method="post" enctype="multipart/form-data" name="categoryForm" id="categoryForm">
+          @csrf
+          <div class="card card-default">
+            <div class="card-header">
+              <h3 class="card-title">Ajouter une sous-catégorie</h3>
 
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
             </div>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="category_name">Nom</label>
+                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Entrez le nom de la sous-catégorie" id="">
+                    </div>
+                  <!-- /.form-group -->
                   <div class="form-group">
-                      <label for="category_name">Nom de la sous-catégorie</label>
-                      <input type="email" class="form-control" name="category_name" placeholder="Entrez le nom de la sous-catégorie" id="">
+                      <label>Choisir le niveau de la catégorie</label>
+                      <select name="parent_id" id="parent_id" class="form-control select2bs4" style="width: 100%;">
+                        <option value="">Catégorie principale</option>
+                      </select>
                   </div>
-                <!-- /.form-group -->
-                <div class="form-group">
-                    <label>Choisir le niveau de la catégorie</label>
-                    <select name="parent_id" class="form-control select2bs4" style="width: 100%;">
-                      <option value="">Catégorie principale</option>
-                      @foreach ($getSections as $section)
-                      <option>{{ $section->name }}</option>
-                      @endforeach
-                    </select>
+
+                  <div class="form-group">
+                    <label for="category_discount">Remise</label>
+                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="Entrez le nom de la sous-catégorie" id="">
+                </div>
+
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="" rows="3" name="description" id="description" class="form-control"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="description">Meta description</label>
+                    <textarea  rows="3" name="meta_description" id="meta_description" class="form-control"></textarea>
+                  </div>
+                </div>
+
+
+
+                <!-- /.col -->
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                      <label>Choisir la catégorie</label>
+                      <select name="section_id" id="section_id" class="form-control select2bs4" style="width: 100%;">
+                        <option value="">Sélectionner</option>
+                        @foreach ($getSections as $section)
+                        <option>{{ $section->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                      <label for="">Image</label>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" name="category_image" id="category_image" class="custom-file-input">
+                          <label for="" class="custom-file-label">Choisir le fichier</label>
+                        </div>
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            upload
+                          </span>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="url">url</label>
+                    <input type="text" id="url" class="form-control" name="url" placeholder="url">
                 </div>
 
                 <div class="form-group">
-                    <label for="category_name">url de la sous-categories</label>
-                    <input type="email" class="form-control" name="category_name" placeholder="Entrez le nom de la sous-catégorie" id="">
+                  <label for="description">Meta titre</label>
+                  <textarea  rows="3" name="meta_title" id="meta_title" class="form-control"></textarea>
                 </div>
+
+              <div class="form-group">
+                <label for="category_name">Mots clés</label>
+                <textarea  rows="3" name="meta_keywords" id="meta_keywords" class="form-control"></textarea>
               </div>
 
 
-
-              <!-- /.col -->
-              <div class="col-md-6">
-
-                <div class="form-group">
-                    <label>Choisir la catégorie</label>
-                    <select name="section_id" class="form-control select2bs4" style="width: 100%;">
-                      <option value="">Sélectionner</option>
-                      @foreach ($getSections as $section)
-                      <option>{{ $section->name }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                <!-- /.form-group -->
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Image de la sous-catégorie</label>
-                    <input type="file" class="form-control" name="category_image" id="category_image" accept="image/*">
+                  <!-- /.form-group -->
                 </div>
-
-                <div class="form-group">
-                    <label for="category_name">Remise</label>
-                    <input type="email" class="form-control" name="category_name" placeholder="Entrez le nom de la sous-catégorie" id="">
-                </div>
-                <!-- /.form-group -->
+                <!-- /.col -->
               </div>
-              <!-- /.col -->
+              <!-- /.row -->
             </div>
-            <!-- /.row -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Soumettre</button>
+            </div>
           </div>
-        </div>
+        </form>
+
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->

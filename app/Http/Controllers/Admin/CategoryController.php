@@ -35,8 +35,24 @@ class CategoryController extends Controller
     public function addEditCategory(Request $request, $id=null){
         if($id==""){
             $title="Ajouter une sous-catégorie";
+            $category = new Category;
         }else {
             $title="Modifier une sous-catégorie";
+        }
+
+        if($request->isMethod('post')){
+            $data = $request->all();
+
+            $category->parent_id = $data['parent_id'];
+            $category->section_id = $data['section_id'];
+            $category->category_name = $data['category_name'];
+            $category->category_discount = $data['category_discount'];
+            $category->description = $data['description'];
+            $category->url = $data['url'];
+            $category->meta_title = $data['meta_title'];
+            $category->meta_description = $data['meta_description'];
+            $category->meta_keywords = $data['meta_keywords'];
+            $category->save();
         }
 
         $getSections = Section::get();
