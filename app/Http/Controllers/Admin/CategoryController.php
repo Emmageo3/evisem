@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function categories()
     {
         Session::put('page','categories');
-        $categories = Category::get();
+        $categories = Category::with(['section', 'parentcategory'])->get();
         return view('admin.categories.categories', compact('categories'));
     }
 
@@ -37,8 +37,10 @@ class CategoryController extends Controller
         if($id==""){
             $title="Ajouter une sous-catégorie";
             $category = new Category;
+            $categorydata = array();
         }else {
             $title="Modifier une sous-catégorie";
+            $categorydata = Category::where('id', $id)->first();
         }
 
         if($request->isMethod('post')){
@@ -103,14 +105,14 @@ class CategoryController extends Controller
 
         $getSections = Section::get();
 
-        return view('admin.categories.add_edit_category', compact('title','getSections'));
+        return view('admin.categories.add_edit_category', compact('title','getSections','categorydata'));
     }
 
     public function appendCategoriesLevel(Request $request)
     {
         if($request->ajax()){
             $data = $request->all();
-            $getcategories = Category::where(['section_id'=>$data['section_id'],'parent_id'=>0,'status'=>1])->get();
+            $getcategories = Category::with('subcategories')->where(['section_id'=>$data['section_id'],'parent_id'=>0,'status'=>1])->get();
             $getcategories = json_decode(json_encode($getcategories),true);
             return view('admin.categories.append_categories_level', compact('getcategories'));
         }

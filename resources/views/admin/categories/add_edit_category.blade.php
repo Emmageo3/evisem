@@ -42,11 +42,11 @@
                 </button>
             </div>
         @endif
-        <form action="{{ url('/admin/add-edit-category') }}" method="post" enctype="multipart/form-data" name="categoryForm" id="categoryForm">
+        <form @if(empty($categorydata['id'])) action="{{ url('/admin/add-edit-category') }}" @else action="{{ url('/admin/add-edit-category/'.$categorydata['id']) }}" @endif  method="post" enctype="multipart/form-data" name="categoryForm" id="categoryForm">
           @csrf
           <div class="card card-default">
             <div class="card-header">
-              <h3 class="card-title">Ajouter une sous-catégorie</h3>
+              <h3 class="card-title">{{ $title }}</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -63,7 +63,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="category_name">Nom</label>
-                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Entrez le nom de la sous-catégorie">
+                        <input type="text" class="form-control" id="category_name" name="category_name"
+                         placeholder="Entrez le nom de la sous-catégorie"
+                        @if (!empty($categorydata['category_name']))
+                             value="{{ $categorydata['category_name'] }}"
+                        @else
+                             value="{{ old('category_name') }}"
+                        @endif>
                     </div>
                   <!-- /.form-group -->
                   <div id="appendCategoriesLevel">
@@ -72,17 +78,32 @@
 
                   <div class="form-group">
                     <label for="category_discount">Remise</label>
-                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="Entrez le nom de la sous-catégorie" >
+                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="Entrez le nom de la sous-catégorie"
+                    @if (!empty($categorydata['category_discount']))
+                             value="{{ $categorydata['category_discount'] }}"
+                    @else
+                             value="{{ old('category_discount') }}"
+                    @endif>
                 </div>
 
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea rows="3" name="description" id="description" class="form-control"></textarea>
+                    <textarea rows="3" name="description" id="description" class="form-control"
+                    @if (!empty($categorydata['description']))
+                             value="{{ $categorydata['description'] }}"
+                    @else
+                             value="{{ old('description') }}"
+                    @endif></textarea>
                   </div>
 
                   <div class="form-group">
                     <label for="meta_description">Meta description</label>
-                    <textarea  rows="3" name="meta_description" id="meta_description" class="form-control"></textarea>
+                    <textarea  rows="3" name="meta_description" id="meta_description" class="form-control"
+                    @if (!empty($categorydata['meta_description']))
+                             value="{{ $categorydata['meta_description'] }}"
+                    @else
+                             value="{{ old('meta_description') }}"
+                    @endif></textarea>
                   </div>
                 </div>
 
@@ -118,12 +139,22 @@
 
                   <div class="form-group">
                     <label for="url">url</label>
-                    <input type="text" id="url" class="form-control" name="url" placeholder="url">
+                    <input type="text" id="url" class="form-control" name="url" placeholder="url"
+                    @if (!empty($categorydata['url']))
+                             value="{{ $categorydata['url'] }}"
+                    @else
+                             value="{{ old('url') }}"
+                    @endif>
                 </div>
 
                 <div class="form-group">
                   <label for="meta_title">Meta titre</label>
-                  <textarea  rows="3" name="meta_title" id="meta_title" class="form-control"></textarea>
+                  <textarea  rows="3" name="meta_title" id="meta_title" class="form-control"
+                  @if (!empty($categorydata['meta_title']))
+                             value="{{ $categorydata['meta_title'] }}"
+                    @else
+                             value="{{ old('meta_title') }}"
+                    @endif></textarea>
                 </div>
 
               <div class="form-group">
