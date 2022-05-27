@@ -66,11 +66,8 @@
                         <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Entrez le nom de la sous-catégorie">
                     </div>
                   <!-- /.form-group -->
-                  <div class="form-group">
-                      <label>Choisir le niveau de la catégorie</label>
-                      <select name="parent_id" id="parent_id" class="form-control select2bs4" style="width: 100%;">
-                        <option value="0">Catégorie principale</option>
-                      </select>
+                  <div id="appendCategoriesLevel">
+                      @include('admin.categories.append_categories_level')
                   </div>
 
                   <div class="form-group">
