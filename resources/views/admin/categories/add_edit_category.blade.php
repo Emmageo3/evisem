@@ -24,6 +24,24 @@
       <div class="container-fluid">
 
         <!-- SELECT2 EXAMPLE -->
+        @if ($errors->any())
+            <div class="alert alert-danger" style="margin-top: 10px">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if(Session::has('success_message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+                {{ Session::get('success_message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <form action="{{ url('/admin/add-edit-category') }}" method="post" enctype="multipart/form-data" name="categoryForm" id="categoryForm">
           @csrf
           <div class="card card-default">
@@ -45,28 +63,28 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="category_name">Nom</label>
-                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Entrez le nom de la sous-catégorie" id="">
+                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Entrez le nom de la sous-catégorie">
                     </div>
                   <!-- /.form-group -->
                   <div class="form-group">
                       <label>Choisir le niveau de la catégorie</label>
                       <select name="parent_id" id="parent_id" class="form-control select2bs4" style="width: 100%;">
-                        <option value="">Catégorie principale</option>
+                        <option value="0">Catégorie principale</option>
                       </select>
                   </div>
 
                   <div class="form-group">
                     <label for="category_discount">Remise</label>
-                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="Entrez le nom de la sous-catégorie" id="">
+                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="Entrez le nom de la sous-catégorie" >
                 </div>
 
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="" rows="3" name="description" id="description" class="form-control"></textarea>
+                    <textarea rows="3" name="description" id="description" class="form-control"></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label for="description">Meta description</label>
+                    <label for="meta_description">Meta description</label>
                     <textarea  rows="3" name="meta_description" id="meta_description" class="form-control"></textarea>
                   </div>
                 </div>
@@ -81,7 +99,7 @@
                       <select name="section_id" id="section_id" class="form-control select2bs4" style="width: 100%;">
                         <option value="">Sélectionner</option>
                         @foreach ($getSections as $section)
-                        <option>{{ $section->name }}</option>
+                        <option value="{{ $section->id }}">{{ $section->name }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -107,7 +125,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="description">Meta titre</label>
+                  <label for="meta_title">Meta titre</label>
                   <textarea  rows="3" name="meta_title" id="meta_title" class="form-control"></textarea>
                 </div>
 
