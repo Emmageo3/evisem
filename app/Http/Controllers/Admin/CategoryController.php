@@ -38,9 +38,16 @@ class CategoryController extends Controller
             $title="Ajouter une sous-catégorie";
             $category = new Category;
             $categorydata = array();
+            $getcategories = array();
+            $message = "La sous catégorie a été ajoutée avec succes!";
         }else {
             $title="Modifier une sous-catégorie";
             $categorydata = Category::where('id', $id)->first();
+            $categorydata = json_decode(json_encode($categorydata),true);
+            $getcategories = Category::with('subcategories')->where(['parent_id'=>0,'section_id'=>$categorydata['section_id']])->get();
+            $getcategories = json_decode(json_encode($getcategories),true);
+            $category = Category::find($id);
+            $message = "La sous catégorie a été modifiée avec succes!";
         }
 
         if($request->isMethod('post')){
@@ -99,13 +106,13 @@ class CategoryController extends Controller
             $category->status = 1;
             $category->save();
 
-            Session::flash('success_message','La sous-catégorie a été insérée avec succes!');
+            Session::flash('success_message',$message);
             return redirect('admin/categories');
         }
 
         $getSections = Section::get();
 
-        return view('admin.categories.add_edit_category', compact('title','getSections','categorydata'));
+        return view('admin.categories.add_edit_category', compact('title','getSections','categorydata','getcategories'));
     }
 
     public function appendCategoriesLevel(Request $request)

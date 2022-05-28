@@ -71,9 +71,16 @@
                              value="{{ old('category_name') }}"
                         @endif>
                     </div>
-                  <!-- /.form-group -->
-                  <div id="appendCategoriesLevel">
-                      @include('admin.categories.append_categories_level')
+
+
+                  <div class="form-group">
+                    <label>Choisir la catégorie</label>
+                    <select name="section_id" id="section_id" class="form-control select2bs4" style="width: 100%;">
+                      <option value="">Sélectionner</option>
+                      @foreach ($getSections as $section)
+                      <option value="{{ $section->id }}" @if(!empty($categorydata['section_id']) && $categorydata['section_id']==$section->id) selected @endif>{{ $section->name }}</option>
+                      @endforeach
+                    </select>
                   </div>
 
                   <div class="form-group">
@@ -88,22 +95,24 @@
 
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea rows="3" name="description" id="description" class="form-control"
-                    @if (!empty($categorydata['description']))
-                             value="{{ $categorydata['description'] }}"
-                    @else
-                             value="{{ old('description') }}"
-                    @endif></textarea>
+                    <textarea name="description" id="description" class="form-control">
+                        @if (!empty($categorydata['description']))
+                                {{ $categorydata['description'] }}"
+                        @else
+                                {{ old('description') }}"
+                        @endif
+                    </textarea>
                   </div>
 
                   <div class="form-group">
                     <label for="meta_description">Meta description</label>
-                    <textarea  rows="3" name="meta_description" id="meta_description" class="form-control"
+                    <textarea name="meta_description" id="meta_description" class="form-control">
                     @if (!empty($categorydata['meta_description']))
-                             value="{{ $categorydata['meta_description'] }}"
+                             {{ $categorydata['meta_description'] }}
                     @else
-                             value="{{ old('meta_description') }}"
-                    @endif></textarea>
+                             {{ old('meta_description') }}
+                    @endif
+                </textarea>
                   </div>
                 </div>
 
@@ -111,16 +120,11 @@
 
                 <!-- /.col -->
                 <div class="col-md-6">
+                     <!-- /.form-group -->
+                  <div id="appendCategoriesLevel">
+                    @include('admin.categories.append_categories_level')
+                </div>
 
-                  <div class="form-group">
-                      <label>Choisir la catégorie</label>
-                      <select name="section_id" id="section_id" class="form-control select2bs4" style="width: 100%;">
-                        <option value="">Sélectionner</option>
-                        @foreach ($getSections as $section)
-                        <option value="{{ $section->id }}">{{ $section->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
                   <!-- /.form-group -->
                   <div class="form-group">
                       <label for="">Image</label>
@@ -149,17 +153,24 @@
 
                 <div class="form-group">
                   <label for="meta_title">Meta titre</label>
-                  <textarea  rows="3" name="meta_title" id="meta_title" class="form-control"
+                  <textarea name="meta_title" id="meta_title" class="form-control">
                   @if (!empty($categorydata['meta_title']))
-                             value="{{ $categorydata['meta_title'] }}"
+                             {{ $categorydata['meta_title'] }}
                     @else
-                             value="{{ old('meta_title') }}"
-                    @endif></textarea>
+                             {{ old('meta_title') }}
+                    @endif
+                </textarea>
                 </div>
 
               <div class="form-group">
                 <label for="category_name">Mots clés</label>
-                <textarea  rows="3" name="meta_keywords" id="meta_keywords" class="form-control"></textarea>
+                <textarea name="meta_keywords" id="meta_keywords" class="form-control">
+                    @if (!empty($categorydata['meta_keywords']))
+                             {{ $categorydata['meta_keywords'] }}
+                    @else
+                             {{ old('meta_keywords') }}
+                    @endif
+                </textarea>
               </div>
 
 
