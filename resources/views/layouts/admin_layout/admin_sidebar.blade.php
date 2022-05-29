@@ -88,7 +88,7 @@
             </ul>
           </li>
 
-          @if (Session::get('page') == "sections" || Session::get('page') == "categories")
+          @if (Session::get('page') == "sections" || Session::get('page') == "categories" || Session::get('page') == "produits  ")
             <?php $active = "active"; ?>
             @else
                 <?php $active=""; ?>
@@ -122,6 +122,17 @@
                 <a href="{{ url('admin/categories') }}" class="nav-link {{ $active }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sous-catégories</p>
+                </a>
+              </li>
+              @if (Session::get('page') == "produits")
+                  <?php $active = "active"; ?>
+              @else
+                  <?php $active=""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{ url('admin/produits') }}" class="nav-link {{ $active }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Produits</p>
                 </a>
               </li>
             </ul>
