@@ -41,6 +41,8 @@
                   <thead>
                   <tr>
                     <th>Id</th>
+                    <th>Catégorie</th>
+                    <th>Sous catégorie</th>
                     <th>Nom</th>
                     <th>Code</th>
                     <th>Couleur</th>
@@ -52,6 +54,8 @@
                     @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
+                        <td>{{ $product->section->name }}</td>
+                        <td>{{ $product->category->category_name }}</td>
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->product_code }}</td>
                         <td>{{ $product->product_color }}</td>
