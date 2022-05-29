@@ -62,15 +62,11 @@ class CategoryController extends Controller
 
             $this->validate($request,$rules);
 
-            if($request->hasFile('category_image')){
-                $image_tmp = $request->file('category_image');
-                if($image_tmp->isValid()){
-                    $extension = $image_tmp->getClientOriginalExtension();
-                    $imageName = rand(111,99999).'.'.$extension;
-                    $imagePath = 'images/category_images/'.$imageName;
-                    Image::make($image_tmp)->save($imagePath);
-                    $category->category_image = $imageName;
-                }
+            // Upload Category Image
+            if ($request->hasFile('category_image')) {
+                $fileName = $request->file('category_image')->getClientOriginalName();
+                $path = $request->file('category_image')->storeAs('images/category_images/', $fileName, 'public');
+                $data["category_image"] = '/storage/'.$path;
             }
 
             if(empty($data['category_discount'])){

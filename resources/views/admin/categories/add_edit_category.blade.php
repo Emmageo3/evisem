@@ -127,7 +127,7 @@
 
                   <!-- /.form-group -->
                   <div class="form-group">
-                      <label for="">Image</label>
+                      <label for="category_image">Image</label>
                       <div class="input-group">
                         <div class="custom-file">
                           <input type="file" name="category_image" id="category_image" class="custom-file-input">
@@ -139,6 +139,12 @@
                           </span>
                         </div>
                       </div>
+                      @if (!empty($categorydata['category_image']))
+                          <div style="height: 100px">
+                              <img style="width: 50px" src="{{ asset($categorydata['category_image']) }}" alt="">
+                          </div>
+                          &nbsp;Supprimer l'image
+                      @endif
                   </div>
 
                   <div class="form-group">
@@ -164,13 +170,7 @@
 
               <div class="form-group">
                 <label for="category_name">Mots clés</label>
-                <textarea name="meta_keywords" id="meta_keywords" class="form-control">
-                    @if (!empty($categorydata['meta_keywords']))
-                             {{ $categorydata['meta_keywords'] }}
-                    @else
-                             {{ old('meta_keywords') }}
-                    @endif
-                </textarea>
+                <textarea name="meta_keywords" id="meta_keywords" class="form-control">@if (!empty($categorydata['meta_keywords'])) {{ $categorydata['meta_keywords'] }} @else {{ old('meta_keywords') }} @endif </textarea>
               </div>
 
 
