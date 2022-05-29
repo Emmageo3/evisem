@@ -138,7 +138,7 @@
                               <img style="width: 100px" src="{{ asset($categorydata['category_image']) }}" alt="">
                           </div>
                           &nbsp;
-                          <a href="{{ url('admin/delete-category-image/'.$categorydata['id']) }}">Supprimer l'image</a>
+                          <a class="confirmDelete" href="javascript:void(0)" record="category-image" recordid="{{ $categorydata['id'] }}">Supprimer l'image</a>
                       @endif
                   </div>
 
