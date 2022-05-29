@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Section;
 use Session;
 
 class ProductController extends Controller
@@ -57,6 +58,9 @@ class ProductController extends Controller
         $fitArray = array('Régulier', 'Slim');
         $occasionArray = array('décontracté', 'formel');
 
-        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','occasionArray'));
+        $categories = Section::with('categories')->get();
+        $categories = json_decode(json_encode($categories), true);
+
+        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','occasionArray','patternArray','categories'));
     }
 }
