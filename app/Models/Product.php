@@ -18,4 +18,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Section','section_id');
     }
+
+    public function attributes()
+    {
+        return $this->hasMany('App\Models\ProductsAttribute');
+    }
 }

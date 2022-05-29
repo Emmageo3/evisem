@@ -74,9 +74,11 @@
                          @endif
                         </td>
                         <td>
-                            <a href="{{ url('admin/add-edit-product/'.$product->id) }}">Modifier</a>
+                            <a href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="fas fa-plus"></i></a>
                             &nbsp;&nbsp;
-                            <a class="confirmDelete" record="product" recordid="{{ $product->id }}" href="javascript:void(0)">Supprimer</a>
+                            <a href="{{ url('admin/add-edit-product/'.$product->id) }}"><i class="fas fa-edit"></i></a>
+                            &nbsp;&nbsp;
+                            <a class="confirmDelete" record="product" recordid="{{ $product->id }}" href="javascript:void(0)"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                   @endforeach

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
+use App\Models\ProductsAttribute;
 use Session;
 
 class ProductController extends Controller
@@ -191,5 +192,41 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    public function addAttributes(Request $request, $id)
+    {
+
+        if($request->isMethod('post'))
+        {
+            $data = $request->all();
+
+            foreach ($data['sku'] as $key => $value) {
+                if (!empty($value)) {
+
+                    $attrCountSKU = ProductsAttribute::where(['product_id'=>$id, 'size'=>$data['size'][$key]])->count();
+                    if($attrCountSKU>0)
+                    {
+                        return redirect()->back();
+                    }
+
+                    $attribute = new ProductsAttribute;
+                    $attribute->product_id = $id;
+                    $attribute->sku = $value;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->status = 1;
+                    $attribute->save();
+                }
+            }
+
+
+        }
+        $productdata = Product::select('id','product_name','product_code','product_color','main_image')->with('attributes')->find($id);
+        $productdata = json_decode(json_encode($productdata),true);
+        //echo "<pre>"; print_r($productdata); die;
+        $title = "Les attributs du produit";
+        return view('admin.products.add_attributes', compact('productdata', 'title'));
+
+    }
 
 }
