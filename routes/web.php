@@ -46,6 +46,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::get('produits',[App\Http\Controllers\Admin\ProductController::class, 'products']);
         Route::post('update-product-status',[App\Http\Controllers\Admin\ProductController::class, 'updateProductStatus']);
         Route::get('delete-product/{id}',[App\Http\Controllers\Admin\ProductController::class, 'deleteProduct']);
+        Route::match(['get', 'post'], 'add-edit-product/{id?}',[App\Http\Controllers\Admin\ProductController::class, 'addEditProduct']);
     });
 
 });

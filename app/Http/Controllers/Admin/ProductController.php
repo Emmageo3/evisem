@@ -42,4 +42,21 @@ class ProductController extends Controller
         Session::flash('success_message',$message);
         return redirect()->back();
     }
+
+    public function addEditProduct(Request $request, $id=null)
+    {
+        if($id==""){
+            $title = "Ajouter un produit";
+        } else {
+            $title = "Modifier un produit";
+        }
+
+        $fabricArray = array('Coton','Polyester', 'laine');
+        $sleeveArray = array('Manche longue', 'Manche 3/4', 'Manche courte', 'Sans manche');
+        $patternArray = array('vérifié', 'uni', 'imprimé', 'soi', 'solid');
+        $fitArray = array('Régulier', 'Slim');
+        $occasionArray = array('décontracté', 'formel');
+
+        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','occasionArray'));
+    }
 }
