@@ -95,24 +95,18 @@
 
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control">
-                        @if (!empty($categorydata['description']))
-                                {{ $categorydata['description'] }}"
-                        @else
-                                {{ old('description') }}"
-                        @endif
-                    </textarea>
+                    <textarea name="description" id="description" class="form-control">@if (!empty($categorydata['description'])) {{ $categorydata['description'] }} @else {{ old('description') }} @endif </textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="meta_title">Meta titre</label>
+                    <textarea name="meta_title" id="meta_title" class="form-control">@if (!empty($categorydata['meta_title'])) {{ $categorydata['meta_title'] }} @else {{ old('meta_title') }} @endif
+                  </textarea>
                   </div>
 
                   <div class="form-group">
                     <label for="meta_description">Meta description</label>
-                    <textarea name="meta_description" id="meta_description" class="form-control">
-                    @if (!empty($categorydata['meta_description']))
-                             {{ $categorydata['meta_description'] }}
-                    @else
-                             {{ old('meta_description') }}
-                    @endif
-                </textarea>
+                    <textarea name="meta_description" id="meta_description" class="form-control">@if (!empty($categorydata['meta_description'])) {{ $categorydata['meta_description'] }} @else {{ old('meta_description') }} @endif </textarea>
                   </div>
                 </div>
 
@@ -140,10 +134,11 @@
                         </div>
                       </div>
                       @if (!empty($categorydata['category_image']))
-                          <div style="height: 100px">
-                              <img style="width: 50px" src="{{ asset($categorydata['category_image']) }}" alt="">
+                          <div style="margin-top: 5px;">
+                              <img style="width: 100px" src="{{ asset($categorydata['category_image']) }}" alt="">
                           </div>
-                          &nbsp;Supprimer l'image
+                          &nbsp;
+                          <a href="{{ url('admin/delete-category-image/'.$categorydata['id']) }}">Supprimer l'image</a>
                       @endif
                   </div>
 
@@ -157,16 +152,7 @@
                     @endif>
                 </div>
 
-                <div class="form-group">
-                  <label for="meta_title">Meta titre</label>
-                  <textarea name="meta_title" id="meta_title" class="form-control">
-                  @if (!empty($categorydata['meta_title']))
-                             {{ $categorydata['meta_title'] }}
-                    @else
-                             {{ old('meta_title') }}
-                    @endif
-                </textarea>
-                </div>
+
 
               <div class="form-group">
                 <label for="category_name">Mots clés</label>

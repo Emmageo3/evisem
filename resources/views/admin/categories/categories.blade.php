@@ -69,6 +69,8 @@
                         </td>
                         <td>
                             <a href="{{ url('admin/add-edit-category/'.$category->id) }}">Modifier</a>
+                            &nbsp;&nbsp;
+                            <a href="{{ url('admin/delete-category/'.$category->id) }}">Supprimer</a>
                         </td>
                     </tr>
                   @endforeach
