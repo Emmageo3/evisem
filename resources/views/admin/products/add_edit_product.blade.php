@@ -64,14 +64,14 @@
 
                     <div class="form-group">
                         <label>Choisir la sous catégorie</label>
-                        <select name="product_id" id="product_id" class="form-control select2bs4" style="width: 100%;">
+                        <select name="category_id" id="category_id" class="form-control select2bs4" style="width: 100%;">
                           <option value="">Sélectionner</option>
                           @foreach ($categories as $section)
                               <optgroup label="{{ $section['name'] }}"></optgroup>
                               @foreach ($section['categories'] as $category)
-                                  <option value="{{ $category['id'] }}">&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                                  <option value="{{ $category['id'] }}" @if(!empty(@old('category_id')) && $category['id'] == @old('category_id')) selected @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                                   @foreach ($category['subcategories'] as $subcategory)
-                                      <option value="{{ $subcategory['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                                      <option value="{{ $subcategory['id'] }}" @if(!empty(@old('category_id')) && $subcategory['id'] == @old('category_id')) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                                   @endforeach
                               @endforeach
                           @endforeach
