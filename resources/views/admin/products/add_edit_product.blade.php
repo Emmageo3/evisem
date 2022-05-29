@@ -69,9 +69,17 @@
                           @foreach ($categories as $section)
                               <optgroup label="{{ $section['name'] }}"></optgroup>
                               @foreach ($section['categories'] as $category)
-                                  <option value="{{ $category['id'] }}" @if(!empty(@old('category_id')) && $category['id'] == @old('category_id')) selected @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                                  <option value="{{ $category['id'] }}"
+                                @if(!empty(@old('category_id')) && $category['id'] == @old('category_id'))
+                                    selected  @else if (!empty($productdata['category_id']) && $productdata['category_id']==$category['id'])
+                                    selected
+                                @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                                   @foreach ($category['subcategories'] as $subcategory)
-                                      <option value="{{ $subcategory['id'] }}" @if(!empty(@old('category_id')) && $subcategory['id'] == @old('category_id')) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                                      <option value="{{ $subcategory['id'] }}"
+                                      @if(!empty(@old('category_id')) && $subcategory['id'] == @old('category_id'))
+                                      selected @else if (!empty($productdata['category_id']) && $productdata['category_id']==$subcategory['id'])
+                                      selected
+                                      @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $subcategory['category_name'] }}</option>
                                   @endforeach
                               @endforeach
                           @endforeach
@@ -102,10 +110,8 @@
                     <div class="form-group">
                         <label for="product_discount">Remise (%)</label>
                         <input type="text" class="form-control" name="product_discount" id="product_discount" placeholder="Entrez la remise du produit"
-                        @if (!empty($productdata['product_discount']))
-                                value="{{ $productdata['product_discount'] }}"
-                        @else
-                                value="{{ old('product_discount') }}"
+                        @if (!empty($productdata['product_discount'])) value="{{ $productdata['product_discount'] }}"
+                        @else value="{{ old('product_discount') }}"
                         @endif>
                     </div>
 
@@ -137,7 +143,7 @@
                         <select name="sleeve" id="sleeve" class="form-control select2bs4" style="width: 100%;">
                           <option value="">Sélectionner</option>
                           @foreach ($sleeveArray as $sleeve)
-                              <option value="{{ $sleeve }}">{{ $sleeve }}</option>
+                              <option value="{{ $sleeve }}" @if(!empty($productdata['sleeve'])) selected @endif>{{ $sleeve }}</option>
                           @endforeach
                         </select>
                     </div>
@@ -149,7 +155,7 @@
                         <select name="pattern" id="pattern" class="form-control select2bs4" style="width: 100%;">
                           <option value="">Sélectionner</option>
                           @foreach ($patternArray as $pattern)
-                              <option value="{{ $pattern }}">{{ $pattern }}</option>
+                              <option value="{{ $pattern }}" @if(!empty($productdata['pattern'])) selected @endif>{{ $pattern }}</option>
                           @endforeach
                         </select>
                     </div>
@@ -216,7 +222,14 @@
                           upload
                         </span>
                       </div>
-                      </div>
+                    </div>
+                    @if (!empty($productdata['main_image']))
+                          <div style="margin-top: 5px;">
+                              <img style="width: 100px" src="{{ asset($productdata['main_image']) }}" alt="{{ '/storage/'.$productdata['main_image'] }}">
+                          </div>
+                          &nbsp;
+                          <a class="confirmDelete" href="javascript:void(0)" record="product-image" recordid="{{ $productdata['id'] }}">Supprimer l'image</a>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -231,7 +244,7 @@
                     <select name="fabric" id="fabric" class="form-control select2bs4" style="width: 100%;">
                       <option value="">Sélectionner</option>
                       @foreach ($fabricArray as $fabric)
-                          <option value="{{ $fabric }}">{{ $fabric }}</option>
+                          <option value="{{ $fabric }}" @if(!empty($productdata['fabric'])) selected @endif>{{ $fabric }}</option>
                       @endforeach
                     </select>
                 </div>
@@ -243,7 +256,7 @@
                         <select name="occasion" id="occasion" class="form-control select2bs4" style="width: 100%;">
                           <option value="">Sélectionner</option>
                           @foreach ($occasionArray as $occasion)
-                              <option value="{{ $occasion }}">{{ $occasion }}</option>
+                              <option value="{{ $occasion }}" @if(!empty($productdata['occasion'])) selected @endif>{{ $occasion }}</option>
                           @endforeach
                         </select>
                     </div>
@@ -255,7 +268,7 @@
                         <select name="fit" id="fit" class="form-control select2bs4" style="width: 100%;">
                           <option value="">Sélectionner</option>
                           @foreach ($fitArray as $fit)
-                              <option value="{{ $fit }}">{{ $fit }}</option>
+                              <option value="{{ $fit }}" @if(!empty($productdata['fit'])) selected @endif>{{ $fit }}</option>
                           @endforeach
                         </select>
                     </div>

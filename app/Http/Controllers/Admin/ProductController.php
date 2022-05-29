@@ -50,8 +50,12 @@ class ProductController extends Controller
         if($id==""){
             $title = "Ajouter un produit";
             $product = new Product;
+            $productdata = array();
         } else {
             $title = "Modifier un produit";
+            $productdata = Product::find($id);
+            $productdata = json_decode(json_encode($productdata), true);
+            $product = Product::find($id);
         }
 
         if($request->isMethod('post'))
@@ -108,21 +112,28 @@ class ProductController extends Controller
             if(empty($data['product_discount'])){
                 $data['product_discount']="";
             }
+
             if(empty($data['product_video'])){
                 $data['product_video']="";
             }
+
 
             // Upload Category Image
             if ($request->hasFile('main_image')) {
                 $fileName = $request->file('main_image')->getClientOriginalName();
                 $path = $request->file('main_image')->storeAs('images/category_images/', $fileName, 'public');
-                $data["main_image"] = '/storage/'.$path;
+                $product->main_image = '/storage/'.$path;
             }
 
             if ($request->hasFile('product_video')) {
                 $fileName = $request->file('product_video')->getClientOriginalName();
                 $path = $request->file('product_video')->storeAs('images/category_images/', $fileName, 'public');
                 $data["product_video"] = '/storage/'.$path;
+                $product->product_video = $fileName;
+
+                if(empty($data['product_video'])){
+                    $data['product_video']="";
+                }
             }
 
             $categoryDetails = Category::find($data['category_id']);
@@ -134,8 +145,6 @@ class ProductController extends Controller
             $product->product_price = $data['product_price'];
             $product->product_discount = $data['product_discount'];
             $product->product_weight = $data['product_weight'];
-            $product->product_video = $data['product_video'];
-            $product->main_image = $data['main_image'];
             $product->description = $data['description'];
             $product->wash_care = $data['wash_care'];
             $product->fabric = $data['fabric'];
@@ -146,6 +155,7 @@ class ProductController extends Controller
             $product->meta_title = $data['meta_title'];
             $product->meta_keywords = $data['meta_keywords'];
             $product->meta_description = $data['meta_description'];
+            $product->product_video = $data['product_video'];
             $product->is_featured = $is_featured;
             $product->status = 1;
             $product->save();
@@ -153,7 +163,7 @@ class ProductController extends Controller
             return redirect('admin/produits');
         }
 
-        $fabricArray = array('Coton','Polyester', 'laine');
+        $fabricArray = array('Coton','Polyester', 'laine', 'satin');
         $sleeveArray = array('Manche longue', 'Manche 3/4', 'Manche courte', 'Sans manche');
         $patternArray = array('vérifié', 'uni', 'imprimé', 'soi', 'solid');
         $fitArray = array('Régulier', 'Slim');
@@ -162,6 +172,24 @@ class ProductController extends Controller
         $categories = Section::with('categories')->get();
         $categories = json_decode(json_encode($categories), true);
 
-        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','occasionArray','patternArray','categories'));
+        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','occasionArray','patternArray','categories','productdata'));
     }
+
+    public function deleteProductImage($id)
+    {
+        $productimage = Product::select('main_image')->where('id', $id)->first();
+        $product_image_path = '/storage/images/product_images/';
+        if(file_exists($product_image_path.$productimage->product_image))
+        {
+            unlink($product_image_path.$productimage->product_image);
+        }
+
+        product::where('id', $id)->update(['main_image'=>'']);
+
+        $message ="la sous-catégorie a été mise a jour avec succes!";
+        Session::flash('success_message',$message);
+        return redirect()->back();
+    }
+
+
 }

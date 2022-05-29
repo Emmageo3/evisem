@@ -45,6 +45,7 @@
                     <th>Sous catégorie</th>
                     <th>Nom</th>
                     <th>Code</th>
+                    <th>Image</th>
                     <th>Couleur</th>
                     <th>Statut</th>
                     <th>Actions</th>
@@ -58,6 +59,12 @@
                         <td>{{ $product->category->category_name }}</td>
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->product_code }}</td>
+                        <td>
+                            @if (!empty($product->main_image))
+                            <img src="{{ $product->main_image }}" alt="" height="100px" width="auto"></td>
+                            @else <p>Il n'a pas d'image</p>
+                            @endif
+
                         <td>{{ $product->product_color }}</td>
                         <td>
                          @if($product->status==1)

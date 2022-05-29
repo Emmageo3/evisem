@@ -96,13 +96,13 @@ $(document).ready(function(){
         var record = $(this).attr("record")
         var recordid = $(this).attr("recordid")
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Etes-vous sur de vouloir supprimer ceci ?',
+            text: "Vous ne pourrez pas revenir en arriere!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Oui, le supprimer!'
           }).then((result) => {
             if (result.value) {
               window.location.href="/admin/delete-"+record+"/"+recordid;
