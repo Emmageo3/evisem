@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Front\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,6 @@ use App\Http\Controllers\Admin\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -59,4 +56,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::get('delete-image/{id}',[App\Http\Controllers\Admin\ProductController::class, 'deleteImage']);
     });
 
+});
+
+Route::namespace('front')->group(function(){
+    Route::get('/', [App\Http\Controllers\Front\IndexController::class, 'index']);
 });
