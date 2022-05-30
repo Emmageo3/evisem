@@ -50,6 +50,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::get('delete-product-image/{id}',[App\Http\Controllers\Admin\ProductController::class, 'deleteProductImage']);
 
         Route::match(['get', 'post'], 'add-attributes/{id}',[App\Http\Controllers\Admin\ProductController::class, 'addAttributes']);
+        Route::post('edit-attributes/{id}',[App\Http\Controllers\Admin\ProductController::class, 'editAttributes']);
     });
 
 });

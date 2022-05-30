@@ -187,8 +187,7 @@ class ProductController extends Controller
 
         product::where('id', $id)->update(['main_image'=>'']);
 
-        $message ="la sous-catégorie a été mise a jour avec succes!";
-        Session::flash('success_message',$message);
+        Session::flash('success_message','le produit a été supprimé jour avec succes!');
         return redirect()->back();
     }
 
@@ -205,6 +204,7 @@ class ProductController extends Controller
                     $attrCountSKU = ProductsAttribute::where(['product_id'=>$id, 'size'=>$data['size'][$key]])->count();
                     if($attrCountSKU>0)
                     {
+                        Session::flash('success_message', 'Vous avez déja ajouté cette taille');
                         return redirect()->back();
                     }
 
@@ -227,6 +227,22 @@ class ProductController extends Controller
         $title = "Les attributs du produit";
         return view('admin.products.add_attributes', compact('productdata', 'title'));
 
+    }
+
+    public function editAttributes(Request $request, $id)
+    {
+        if($request->isMethod('post'))
+        {
+            $data = $request->all();
+            foreach ($data['attrId'] as $key => $attr) {
+                if (!empty($attr)) {
+                    ProductsAttribute::where(['id'=>$data['attrId'][$key]])->update(['price'=>$data['price'][$key], 'stock'=>$data['stock'][$key]]);
+                }
+            }
+
+            Session::flash('success_message1','L\'attribut a été mis a jour avec succes!'    );
+            return redirect()->back();
+        }
     }
 
 }

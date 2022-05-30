@@ -42,6 +42,7 @@
                 </button>
             </div>
         @endif
+
         <form @if(empty($categorydata['id'])) action="{{ url('/admin/add-edit-category') }}" @else action="{{ url('/admin/add-edit-category/'.$categorydata['id']) }}" @endif  method="post" enctype="multipart/form-data" name="categoryForm" id="categoryForm">
           @csrf
           <div class="card card-default">
