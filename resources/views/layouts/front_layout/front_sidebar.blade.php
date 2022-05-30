@@ -1,48 +1,34 @@
+<?php
+
+use App\Models\Section;
+
+$sections = Section::sections();
+
+?>
+
 <div id="sidebar" class="span3">
     <div class="well well-small"><a id="myCart" href="product_summary.html"><img src="{{ asset('images/front_images/ico-cart.png') }}" alt="cart">3 produits</a></div>
     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-        <li class="subMenu"><a>MEN</a>
+        @foreach ($sections as $section)
+        @if(count($section['categories'])>0)
+        <li class="subMenu"><a>{{ $section['name'] }}</a>
             <ul>
-                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>T-Shirts</strong></a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Casual T-Shirts</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Formal T-Shirts</a></li>
-            </ul>
-            <ul>
-                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>Shirts</strong></a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Casual Shirts</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Formal Shirts</a></li>
-            </ul>
-        </li>
-        <li class="subMenu"><a> WOMEN </a>
-            <ul>
-                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>Tops</strong></a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Casual Tops</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Formal Tops</a></li>
-            </ul>
-            <ul>
-                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>Dresses</strong></a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Casual Dresses</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Formal Dresses</a></li>
+                @foreach ($section['categories'] as $category)
+                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>{{ $category['category_name'] }}</strong></a></li>
+                @foreach ($category['subcategories'] as $subcategory)
+                <li><a href="products.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- {{ $subcategory['category_name'] }}</a></li>
+                @endforeach
+                @endforeach
             </ul>
         </li>
-        <li class="subMenu"><a>KIDS</a>
-            <ul>
-                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>T-Shirts</strong></a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Casual T-Shirts</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Formal T-Shirts</a></li>
-            </ul>
-            <ul>
-                <li><a href="products.html"><i class="icon-chevron-right"></i><strong>Shirts</strong></a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Casual Shirts</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Formal Shirts</a></li>
-            </ul>
-        </li>
+        @endif
+        @endforeach
     </ul>
     <br/>
     <div class="thumbnail">
         <img src="{{ asset('images/front_images/payment_methods.png') }}" title="Payment Methods" alt="Payments Methods">
         <div class="caption">
-            <h5>Payment Methods</h5>
+            <h5>Méthodes de paiment</h5>
         </div>
     </div>
 </div>
