@@ -57,9 +57,9 @@
                         <td>{{ $banner['alt'] }}</td>
                         <td>
                             @if($banner['status']==1)
-                            <a href="javascript:void(0)" class="updateBannerStatus" id="banner-{{ $banner['id'] }}" banner_id="{{ $banner['id'] }}"><i class='fas fa-toggle-on' aria-hidden="true" status="actif"></i></a>
+                            <a href="javascript:void(0)" class="updateBannerStatus" id="banner-{{ $banner['id'] }}" banner_id="{{ $banner['id'] }}">Actif</a>
                             @else
-                            <a href="javascript:void(0)" class="updateBannerStatus" id="banner-{{ $banner['id'] }}" banner_id="{{ $banner['id'] }}"><i class='fas fa-toggle-off' aria-hidden="true" status="inactif"></i></a>
+                            <a href="javascript:void(0)" class="updateBannerStatus" id="banner-{{ $banner['id'] }}" banner_id="{{ $banner['id'] }}">Inactif</a>
                             @endif
                             &nbsp;&nbsp;
                             <a href="{{ url('admin/add-edit-banner/'.$banner['id']) }}"><i class="fas fa-edit"></i></a>

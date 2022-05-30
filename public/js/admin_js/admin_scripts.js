@@ -157,15 +157,17 @@ $(document).ready(function(){
             data:{status:status,banner_id:banner_id},
             success:function(resp){
                 if(resp['status']==0){
-                    $("#banner-"+banner_id).html("<i class='fas fa-toggle-off aria-hidden='true' status='actif''></i>")
+                    $("#banner-"+banner_id).html("<a href='javascript:void(0)' class='updateBannerStatus'>Inactif</a>")
                 }else if(resp['status']==1){
-                    $("#banner-"+banner_id).html("<i class='fas fa-toggle-on aria-hidden='true' status='actif''></i>")
+                    $("#banner-"+banner_id).html("<a href='javascript:void(0)' class='updateBannerStatus'>Actif</a>")
                 }
             },error:function(){
                 alert("Erreur")
             }
         })
     })
+
+
 
 
     var maxField = 10; //Input fields increment limitation
