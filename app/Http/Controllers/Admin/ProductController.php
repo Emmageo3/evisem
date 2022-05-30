@@ -317,4 +317,19 @@ class ProductController extends Controller
             return response()->json(['status'=>$status, 200, 'image_id'=>$data['image_id']]);
         }
     }
+
+    public function deleteImage($id)
+    {
+        $productimage = ProductsImage::select('image')->where('id', $id)->first();
+        $product_image_path = '/storage/images/product_images/';
+        if(file_exists($product_image_path.$productimage->product_image))
+        {
+            unlink($product_image_path.$productimage->product_image);
+        }
+
+        productsImage::where('id', $id)->delete();
+
+        Session::flash('success_message','l\'image a été supprimée jour avec succes!');
+        return redirect()->back();
+    }
 }
