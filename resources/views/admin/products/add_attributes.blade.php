@@ -146,6 +146,13 @@
                                         <input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required>
                                     </td>
                                     <td>
+                                        @if($attribute['status']==1)
+                                        <a href="javascript:void(0)" class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}">Actif</a>
+                                        @else
+                                        <a href="javascript:void(0)" class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}">Inactif</a>
+                                        @endif
+                                        &nbsp;&nbsp;
+                                        <a class="confirmDelete" record="attribute" recordid="{{ $attribute['id'] }}" href="javascript:void(0)">Supprimer</a>
                                     </td>
                                 </tr>
                                 @endforeach
