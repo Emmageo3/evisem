@@ -3,14 +3,17 @@
 
 <div class="span9">
     <div class="well well-small">
-        <h4>Les tendances<small class="pull-right">+200 produits en tendance</small></h4>
+        <h4>Les tendances<small class="pull-right">{{ $featuredItemsCount }} produits en tendance</small></h4>
+
         <div class="row-fluid">
-            <div id="featured" class="carousel slide">
+            <div id="featured" @if($featuredItemsCount>4) class="carousel slide" @endif>
                 <div class="carousel-inner">
                     @foreach ($featuredItemsChunk as $key => $featuredItem)
+
                     <div class="item @if($key == 1) active @endif">
                         <ul class="thumbnails">
                             @foreach ($featuredItem as $item)
+
                             <li class="span3">
                                 <div class="thumbnail">
                                     <i class="tag"></i>
@@ -24,12 +27,14 @@
                             @endforeach
                         </ul>
                     </div>
+
                     @endforeach
                 </div>
                 <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
                 <a class="right carousel-control" href="#featured" data-slide="next">›</a>
             </div>
         </div>
+
     </div>
     <h4>Les nouveautés </h4>
     <ul class="thumbnails">
@@ -39,9 +44,6 @@
                 <a  href="product_details.html"><img style="width: 150px" src="{{ $product['main_image'] }}" alt=""/></a>
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
-                    <p>
-                        {{ $product['description'] }}
-                    </p>
 
                     <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a></h4>
                 </div>
