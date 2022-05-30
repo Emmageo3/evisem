@@ -2,19 +2,18 @@
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Produits</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-              <li class="breadcrumb-item active">Produits</li>
-            </ol>
-          </div>
+            <div class="col-sm-6">
+                <h1>Produits</h1>
+            </div>
+            <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                        <li class="breadcrumb-item active">Produits</li>
+                    </ol>
+            </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -75,6 +74,8 @@
                         </td>
                         <td>
                             <a href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="fas fa-plus"></i></a>
+                            &nbsp;&nbsp;
+                            <a href="{{ url('admin/add-images/'.$product->id) }}"><i class="fas fa-plus-circle"></i></a>
                             &nbsp;&nbsp;
                             <a href="{{ url('admin/add-edit-product/'.$product->id) }}"><i class="fas fa-edit"></i></a>
                             &nbsp;&nbsp;

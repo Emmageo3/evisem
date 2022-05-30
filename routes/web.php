@@ -53,6 +53,10 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::post('edit-attributes/{id}',[App\Http\Controllers\Admin\ProductController::class, 'editAttributes']);
         Route::post('update-attribute-status',[App\Http\Controllers\Admin\ProductController::class, 'updateAttributeStatus']);
         Route::get('delete-attribute/{id}',[App\Http\Controllers\Admin\ProductController::class, 'deleteAttribute']);
+
+        Route::match(['get', 'post'], 'add-images/{id}',[App\Http\Controllers\Admin\ProductController::class, 'addImages']);
+        Route::post('update-image-status',[App\Http\Controllers\Admin\ProductController::class, 'updateImageStatus']);
+        Route::get('delete-image/{id}',[App\Http\Controllers\Admin\ProductController::class, 'deleteImage']);
     });
 
 });

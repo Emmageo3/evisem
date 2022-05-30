@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
 use App\Models\ProductsAttribute;
+use App\Models\ProductsImage;
 use Session;
 
 class ProductController extends Controller
@@ -266,5 +267,54 @@ class ProductController extends Controller
         $message ="l\'attribut a été supprimé avec succes!";
         Session::flash('success_message',$message);
         return redirect()->back();
+    }
+
+    public function addImages(Request $request,$id)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+            //echo "<pre>"; print_r($request->hasFile('image')); die;
+            if($request->hasFile('images'))
+            {
+
+                $chemin = $request->file('images');
+                //echo "<pre>"; print_r($images); die;
+                //echo "test";die;
+                foreach ($chemin as $key => $image) {
+                    $productImage = new ProductsImage;
+                    $fileName = $image->getClientOriginalName();
+                    $path = $image->storeAs('images/category_images/', $fileName, 'public');
+                    $data['images'] = '/storage/'.$path;
+                    $productImage->image = $data['images'];
+                    $productImage->product_id = $id;
+                    $productImage->status = 1;
+                    $productImage->save();
+                }
+
+                $message = "Les images ont été ajoutées avec succes!";
+                return redirect()->back();
+                Session::flash('success_message', $message);
+            }
+        }
+
+        $productdata = Product::with('images')->select('id','product_name','product_code','product_color','main_image')->find($id);
+        $productdata = json_decode(json_encode($productdata), true);
+
+        $title ="Ajouter des images";
+        return view('admin.products.add_images', compact('title','productdata'));
+    }
+
+    public function updateImageStatus(Request $request)
+    {
+        if($request->ajax()){
+            $data = $request->all();
+            if ($data['status']=='Actif') {
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            ProductsImage::where('id',$data['image_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status, 200, 'image_id'=>$data['image_id']]);
+        }
     }
 }
