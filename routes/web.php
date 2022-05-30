@@ -54,6 +54,9 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::match(['get', 'post'], 'add-images/{id}',[App\Http\Controllers\Admin\ProductController::class, 'addImages']);
         Route::post('update-image-status',[App\Http\Controllers\Admin\ProductController::class, 'updateImageStatus']);
         Route::get('delete-image/{id}',[App\Http\Controllers\Admin\ProductController::class, 'deleteImage']);
+
+        Route::get('banners', [App\Http\Controllers\Admin\BannerController::class, 'banners']);
+        Route::post('update-banner-status',[App\Http\Controllers\Admin\BannerController::class, 'updateBannerStatus']);
     });
 
 });
