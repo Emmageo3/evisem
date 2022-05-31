@@ -32,7 +32,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Bannieres</h3>
-                <a href="{{ url('admin/add-edit-product') }}" style="max-width: 200px; float: right;display: inline-block" class="btn btn-block btn-success">Ajouter une bannière</a>
+                <a href="{{ url('admin/add-edit-banner') }}" style="max-width: 200px; float: right;display: inline-block" class="btn btn-block btn-success">Ajouter une bannière</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -51,7 +51,7 @@
                     @foreach ($banners as $banner)
                     <tr>
                         <td>{{ $banner['id'] }}</td>
-                        <td><img src="{{ asset('images/admin_images/'.$banner['image']) }}" alt=""></td>
+                        <td><img src="{{ asset($banner['image']) }}" alt=""></td>
                         <td>{{ $banner['link'] }}</td>
                         <td>{{ $banner['title'] }}</td>
                         <td>{{ $banner['alt'] }}</td>
@@ -64,7 +64,7 @@
                             &nbsp;&nbsp;
                             <a href="{{ url('admin/add-edit-banner/'.$banner['id']) }}"><i class="fas fa-edit"></i></a>
                             &nbsp;&nbsp;
-                            <a class="confirmDelete" record="banner" recordid="{{ $banner['id'] }}" href="javascript:void(0)"><i class="fas fa-trash"></i></a>
+                            <a href="{{ url('admin/delete-banner/'.$banner['id']) }}" class="confirmDelete" record="banner" recordid="{{ $banner['id'] }}" href="javascript:void(0)"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                   @endforeach
