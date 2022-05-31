@@ -53,6 +53,6 @@
 
 <script src="{{ url('js/front_js/front.js') }}"></script>
 <script src="{{ url('js/front_js/jquery.lightbox-0.5.js') }}"></script>
-
+<script src="{{ url('js/front_js/front_script.js') }}"></script>
 </body>
 </html>

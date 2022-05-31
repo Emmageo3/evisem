@@ -41,7 +41,7 @@
 #accordion2, #legalNotice, .justify, #mainCol{text-align:justify}
 #myCarousel .carousel-control{display:none}
 #myCarousel:hover .carousel-control{display:block}
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {color:#fff; background-color: #CF0007;text-shadow: none;}
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {color:#fff; background-color: pink;text-shadow: none;}
 /* Footer section--------------- */
 #footerSection {background: #202020;color: white;padding: 28px 0 44px;margin-top: 20px;border-top: 1px solid #444;}
 #footerSection a{color:#ccc; font-size:11px; padding:0; line-height:24px; display:block; }
@@ -60,7 +60,7 @@
 #lightbox-nav-btnPrev { left: 0; float: left;}#lightbox-nav-btnNext { right: 0; float: right;}
 #lightbox-container-image-data-box {font: 10px Verdana, Helvetica, sans-serif;background-color: #fff;margin: 0 auto;line-height: 1.4em;overflow: auto;width: 100%;padding: 0 10px 0;}
 #lightbox-container-image-data {	padding: 0 10px; 	color: #666; }
-#lightbox-container-image-data #lightbox-image-details {width: 70%; float: left; text-align: left; }	
+#lightbox-container-image-data #lightbox-image-details {width: 70%; float: left; text-align: left; }
 #lightbox-image-details-caption { font-weight: bold; }#lightbox-image-details-currentNumber {display: block; clear: left; padding-bottom: 1.0em;}
 #lightbox-secNav-btnClose {width: 66px; float: right;padding-bottom: 0.7em;	}
 /* ------------------------------- */

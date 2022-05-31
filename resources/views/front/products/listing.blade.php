@@ -3,23 +3,26 @@
 
 <div class="span9">
     <ul class="breadcrumb">
-        <li><a href="index.html">Accueil</a> <span class="divider">/</span></li>
-        <li class="active">{{ $categoryDetails['categoryDetails']['category_name'] }}</li>
+        <li><a href="{{ url('/') }}">Accueil</a> <span class="divider">/</span></li>
+        <li class="active"><?php echo $categoryDetails['breadcrumbs']; ?></li>
     </ul>
-    <h3> {{ $categoryDetails['categoryDetails']['category_name'] }} <small class="pull-right"> 40 products are available </small></h3>
+    <h3> {{ $categoryDetails['categoryDetails']['category_name'] }} <small class="pull-right"> {{ count($categoryProducts) }} produits</small></h3>
     <hr class="soft"/>
     <p>
-
+        {{ $categoryDetails['categoryDetails']['description'] }}
     </p>
     <hr class="soft"/>
-    <form class="form-horizontal span6">
+    <form name="sortProducts" id="sortProducts" class="form-horizontal span6">
+        <input type="hidden" name="url" value="{{ $url }}">
         <div class="control-group">
-            <label class="control-label alignL">Sort By </label>
-            <select>
-                <option>Priduct name A - Z</option>
-                <option>Priduct name Z - A</option>
-                <option>Priduct Stoke</option>
-                <option>Price Lowest first</option>
+            <label class="control-label alignL">Filtre</label>
+            <select name="sort" id="sort">
+                <option value="">filtrer</option>
+                <option value="product_latest" @if (isset($_GET['sort']) && $_GET['sort'] == "product_latest") selected @endif>Les plus récents</option>
+                <option value="product_name_a_z" @if (isset($_GET['sort']) && $_GET['sort'] == "product_name_a_z") selected @endif>Par ordre alphabétique (A à Z)</option>
+                <option value="product_name_z_a" @if (isset($_GET['sort']) && $_GET['sort'] == "product_name_z_a") selected @endif>Par ordre alphabétique (Z à A)</option>
+                <option value="price_lowest" @if (isset($_GET['sort']) && $_GET['sort'] == "product_lowest") selected @endif>Par le prix le plus bas</option>
+                <option value="price_highest" @if (isset($_GET['sort']) && $_GET['sort'] == "product_highest") selected @endif>Par le prix le plus élevé</option>
             </select>
         </div>
     </form>
@@ -31,179 +34,36 @@
     <br class="clr"/>
     <div class="tab-content">
         <div class="tab-pane" id="listView">
+            @foreach ($categoryProducts as $product)
             <div class="row">
                 <div class="span2">
-                    <img src="themes/images/products/3.jpg" alt=""/>
+                    <img src="{{ asset($product['main_image']) }}" alt=""/>
                 </div>
                 <div class="span4">
-                    <h3>New | Available</h3>
+                    <h3>Nouveau | Disponible</h3>
                     <hr class="soft"/>
-                    <h5>Product Name </h5>
+                    <h5>{{ $product['product_name'] }}</h5>
                     <p>
-                        Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                        that is why our goods are so popular..
+                        {{ $product['description'] }}
                     </p>
-                    <a class="btn btn-small pull-right" href="product_details.html">View Details</a>
+                    <a class="btn btn-small pull-right" href="product_details.html">Voir les détails</a>
                     <br class="clr"/>
                 </div>
                 <div class="span3 alignR">
                     <form class="form-horizontal qtyFrm">
-                        <h3> $140.00</h3>
+                        <h3>{{ $product['product_price'] }} Fcfa</h3>
                         <label class="checkbox">
-                            <input type="checkbox">  Adds product to compair
+                            <input type="checkbox">  Ajouter aux favoris
                         </label><br/>
 
-                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+                        <a href="product_details.html" class="btn btn-large btn-primary">Ajouter au panier<i class=" icon-shopping-cart"></i></a>
                         <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                     </form>
                 </div>
             </div>
             <hr class="soft"/>
-            <div class="row">
-                <div class="span2">
-                    <img src="themes/images/products/1.jpg" alt=""/>
-                </div>
-                <div class="span4">
-                    <h3>New | Available</h3>
-                    <hr class="soft"/>
-                    <h5>Product Name </h5>
-                    <p>
-                        Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                        that is why our goods are so popular..
-                    </p>
-                    <a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-                    <br class="clr"/>
-                </div>
-                <div class="span3 alignR">
-                    <form class="form-horizontal qtyFrm">
-                        <h3> $140.00</h3>
-                        <label class="checkbox">
-                            <input type="checkbox">  Adds product to compair
-                        </label><br/>
-
-                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                    </form>
-                </div>
-            </div>
-            <hr class="soft"/>
-            <div class="row">
-                <div class="span2">
-                    <img src="themes/images/products/3.jpg" alt=""/>
-                </div>
-                <div class="span4">
-                    <h3>New | Available</h3>
-                    <hr class="soft"/>
-                    <h5>Product Name </h5>
-                    <p>
-                        Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                        that is why our goods are so popular..
-                    </p>
-                    <a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-                    <br class="clr"/>
-                </div>
-                <div class="span3 alignR">
-                    <form class="form-horizontal qtyFrm">
-                        <h3> $140.00</h3>
-                        <label class="checkbox">
-                            <input type="checkbox">  Adds product to compair
-                        </label><br/>
-
-                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                    </form>
-                </div>
-            </div>
-            <hr class="soft"/>
-            <div class="row">
-                <div class="span2">
-                    <img src="themes/images/products/3.jpg" alt=""/>
-                </div>
-                <div class="span4">
-                    <h3>New | Available</h3>
-                    <hr class="soft"/>
-                    <h5>Product Name </h5>
-                    <p>
-                        Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                        that is why our goods are so popular..
-                    </p>
-                    <a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-                    <br class="clr"/>
-                </div>
-                <div class="span3 alignR">
-                    <form class="form-horizontal qtyFrm">
-                        <h3> $140.00</h3>
-                        <label class="checkbox">
-                            <input type="checkbox">  Adds product to compair
-                        </label><br/>
-
-                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                    </form>
-                </div>
-            </div>
-
-            <hr class="soft"/>
-            <div class="row">
-                <div class="span2">
-                    <img src="themes/images/products/3.jpg" alt=""/>
-                </div>
-                <div class="span4">
-                    <h3>New | Available</h3>
-                    <hr class="soft"/>
-                    <h5>Product Name </h5>
-                    <p>
-                        Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                        that is why our goods are so popular..
-                    </p>
-                    <a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-                    <br class="clr"/>
-                </div>
-                <div class="span3 alignR">
-                    <form class="form-horizontal qtyFrm">
-                        <h3> $140.00</h3>
-                        <label class="checkbox">
-                            <input type="checkbox">  Adds product to compair
-                        </label><br/>
-                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-                    </form>
-                </div>
-            </div>
-            <hr class="soft"/>
-            <div class="row">
-                <div class="span2">
-                    <img src="themes/images/products/3.jpg" alt=""/>
-                </div>
-                <div class="span4">
-                    <h3>New | Available</h3>
-                    <hr class="soft"/>
-                    <h5>Product Name </h5>
-                    <p>
-                        Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                        that is why our goods are so popular..
-                    </p>
-                    <a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-                    <br class="clr"/>
-                </div>
-                <div class="span3 alignR">
-                    <form class="form-horizontal qtyFrm">
-                        <h3> $140.00</h3>
-                        <label class="checkbox">
-                            <input type="checkbox">  Adds product to compair
-                        </label><br/>
-
-                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                    </form>
-                </div>
-            </div>
-            <hr class="soft"/>
+            @endforeach
         </div>
         <div class="tab-pane  active" id="blockView">
             <ul class="thumbnails">
@@ -212,7 +72,7 @@
                     <div class="thumbnail">
                         <a href="product_details.html"><img style="width: 150px" src="{{ asset($product['main_image']) }}" alt=""/></a>
                         <div class="caption">
-                            <h5>{{ $product['product_name'] }}</h5>
+                            <h5>{{ $product['product_name'] }} {{ $product['id'] }}</h5>
                             <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
                         </div>
                     </div>
@@ -222,17 +82,13 @@
             <hr class="soft"/>
         </div>
     </div>
-    <a href="compair.html" class="btn btn-large pull-right">Compair Product</a>
+    <a href="compair.html" class="btn btn-large pull-right">Comparer les produits</a>
     <div class="pagination">
-        <ul>
-            <li><a href="#">&lsaquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">...</a></li>
-            <li><a href="#">&rsaquo;</a></li>
-        </ul>
+        @if(isset($_GET['sort']) && !empty($_GET['sort']))
+        {{ $categoryProducts->appends(['sort' => 'price_lowest'])->links() }}
+        @else
+        {{ $categoryProducts->links() }}
+        @endif
     </div>
     <br class="clr"/>
 </div>
