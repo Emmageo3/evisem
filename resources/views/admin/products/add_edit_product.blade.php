@@ -69,15 +69,11 @@
                           @foreach ($categories as $section)
                               <optgroup label="{{ $section['name'] }}"></optgroup>
                               @foreach ($section['categories'] as $category)
-                                  <option value="{{ $category['id'] }}"
-                                @if(!empty(@old('category_id')) && $category['id'] == @old('category_id'))
-                                    selected  @else if (!empty($productdata['category_id']) && $productdata['category_id']==$category['id'])
-                                    selected
-                                @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                                  <option value="{{ $category['id'] }}" @if(!empty(@old('category_id')) && $category['id'] == @old('category_id')) selected  @elseif(!empty($productdata['category_id']) && $productdata['category_id']==$category['id']) selected @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                                   @foreach ($category['subcategories'] as $subcategory)
                                       <option value="{{ $subcategory['id'] }}"
                                       @if(!empty(@old('category_id')) && $subcategory['id'] == @old('category_id'))
-                                      selected @else if (!empty($productdata['category_id']) && $productdata['category_id']==$subcategory['id'])
+                                      selected @elseif (!empty($productdata['category_id']) && $productdata['category_id']==$subcategory['id'])
                                       selected
                                       @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $subcategory['category_name'] }}</option>
                                   @endforeach
@@ -110,8 +106,10 @@
                     <div class="form-group">
                         <label for="product_discount">Remise (%)</label>
                         <input type="text" class="form-control" name="product_discount" id="product_discount" placeholder="Entrez la remise du produit"
-                        @if (!empty($productdata['product_discount'])) value="{{ $productdata['product_discount'] }}"
-                        @else value="{{ old('product_discount') }}"
+                        @if (!empty($productdata['product_discount']))
+                                value="{{ $productdata['product_discount'] }}"
+                        @else
+                                value="{{ old('product_discount') }}"
                         @endif>
                     </div>
 
@@ -132,10 +130,10 @@
                           </div>
                     </div>
 
-                  <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control">@if (!empty($categorydata['description'])) {{ $categorydata['description'] }} @else {{ old('description') }} @endif </textarea>
-                  </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" class="form-control">@if (!empty($productdata['description'])) {{ $productdata['description'] }} @else {{ old('description') }} @endif </textarea>
+                    </div>
 
                   <div class="col-12 col-sm-6">
                     <div class="form-group">
@@ -252,11 +250,11 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
-                        <label>Occasion</label>
-                        <select name="occasion" id="occasion" class="form-control select2bs4" style="width: 100%;">
+                        <label>Longueur</label>
+                        <select name="height" id="height" class="form-control select2bs4" style="width: 100%;">
                           <option value="">Sélectionner</option>
-                          @foreach ($occasionArray as $occasion)
-                              <option value="{{ $occasion }}" @if(!empty($productdata['occasion'])) selected @endif>{{ $occasion }}</option>
+                          @foreach ($heightArray as $height)
+                              <option value="{{ $height }}" @if(!empty($productdata['height'])) selected @endif>{{ $height }}</option>
                           @endforeach
                         </select>
                     </div>
@@ -277,14 +275,14 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
-                        <label for="meta_description">Meta description</label>
-                        <textarea name="meta_description" id="meta_description" class="form-control">@if (!empty($productdata['meta_description'])) {{ $productdata['meta_description'] }} @else {{ old('meta_description') }} @endif </textarea>
+                        <label for="description">Meta description</label>
+                        <textarea name="description" id="description" class="form-control">@if (!empty($productdata['description'])) {{ $productdata['description'] }} @else {{ old('description') }} @endif </textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="is_featured">En vedette ?</label>
-                    <input type="checkbox" name="is_featured" id="is_featured" value="1">
+                    <input type="checkbox" name="is_featured" id="is_featured" @if (!empty($productdata['is_featured']) && $productdata['is_featured'] == "yes") checked @endif>
                 </div>
 
 

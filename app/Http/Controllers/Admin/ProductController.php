@@ -66,7 +66,7 @@ class ProductController extends Controller
 
             $rules = [
                 'category_id' => 'required',
-                'product_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'product_name' => 'required',
                 'product_code' => 'required|regex:/^[\w-]*$/',
                 'product_price' => 'required|numeric',
                 'product_color' =>  'required|regex:/^[\pL\s\-]+$/u'
@@ -95,6 +95,9 @@ class ProductController extends Controller
             }
             if(empty($data['meta_description'])){
                 $data['meta_description']="";
+            }
+            if(empty($data['description'])){
+                $data['description']="";
             }
             if(empty($data['meta_title'])){
                 $data['meta_title']="";
@@ -165,16 +168,17 @@ class ProductController extends Controller
             return redirect('admin/produits');
         }
 
-        $fabricArray = array('Coton','Polyester', 'laine', 'satin');
-        $sleeveArray = array('Manche longue', 'Manche 3/4', 'Manche courte', 'Sans manche');
-        $patternArray = array('vérifié', 'uni', 'imprimé', 'soi', 'solid');
-        $fitArray = array('Régulier', 'Slim');
-        $occasionArray = array('décontracté', 'formel');
+        $productFilters = Product::productFilters();
+        $fabricArray = $productFilters['fabricArray'];
+        $sleeveArray = $productFilters['sleeveArray'];
+        $fitArray = $productFilters['fitArray'];
+        $heightArray = $productFilters['heightArray'];
+        $patternArray = $productFilters['patternArray'];
 
         $categories = Section::with('categories')->get();
         $categories = json_decode(json_encode($categories), true);
 
-        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','occasionArray','patternArray','categories','productdata'));
+        return view('admin.products.add_edit_product', compact('title','fabricArray','sleeveArray','fitArray','heightArray','patternArray','categories','productdata'));
     }
 
     public function deleteProductImage($id)

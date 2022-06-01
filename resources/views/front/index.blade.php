@@ -44,7 +44,7 @@
         @foreach ($newProducts as $product)
         <li class="span3">
             <div class="thumbnail">
-                <a  href="product_details.html"><img style="width: 150px" src="{{ $product['main_image'] }}" alt=""/></a>
+                <a  href="product_details.html"><img style="width: 100%; height: auto" src="{{ $product['main_image'] }}" alt=""/></a>
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
 
