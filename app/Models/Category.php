@@ -26,8 +26,8 @@ class Category extends Model
 
     public static function categoryDetails($url)
     {
-        $categoryDetails = Category::select('id','parent_id','category_name','url','description')->with(['subcategories'=>function($query){
-            $query->select('id','parent_id','category_name','url','description')->where('status',1);
+        $categoryDetails = Category::select('id','parent_id','section_id','category_name','url','description')->with(['subcategories'=>function($query){
+            $query->select('id','parent_id','section_id','category_name','url','description')->where('status',1);
         }])->where('url',$url)->first()->toArray();
         if ($categoryDetails['parent_id']==0) {
             $breadcrumbs = '<a href="'.url($categoryDetails['url']).'">'.$categoryDetails['category_name'].'</a>';
@@ -36,11 +36,14 @@ class Category extends Model
             $breadcrumbs = '<a href="'.url($parentCategory['url']).'">'.$parentCategory['category_name'].'</a>&nbsp;<span class="divider"></span>&nbsp;<a href="'.url($categoryDetails['url']).'">'.$categoryDetails['category_name'].'</a>';
         }
         $catIds = array();
+        $catSections = array();
         $catIds[] = $categoryDetails['id'];
+        $catSections[] = $categoryDetails['section_id'];
         foreach ($categoryDetails['subcategories'] as $key => $subcat) {
             $catIds[] = $subcat['id'];
+            $catSections[] = $subcat['section_id'];
         }
 
-        return array('catIds'=>$catIds,'categoryDetails'=>$categoryDetails,'breadcrumbs'=>$breadcrumbs);
+        return array('catIds'=>$catIds,'catSections'=>$catSections,'categoryDetails'=>$categoryDetails,'breadcrumbs'=>$breadcrumbs);
     }
 }

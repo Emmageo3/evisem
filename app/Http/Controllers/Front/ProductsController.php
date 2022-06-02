@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -9,7 +10,7 @@ use App\Models\Product;
 
 class ProductsController extends Controller
 {
-    public function listing($url, Request $request)
+    public function listing(Request $request)
     {
 
         if($request->ajax()){
@@ -20,6 +21,14 @@ class ProductsController extends Controller
             {
                 $categoryDetails = Category::categoryDetails($url);
                 $categoryProducts = Product::whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
+
+                if(isset($data['fabric']) && !empty($data['fabric'])){
+                    $categoryProducts->whereIn('products.fabric',$data['fabric']);
+                }
+
+                if(isset($data['sleeve']) && !empty($data['sleeve'])){
+                    $categoryProducts->whereIn('products.sleeve',$data['sleeve']);
+                }
 
                 if(isset($data['sort']) && !empty($data['sort'])){
                     if($data['sort']=="product_latest"){
@@ -46,6 +55,7 @@ class ProductsController extends Controller
                 abort(404);
             }
         }else{
+            $url = Route::getFacadeRoot()->current()->uri();
             $categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
             if($categoryCount>0)
             {

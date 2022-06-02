@@ -7,6 +7,9 @@
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
                     <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
+                    <p>
+                        {{ $product['fabric'] }}
+                    </p>
                 </div>
             </div>
         </li>

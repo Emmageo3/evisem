@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Front\IndexController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,5 +66,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
 
 Route::namespace('front')->group(function(){
     Route::get('/', [App\Http\Controllers\Front\IndexController::class, 'index']);
-    Route::get('/{url}', [App\Http\Controllers\Front\ProductsController::class, 'listing']);
+    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+    foreach ($catUrls as $url) {
+        Route::get('/'.$url, [App\Http\Controllers\Front\ProductsController::class, 'listing']);
+    }
 });
