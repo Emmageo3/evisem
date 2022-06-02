@@ -67,7 +67,12 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
 Route::namespace('front')->group(function(){
     Route::get('/', [App\Http\Controllers\Front\IndexController::class, 'index']);
     $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+
     foreach ($catUrls as $url) {
         Route::get('/'.$url, [App\Http\Controllers\Front\ProductsController::class, 'listing']);
     }
+
+    Route::get('/product/{id}', [App\Http\Controllers\Front\ProductsController::class, 'detail']);
+
+    Route::post('/get-product-price', [App\Http\Controllers\Front\ProductsController::class, 'getProductPrice']);
 });

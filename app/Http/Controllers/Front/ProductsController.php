@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductsAttribute;
 
 class ProductsController extends Controller
 {
     public function listing(Request $request)
     {
-
+        Paginator::useBootstrap();
         if($request->ajax()){
             $data = $request->all();
             $url = $data['url'];
@@ -78,6 +80,23 @@ class ProductsController extends Controller
         }
 
 
+    }
+
+    public function detail($id)
+    {
+
+        $productDetails = Product::with('category','attributes','images')->find($id)->toArray();
+        $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
+        return view('front.products.detail', compact('productDetails','total_stock'));
+    }
+
+    public function getProductPrice(Request $request)
+    {
+        if($request->ajax()){
+            $data = $request->all();
+            $getProductPrice = ProductsAttribute::where(['product_id'=>$data['product_id'],'size'=>$data['size']])->first();
+            return $getProductPrice->price;
+        }
     }
 
 }
