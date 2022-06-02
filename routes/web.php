@@ -75,4 +75,6 @@ Route::namespace('front')->group(function(){
     Route::get('/product/{id}', [App\Http\Controllers\Front\ProductsController::class, 'detail']);
 
     Route::post('/get-product-price', [App\Http\Controllers\Front\ProductsController::class, 'getProductPrice']);
+
+    Route::post('/add-to-cart',[App\Http\Controllers\Front\ProductsController::class, 'addToCart']);
 });

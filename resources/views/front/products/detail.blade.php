@@ -41,16 +41,20 @@
             <h3>{{ $productDetails['product_name'] }}</h3>
             <hr class="soft"/>
             <small>{{ $total_stock }} produits en stock</small>
-            <form class="form-horizontal qtyFrm">
+            <form action="{{ url('add-to-cart') }}" method="post" class="form-horizontal qtyFrm">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $productDetails['id'] }}">
                 <div class="control-group">
                     <h4 class="getAttrPrice"> {{ $productDetails['product_price'] }} Fcfa</h4>
+                    @if(!empty($productDetails['attributes']))
                         <select id="getPrice" product-id="{{ $productDetails['id'] }}" class="span2 pull-left">
-                            <option value="">Sélectionner</option>
+                            <option value="">Sélectionner la taille</option>
                             @foreach ($productDetails['attributes'] as $attribute)
                             <option value="{{ $attribute['size'] }}">{{ $attribute['size'] }}</option>
                             @endforeach
                         </select>
-                        <input type="number" class="span1" placeholder="Qty."/>
+                    @endif
+                        <input type="number" name="quantity" class="span1" placeholder="Qty."/>
                         <button type="submit" class="btn btn-large btn-primary pull-right">Ajouter au panier<i class=" icon-shopping-cart"></i></button>
                     </div>
                 </div>
