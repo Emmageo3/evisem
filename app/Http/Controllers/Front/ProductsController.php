@@ -19,22 +19,22 @@ class ProductsController extends Controller
             if($categoryCount>0)
             {
                 $categoryDetails = Category::categoryDetails($url);
-                $categoryProducts = Product::whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->paginate(6);
+                $categoryProducts = Product::whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
 
                 if(isset($data['sort']) && !empty($data['sort'])){
                     if($data['sort']=="product_latest"){
-                        $categoryProducts = Product::orderBy('id','Desc');
+                        $categoryProducts->orderBy('id','Desc');
                     }else if($data['sort']=="product_name_a_z"){
-                        $categoryProducts = Product::orderBy('product_name','Asc');
+                        $categoryProducts->orderBy('product_name','Asc');
                     }else if($data['sort']=="product_name_z_a"){
-                        $categoryProducts = Product::orderBy('product_name','Desc');
+                        $categoryProducts->orderBy('product_name','Desc');
                     }else if($data['sort']=="price_lowest"){
-                        $categoryProducts = Product::orderBy('product_price','Asc');
+                        $categoryProducts->orderBy('product_price','Asc');
                     }else if($data['sort']=="price_highest"){
-                        $categoryProducts = Product::orderBy('product_price','Desc');
+                        $categoryProducts->orderBy('product_price','Desc');
                     }
                     else{
-                        $categoryProducts = Product::orderBy('id','Desc');
+                        $categoryProducts->orderBy('id','Desc');
                     }
 
                     $categoryProducts = $categoryProducts->paginate(30);
