@@ -17,10 +17,10 @@
                             <li class="span3">
                                 <div class="thumbnail">
                                     <i class="tag"></i>
-                                    <a href="product_details.html"><img src="{{ $item['main_image'] }}" alt=""></a>
+                                    <a href="{{ url('/product/'.$item['id']) }}"><img src="{{ $item['main_image'] }}" alt=""></a>
                                     <div class="caption">
                                         <h5>{{ $item['product_name'] }}</h5>
-                                        <h4><a class="btn" href="product_details.html">Voir</a> <span class="pull-right">{{ $item['product_price'] }} Fcfa</span></h4>
+                                        <h4><a class="btn" href="{{ url('/product/'.$item['id']) }}">Voir</a> <span class="pull-right">{{ $item['product_price'] }} Fcfa</span></h4>
                                     </div>
                                 </div>
                             </li>
@@ -44,7 +44,7 @@
         @foreach ($newProducts as $product)
         <li class="span3">
             <div class="thumbnail">
-                <a  href="product_details.html"><img style="width: 100%; height: auto" src="{{ $product['main_image'] }}" alt=""/></a>
+                <a  href="{{ url('/product/'.$product['id']) }}"><img style="width: 100%; height: auto" src="{{ $product['main_image'] }}" alt=""/></a>
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
 
