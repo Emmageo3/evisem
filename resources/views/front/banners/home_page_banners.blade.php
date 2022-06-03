@@ -11,7 +11,7 @@ $getBanners = Banner::getBanners();
             @foreach ($getBanners as $key => $banner)
 			<div class="item @if($key==0) active @endif">
 				<div class="container-fluid">
-					<a href="#"><img style="width: 100%; height: auto" src="{{ asset($banner['image']) }}" alt="special offers"/></a>
+					<a href="#shop"><img style="width: 100%; height: auto" src="{{ asset($banner['image']) }}" alt="special offers"/></a>
 				</div>
 			</div>
             @endforeach

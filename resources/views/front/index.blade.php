@@ -1,7 +1,7 @@
 @extends('layouts.front_layout.front_layout')
 @section('content')
 
-<div class="span9">
+<div class="span9" id="shop">
     <div class="well well-small">
         <h4>Les tendances<small class="pull-right">{{ $featuredItemsCount }} produits en tendance</small></h4>
 
@@ -48,7 +48,7 @@
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
 
-                    <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
+                    <h4 style="text-align:center"><a class="btn" href="{{ url('/product/'.$product['id']) }}"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
                 </div>
             </div>
         </li>

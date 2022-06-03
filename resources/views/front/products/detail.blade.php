@@ -9,8 +9,8 @@
     </ul>
     <div class="row">
         <div id="gallery" class="span3">
-            <a href="{{ $productDetails['main_image'] }}" title="Blue Casual T-Shirt">
-                <img src="{{ $productDetails['main_image'] }}" style="width:100%" alt="Blue Casual T-Shirt"/>
+            <a href="{{ $productDetails['main_image'] }}" title="{{ $productDetails['product_name'] }}">
+                <img src="{{ $productDetails['main_image'] }}" style="width:100%" alt="{{ $productDetails['product_name'] }}"/>
             </a>
             <div id="differentview" class="moreOptopm carousel slide">
                 <div class="carousel-inner">
@@ -38,6 +38,38 @@
             </div>
         </div>
         <div class="span6">
+            @if(Session::has('error_message'))
+            <div style="color: red" role="alert" style="margin-top: 10px">
+                Désolé, nous ne disposons pas de la quantité que vous avez demandé
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+            @if(Session::has('success_message'))
+                <div style="color: green" role="alert" style="margin-top: 10px">
+                    Le produit a bien été inséré au panier
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if(Session::has('error_message2'))
+                <div style="color: red" role="alert" style="margin-top: 10px">
+                    Ce produit a déja été ajouté au panier
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if(Session::has('error_message3'))
+                <div style="color: red" role="alert" style="margin-top: 10px">
+                    Veuillez sélectionner la taille
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <h3>{{ $productDetails['product_name'] }}</h3>
             <hr class="soft"/>
             <small>{{ $total_stock }} produits en stock</small>
@@ -47,14 +79,14 @@
                 <div class="control-group">
                     <h4 class="getAttrPrice"> {{ $productDetails['product_price'] }} Fcfa</h4>
                     @if(!empty($productDetails['attributes']))
-                        <select id="getPrice" product-id="{{ $productDetails['id'] }}" class="span2 pull-left">
+                        <select name="size" id="getPrice" product-id="{{ $productDetails['id'] }}" class="span2 pull-left" required>
                             <option value="">Sélectionner la taille</option>
                             @foreach ($productDetails['attributes'] as $attribute)
                             <option value="{{ $attribute['size'] }}">{{ $attribute['size'] }}</option>
                             @endforeach
                         </select>
                     @endif
-                        <input type="number" name="quantity" class="span1" placeholder="Qty."/>
+                        <input type="number" name="quantity" class="span1" placeholder="Qty." required/>
                         <button type="submit" class="btn btn-large btn-primary pull-right">Ajouter au panier<i class=" icon-shopping-cart"></i></button>
                     </div>
                 </div>
@@ -103,13 +135,10 @@
                                 @foreach ($relatedProducts as $product)
                                 <li class="span3">
                                     <div class="thumbnail">
-                                        <a href="product_details.html"><img src="{{ asset($product['main_image']) }}" alt=""/></a>
+                                        <a href="{{ url('/product/'.$product['id']) }}"><img src="{{ asset($product['main_image']) }}" alt=""/></a>
                                         <div class="caption">
                                             <h5>{{ $product['product_name'] }}</h5>
-                                            <p>
-                                                {{ $product['description'] }}
-                                            </p>
-                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{ $product['product_price'] }}</a></h4>
+                                            <h4 style="text-align:center"><a class="btn" href="{{ url('/product/'.$product['id']) }}"   > <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a></h4>
                                         </div>
                                     </div>
                                 </li>
