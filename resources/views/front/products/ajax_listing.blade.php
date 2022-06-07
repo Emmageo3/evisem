@@ -1,12 +1,23 @@
+<?php use App\Models\Product; ?>
 <div class="tab-pane  active" id="blockView">
     <ul class="thumbnails">
         @foreach ($categoryProducts as $product)
         <li class="span3">
-            <div class="thumbnail">
+            <div class="thumbnail" style="height: 420px">
                 <a href="{{ url('product/'.$product['id']) }}"><img style="width: 100%" src="{{ asset($product['main_image']) }}" alt=""/></a>
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
-                    <h4 style="text-align:center"><a class="btn" href="{{ url('product/'.$product['id']) }}"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">{{ $product['product_price'] }} Fcfa</a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
+                    <?php $discounted_price = Product::getDiscountedPrice($product['id']) ?>
+                    <h4 style="text-align:center"><a class="btn" href="{{ url('product/'.$product['id']) }}"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">
+                        @if($discounted_price>0)
+                        <del>{{ $product['product_price'] }} Fcfa</del>
+                        @else
+                        {{ $product['product_price'] }} Fcfa
+                        @endif
+                    </a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
+                    @if($discounted_price>0)
+                    <h4><font color="pink">en promotion: {{ $discounted_price }} Fcfa</font></h4>
+                    @endif
                     <p>
                         {{ $product['fabric'] }}
                     </p>

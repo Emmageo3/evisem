@@ -56,10 +56,15 @@ class CategoryController extends Controller
                 'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
                 'section_id' => 'required|numeric',
                 'url' => 'required',
-                'category_image' => 'image'
+                'category_image' => 'required|image'
             ];
 
-            $this->validate($request,$rules);
+            $customMessages = [
+                'category_image.required' => 'Veuillez insérer une image',
+                'category_discount.required'=>'Veuillez mettre deux zéros si il n y a pas de remise'
+            ];
+
+            $this->validate($request,$rules,$customMessages);
 
             // Upload Category Image
             if ($request->hasFile('category_image')) {
@@ -120,7 +125,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function deleteCategoryImage($id)
+    public function deleteCategoryImage(Request $request,$id)
     {
         $categoryimage = Category::select('category_image')->where('id', $id)->first();
         $category_image_path = '/storage/images/category_images/';

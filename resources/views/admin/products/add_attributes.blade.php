@@ -82,6 +82,10 @@
                                 <label for="product_color">Couleur : {{ $productdata['product_color'] }}</label>
                             </div>
 
+                            <div class="form-group">
+                                <label for="product_color">Prix : {{ $productdata['product_price'] }} Fcfa</label>
+                            </div>
+
                             <div class="field_wrapper">
                                 <div>
                                     <input style="width: 120px" type="text" name="size[]" id="size" placeholder="taille" required/>

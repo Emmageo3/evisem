@@ -86,7 +86,7 @@
 
                   <div class="form-group">
                     <label for="category_discount">Remise</label>
-                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="Entrez le nom de la sous-catégorie"
+                    <input type="text" class="form-control" name="category_discount" id="category_discount" placeholder="S'il n y a pas de remise, veuillez mettre deux zéros"
                     @if (!empty($categorydata['category_discount']))
                              value="{{ $categorydata['category_discount'] }}"
                     @else
@@ -125,7 +125,7 @@
                       <label for="category_image">Image</label>
                       <div class="input-group">
                         <div class="custom-file">
-                          <input type="file" name="category_image" id="category_image" class="custom-file-input">
+                          <input type="file" name="category_image" id="category_image" class="custom-file-input" required>
                           <label for="" class="custom-file-label">Choisir le fichier</label>
                         </div>
                         <div class="input-group-append">

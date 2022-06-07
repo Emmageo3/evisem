@@ -33,9 +33,13 @@ $(document).ready(function(){
        $.ajax({
            url:'/get-product-price',
            data:{size:size,product_id:product_id},
-           type:"post",
+           type:'post',
            success:function(resp){
-               $(".getAttrPrice").html(resp + " Fcfa")
+               if(resp['discounted_price']>0){
+                    $(".getAttrPrice").html("<del>"+resp['product_price'] + " Fcfa</del>"+resp['discounted_price']+" Fcfa")
+               }else{
+                    $(".getAttrPrice").html(resp['product_price'] + " Fcfa")
+               }
            },error:function(){
                alert('erreur')
            }
