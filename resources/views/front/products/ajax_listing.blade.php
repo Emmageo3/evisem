@@ -8,16 +8,14 @@
                 <div class="caption">
                     <h5>{{ $product['product_name'] }}</h5>
                     <?php $discounted_price = Product::getDiscountedPrice($product['id']) ?>
-                    <h4 style="text-align:center"><a class="btn" href="{{ url('product/'.$product['id']) }}"> <i class="icon-zoom-in"></i></a><a class="btn btn-primary" href="#">
+                    <h4 style="text-align:center"><a class="btn btn-primary" href="#">
                         @if($discounted_price>0)
                         <del>{{ $product['product_price'] }} Fcfa</del>
+                        <font color="purple">{{ $discounted_price }} Fcfa</font>
                         @else
                         {{ $product['product_price'] }} Fcfa
                         @endif
                     </a><a class="btn" href="#">Ajouter au panier<i class="icon-shopping-cart"></i></a></h4>
-                    @if($discounted_price>0)
-                    <h4><font color="pink">en promotion: {{ $discounted_price }} Fcfa</font></h4>
-                    @endif
                     <p>
                         {{ $product['fabric'] }}
                     </p>
