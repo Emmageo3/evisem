@@ -15,29 +15,30 @@
 			<div class="well">
 			<h5>Créer un compte</h5><br/>
 			Entrez votre e-mail pour créer un compte.<br/><br/>
-			<form action="register.html">
+			<form action="{{ url('/register') }}" method="post">
+                @csrf
 			    <div class="control-group">
-				    <label class="control-label" for="inputName0">Nom complet</label>
+				    <label class="control-label" for="name">Nom complet</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="inputName0" placeholder="Nom">
+				         <input class="span3"  type="text" id="name" name="name" placeholder="Nom">
 				    </div>
 			    </div>
 				<div class="control-group">
-				    <label class="control-label" for="inputMobile0">Numéro de téléphone</label>
+				    <label class="control-label" for="mobile">Numéro de téléphone</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="inputMobile0" placeholder="Numéro de téléphone">
+				         <input class="span3"  type="text" id="mobile" name="mobile" placeholder="Numéro de téléphone">
 				    </div>
 			    </div>
                 <div class="control-group">
-				    <label class="control-label" for="inputEmail0">Adresse e-mail</label>
+				    <label class="control-label" for="email">Adresse e-mail</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="inputEmail0" placeholder="Email">
+				         <input class="span3"  type="text" id="email" name="email" placeholder="Email">
 				    </div>
 			    </div>
                 <div class="control-group">
-				    <label class="control-label" for="inputPassword0">Mot de passe</label>
+				    <label class="control-label" for="password">Mot de passe</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="inputPassword0" placeholder="Mot de passe">
+				         <input class="span3"  type="password" id="password" name="password" placeholder="Mot de passe">
 				    </div>
 			    </div>
 			    <div class="controls">

@@ -11,4 +11,12 @@ class UsersController extends Controller
     {
         return view('front.users.login_register');
     }
+
+    public function registerUser(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo "<pre>";print_r($data);die;
+        }
+    }
 }
