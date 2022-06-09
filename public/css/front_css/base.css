@@ -74,6 +74,10 @@
 .navbar .nav.pull-right, #sideManu {overflow:hidden;}
 #logoArea  #smallScreen {margin: 21px 14px 0 0;}
 .navbar-search {margin-top: 8px;}
+form.cmxform label.error, label.error {
+    color: red;
+    font-style: italic;
+}
 /* Responsive--------------------- */
 /* Large desktop */
 @media (min-width: 1200px) {  }

@@ -5,7 +5,7 @@
 <div class="span9">
     <ul class="breadcrumb">
 		<li><a href="{{ url('/') }}">Accueil</a> <span class="divider">/</span></li>
-		<li class="active">Connexion/Inscription</li>
+		<li class="active">Connexion / Inscription</li>
     </ul>
 	<h3> Se connecter / S'inscrire</h3>
 	<hr class="soft"/>
@@ -22,7 +22,7 @@
             @endif
 			<div class="well">
 			<h5>Créer un compte</h5><br/>
-			<form action="{{ url('/register') }}" method="post">
+			<form id="registerForm" action="{{ url('/register') }}" method="post">
                 @csrf
 			    <div class="control-group">
 				    <label class="control-label" for="name">Nom complet</label>

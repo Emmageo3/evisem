@@ -96,4 +96,52 @@ $(document).ready(function(){
     })
 
 
+
+	$("#registerForm").validate({
+			rules: {
+				name: "required",
+				mobile: {
+					required: true,
+					minlength: 9,
+                    maxlength: 14,
+                    digits: true,
+				},
+				email: {
+					required: true,
+					email: true,
+                    remote:"check-email"
+				},
+				password: {
+					required: true,
+					minlength: 6
+				}
+			},
+			messages: {
+				name: "Veuillez entrer votre nom complet",
+				mobile: {
+					required: "Veuillez entrer votre numéro de téléphone",
+					minlength: "Veuillez entrer un numéro de téléphone valide"
+				},
+				password: {
+					required: "Veuillez entrer un mot de passe",
+					minlength: "Votre mot de passe doit contenir au moins 6 caractères"
+				},
+				email: {
+                    required: "Veuillez entrer une adresse email valide",
+                    remote: "Cette adresse e-mail existe déja"
+                }
+
+			}
+	});
+
+		// propose username by combining first- and lastname
+		$("#username").focus(function() {
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
+			if (firstname && lastname && !this.value) {
+				this.value = firstname + "." + lastname;
+			}
+		});
+
+
 })
