@@ -53,7 +53,12 @@ $sections = Section::sections();
 		          <ul class="nav pull-right">
 		            <li><a href="#">Contact</a></li>
 		            <li class="divider-vertical"></li>
-		            <li><a href="#">Se connecter</a></li>
+                    @if(Auth::check())
+                        <li><a href="{{ url('account') }}">Mon compte</a></li>
+                        <li><a href="{{ url('/logout') }}">Se déconnecter</a></li>
+                    @else
+		                <li><a href="{{ url('/login-register') }}">Se connecter / S'inscrire</a></li>
+                    @endif
 		          </ul>
 		        </div><!-- /.nav-collapse -->
 		      </div>

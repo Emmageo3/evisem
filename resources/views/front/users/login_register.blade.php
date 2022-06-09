@@ -12,9 +12,16 @@
 
 	<div class="row">
 		<div class="span4">
+            @if(Session::has('error_message'))
+                <div class="alert alert-danger" role="alert" style="margin-top: 10px">
+                    {{ Session::get('error_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
 			<div class="well">
 			<h5>Créer un compte</h5><br/>
-			Entrez votre e-mail pour créer un compte.<br/><br/>
 			<form action="{{ url('/register') }}" method="post">
                 @csrf
 			    <div class="control-group">

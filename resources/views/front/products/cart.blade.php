@@ -48,16 +48,16 @@
 		</tr>
 	</table>
 
-    @if(Session::has('error_message2'))
-        <div style="color: red" role="alert" style="margin-top: 10px">
-            Ce produit a déja été ajouté au panier
+    @if(Session::has('error_message'))
+        <div class="alert alert-danger" role="alert" style="margin-top: 10px">
+            Ce produit a déja été ajouté au panier !
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     @endif
     @if(Session::has('success_message'))
-        <div style="color: black; background-color: green" role="alert" style="margin-top: 10px">
+        <div class="alert alert-success" role="alert" style="margin-top: 10px">
             Ce produit a été ajouté au panier avec succès !
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

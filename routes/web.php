@@ -88,4 +88,5 @@ Route::namespace('front')->group(function(){
 
     Route::post('/login',[App\Http\Controllers\Front\UsersController::class, 'loginUser']);
     Route::post('/register',[App\Http\Controllers\Front\UsersController::class, 'registerUser']);
+    Route::get('/logout',[App\Http\Controllers\Front\UsersController::class, 'logoutUser']);
 });
