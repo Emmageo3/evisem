@@ -62,7 +62,7 @@
                         <a class="btn btn-primary" href="#">
                             @if ($discounted_price>0)
                                                 <del>{{ $product['product_price'] }} Fcfa</del>
-                                                <font size="1px">{{ $discounted_price }} Fcfa</font>
+                                                <font color="purple">{{ $discounted_price }} Fcfa</font>
                                             @else
                                                 {{ $product['product_price'] }} Fcfa
                                             @endif

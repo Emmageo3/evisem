@@ -63,14 +63,17 @@ class Product extends Model
         $catDetails = Category::select('category_discount')->where('id',$proDetails['category_id'])->first()->toArray();
         if($proDetails['product_discount'] > 0)
         {
-            $discounted_price = $proAttrPrice['price'] - ($proAttrPrice['price']*$proDetails['product_discount']/100);
+            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price']*$proDetails['product_discount']/100);
+            $discount = $proAttrPrice['price'] - $final_price;
         }else if($catDetails['category_discount'])
         {
-            $discounted_price = $proAttrPrice['price'] - ($proAttrPrice['price']*$catDetails['category_discount']/100);
+            $final_price = $proAttrPrice['price'] - ($proAttrPrice['price']*$catDetails['category_discount']/100);
+            $discount = $proAttrPrice['price'] - $final_price;
         }else
         {
-            $discounted_price = 0;
+            $final_price = $proAttrPrice['price'];
+            $discount = 0;
         }
-        return array('product_price'=>$proAttrPrice['price'],'discounted_price'=>$discounted_price);
+        return array('product_price'=>$proAttrPrice['price'],'final_price'=>$final_price,'discount'=>$discount);
     }
 }

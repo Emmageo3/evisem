@@ -35,8 +35,8 @@ $(document).ready(function(){
            data:{size:size,product_id:product_id},
            type:'post',
            success:function(resp){
-               if(resp['discounted_price']>0){
-                    $(".getAttrPrice").html("<del>"+resp['product_price'] + " Fcfa</del>"+resp['discounted_price']+" Fcfa")
+               if(resp['discount']>0){
+                    $(".getAttrPrice").html("<del>"+resp['product_price'] + " Fcfa</del>"+resp['final_price']+" Fcfa")
                }else{
                     $(".getAttrPrice").html(resp['product_price'] + " Fcfa")
                }
@@ -44,6 +44,23 @@ $(document).ready(function(){
                alert('erreur')
            }
        })
+    })
+
+    $(document).on('click','.btnItemUpdate', function(){
+        if($(this).hasClass('qtyMinus')){
+            var quantity = $(this).prev().val();
+            if(quantity<=1){
+                alert('Vous ne pouvez pas réduire la quantité à 0')
+                return false
+            }else{
+                new_qty = parseInt(quantity)-1;
+            }
+        }
+        if($(this).hasClass('qtyPlus')){
+            var quantity = $(this).prev().prev().val();
+            new_qty = parseInt(quantity)+1;
+        }
+        alert(new_qty)
     })
 
 

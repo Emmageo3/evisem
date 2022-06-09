@@ -150,7 +150,7 @@ class ProductsController extends Controller
             $cart->save();
 
             Session::flash('success_message');
-            return redirect()->back();
+            return redirect('cart');
         }
     }
 
