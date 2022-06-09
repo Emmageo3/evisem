@@ -60,7 +60,39 @@ $(document).ready(function(){
             var quantity = $(this).prev().prev().val();
             new_qty = parseInt(quantity)+1;
         }
-        alert(new_qty)
+        var cartid = $(this).data('cartid')
+        $.ajax({
+            data:{"cartid":cartid,"qty":new_qty},
+            url:'/update-cart-item-qty',
+            type:'post',
+            success:function(resp){
+                if(resp.status==false)
+                {
+                    alert(resp.message)
+                }
+                $("#AppendCartItems").html(resp.view)
+            }, error:function(){
+                alert('erreur')
+            }
+        })
+    })
+
+    $(document).on('click','.btnItemDelete', function(){
+        var cartid = $(this).data('cartid')
+        var result = confirm("Voulez vous vraiment supprimer cet article ?")
+        if(result){
+            $.ajax({
+                data:{"cartid":cartid},
+                url:'/delete-cart-item',
+                type:'post',
+                success:function(resp){
+                    $("#AppendCartItems").html(resp.view)
+                }, error:function(){
+                    alert('erreur')
+                }
+            })
+        }
+
     })
 
 
