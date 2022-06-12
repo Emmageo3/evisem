@@ -5,7 +5,7 @@
 
 <div class="span9">
     <ul class="breadcrumb">
-		<li><a href="index.html">Accueil</a> <span class="divider">/</span></li>
+		<li><a href="{{ url('/') }}">Accueil</a> <span class="divider">/</span></li>
 		<li class="active"> Panier</li>
     </ul>
 	<h3>  Panier [ <small>{{ count($userCartItems) }} produits </small>]

@@ -9,7 +9,7 @@
             <td>Cher(e) {{ $name }}</td>
         </tr>
         <tr>
-            <td>Bienvenue chez Evisem. Les informations de votre compte sont les suivants : </td>
+            <td>Bienvenue chez Evisem. Votre compte a été activé et les informations de votre compte sont les suivants : </td>
         </tr>
         <tr>
             <td>&nbsp;</td>

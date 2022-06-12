@@ -17,6 +17,14 @@
         </button>
     </div>
     @endif
+    @if(Session::has('success_message'))
+    <div class="alert alert-success" role="alert" style="margin-top: 10px">
+        {{ Session::get('success_message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
 	<div class="row">
 		<div class="span4">
 			<div class="well">
