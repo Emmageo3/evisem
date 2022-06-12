@@ -134,14 +134,29 @@ $(document).ready(function(){
 			}
 	});
 
-		// propose username by combining first- and lastname
-		$("#username").focus(function() {
-			var firstname = $("#firstname").val();
-			var lastname = $("#lastname").val();
-			if (firstname && lastname && !this.value) {
-				this.value = firstname + "." + lastname;
-			}
-		});
 
+	$("#loginForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            }
+        },
+        messages: {
+            password: {
+                required: "Veuillez entrer votre mot de passe",
+                minlength: "Votre mot de passe doit contenir au moins 6 caractères"
+            },
+            email: {
+                required: "Veuillez entrer une adresse email",
+                email: "Veuillez entrer une adresse email valide"
+            }
+
+        }
+});
 
 })

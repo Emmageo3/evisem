@@ -19,7 +19,7 @@
                 <td>
                     <img width="60" src="{{ asset($item['product']['main_image']) }}" alt=""/>
                 </td>
-                <td colspan="2">{{ $item['product']['product_name'] }} ({{ $item['product']['product_code'] }})<br/>Couleur : {{ $item['product']['product_color'] }} <br> Taille: {{ $item['size'] }}</td>
+                <td colspan="2">{{ $item['product']['product_name'] }} ({{ $item['product']['product_code'] }})<br> Taille: {{ $item['size'] }}</td>
                 <td>
                     <div class="input-append">
                         <input class="span1" style="max-width:34px" value="{{ $item['quantity'] }}" id="appendedInputButtons" size="16" type="text">

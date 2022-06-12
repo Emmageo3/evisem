@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b25f4fbd13ca7b7690fc5507b9d0187",
+    "content-hash": "0e2737c6693fa99933aad90a767f2033",
     "packages": [
         {
             "name": "brick/math",
@@ -892,6 +892,43 @@
                 }
             ],
             "time": "2022-03-20T21:55:58+00:00"
+        },
+        {
+            "name": "informagenie/orange-sms",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/informagenie/orange-sms.git",
+                "reference": "e1515a8ac28151867495c7b05e87ad904287c2b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/informagenie/orange-sms/zipball/e1515a8ac28151867495c7b05e87ad904287c2b7",
+                "reference": "e1515a8ac28151867495c7b05e87ad904287c2b7",
+                "shasum": ""
+            },
+            "require": {
+                "php-curl-class/php-curl-class": "^8.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Informagenie\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Mbungu ngoma",
+                    "email": "hackmmn@gmail.com"
+                }
+            ],
+            "description": "Unofficial Orange SMS API SDK",
+            "support": {
+                "issues": "https://github.com/informagenie/orange-sms/issues",
+                "source": "https://github.com/informagenie/orange-sms/tree/v1.0"
+            },
+            "time": "2019-08-31T06:35:24+00:00"
         },
         {
             "name": "intervention/image",
@@ -2085,6 +2122,77 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.2"
             },
             "time": "2021-11-30T19:35:32+00:00"
+        },
+        {
+            "name": "php-curl-class/php-curl-class",
+            "version": "8.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-curl-class/php-curl-class.git",
+                "reference": "c97c96d5d422b4085aba32ace096c3e404dde607"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/c97c96d5d422b4085aba32ace096c3e404dde607",
+                "reference": "c97c96d5d422b4085aba32ace096c3e404dde607",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Curl\\": "src/Curl/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Zach Borboa"
+                }
+            ],
+            "description": "PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.",
+            "homepage": "https://github.com/php-curl-class/php-curl-class",
+            "keywords": [
+                "API-Client",
+                "api",
+                "class",
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http-client",
+                "http-proxy",
+                "json",
+                "php",
+                "php-curl",
+                "php-curl-library",
+                "proxy",
+                "requests",
+                "restful",
+                "web-scraper",
+                "web-scraping ",
+                "web-service",
+                "xml"
+            ],
+            "support": {
+                "issues": "https://github.com/php-curl-class/php-curl-class/issues",
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/8.10.0"
+            },
+            "time": "2021-06-23T14:34:00+00:00"
         },
         {
             "name": "phpoption/phpoption",

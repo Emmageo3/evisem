@@ -9,17 +9,16 @@
     </ul>
 	<h3> Se connecter / S'inscrire</h3>
 	<hr class="soft"/>
-
+    @if(Session::has('error_message'))
+    <div class="alert alert-danger" role="alert" style="margin-top: 10px">
+        {{ Session::get('error_message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
 	<div class="row">
 		<div class="span4">
-            @if(Session::has('error_message'))
-                <div class="alert alert-danger" role="alert" style="margin-top: 10px">
-                    {{ Session::get('error_message') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
 			<div class="well">
 			<h5>Créer un compte</h5><br/>
 			<form id="registerForm" action="{{ url('/register') }}" method="post">
@@ -58,19 +57,20 @@
 		<div class="span4">
 			<div class="well">
 			<h5>Déja inscrit ?</h5>
-			<form>
-			  <div class="control-group">
-				<label class="control-label" for="inputEmail1">Email</label>
-				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email">
-				</div>
-			  </div>
-			  <div class="control-group">
-				<label class="control-label" for="inputPassword1">Mot de passe</label>
-				<div class="controls">
-				  <input type="password" class="span3"  id="inputPassword1" placeholder="Password">
-				</div>
-			  </div>
+			<form id="loginForm" method="post" action="{{ url('/login') }}">
+				@csrf
+                <div class="control-group">
+				    <label class="control-label" for="email">Adresse e-mail</label>
+				    <div class="controls">
+				         <input class="span3"  type="text" id="email" name="email" placeholder="Email">
+				    </div>
+			    </div>
+                <div class="control-group">
+				    <label class="control-label" for="password">Mot de passe</label>
+				    <div class="controls">
+				         <input class="span3"  type="password" id="password" name="password" placeholder="Mot de passe">
+				    </div>
+			    </div>
 			  <div class="control-group">
 				<div class="controls">
 				  <button type="submit" class="btn">Connexion</button> <a href="forgetpass.html">Mot de passe oublié?</a>
