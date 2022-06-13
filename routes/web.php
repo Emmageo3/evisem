@@ -91,4 +91,5 @@ Route::namespace('front')->group(function(){
     Route::match(['get','post'],'/check-email',[App\Http\Controllers\Front\UsersController::class, 'checkEmail']);
     Route::get('/logout',[App\Http\Controllers\Front\UsersController::class, 'logoutUser']);
     Route::match(['get','post'],'/confirm/{code}',[App\Http\Controllers\Front\UsersController::class, 'confirmAccount']);
+    Route::match(['get','post'],'/forgot-password',[App\Http\Controllers\Front\UsersController::class, 'forgotPassword']);
 });

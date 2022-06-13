@@ -144,4 +144,41 @@ class UsersController extends Controller
             }
         }
     }
+
+    public function forgotPassword(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $emailCount = User::where('email',$data['email'])->count();
+            if($emailCount == 0){
+                $message = "Cette adresse e-mail n'existe pas";
+                Session::flash('error_message',$message);
+                return redirect()->back();
+            }
+            $random_password = str_random(8);
+
+            $new_password = bcrypt($random_password);
+
+            User::where('email',$data['email'])->update(['password'=>$new_password]);
+
+            $userName = User::select('name')->where('email',$data['email'])->first();
+
+            $email = $data['email'];
+            $name = $userName->name;
+            $messageData = [
+                'email' => $email,
+                'name' => $name,
+                'password' => $random_password
+            ];
+            Mail::send('emails.forgot_password',$messageData,function($message) use($email){
+                $message->to($email)->subject('Nouveau mot de passe - Evisem');
+            });
+
+            $message = "Veuillez vérifier votre boite mail pour avoir votre nouveau mot de passe";
+            Session::flash('success_message',$message);
+            return redirect('login-register');
+        }
+
+        return view('front.users.forgot_password');
+    }
 }
