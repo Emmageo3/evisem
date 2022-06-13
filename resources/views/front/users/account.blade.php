@@ -95,24 +95,25 @@
 		<div class="span4">
 			<div class="well">
 			<h5>Mettre a jour le mot de passe</h5>
-			<form id="passwordForm" method="post" action="{{ url('/update-password') }}">
+			<form id="passwordForm" method="post" action="{{ url('/update-user-pwd') }}">
 				@csrf
                 <div class="control-group">
-				    <label class="control-label" for="password">Mot de passe actuel</label>
+				    <label class="control-label" for="current_pwd">Mot de passe actuel</label>
 				    <div class="controls">
-				         <input class="span3"  type="password" id="password" name="password" placeholder="Mot de passe">
+				         <input class="span3"  type="password" id="current_pwd" name="current_pwd" placeholder="Mot de passe">
+				    </div>
+                    <span id="checkPwd"></span>
+			    </div>
+                <div class="control-group">
+				    <label class="control-label" for="new_pwd">Nouveau mot de passe</label>
+				    <div class="controls">
+				         <input class="span3"  type="password" id="new_pwd" name="new_pwd" placeholder="Mot de passe">
 				    </div>
 			    </div>
                 <div class="control-group">
-				    <label class="control-label" for="password">Nouveau mot de passe</label>
+				    <label class="control-label" for="confirm_pwd">Confirmer le mot de passe </label>
 				    <div class="controls">
-				         <input class="span3"  type="password" id="password" name="password" placeholder="Mot de passe">
-				    </div>
-			    </div>
-                <div class="control-group">
-				    <label class="control-label" for="password">Confirmer le mot de passe </label>
-				    <div class="controls">
-				         <input class="span3"  type="password" id="password" name="password" placeholder="Mot de passe">
+				         <input class="span3"  type="password" id="confirm_pwd" name="confirm_pwd" placeholder="Mot de passe">
 				    </div>
 			    </div>
 			  <div class="control-group">

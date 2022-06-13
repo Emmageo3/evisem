@@ -10,6 +10,7 @@ use App\Models\Country;
 use Auth;
 use Session;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -216,5 +217,39 @@ class UsersController extends Controller
 
         }
         return view('front.users.account',compact('userDetails','countries'));
+    }
+
+    public function checkUserPassword(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $user_id = Auth::user()->id;
+            $checkPassword = User::select('password')->where('id',$user_id)->first();
+            if(Hash::check($data['current_pwd'],$checkPassword->password)){
+                return "true";
+            }else{
+                return "false";
+            }
+        }
+    }
+
+    public function updateUserPassword(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $user_id = Auth::user()->id;
+            $checkPassword = User::select('password')->where('id',$user_id)->first();
+            if(Hash::check($data['current_pwd'],$checkPassword->password)){
+                $new_pwd = bcrypt($data['new_pwd']);
+                User::where('id',$user_id)->update(['password'=>$new_pwd]);
+                $message = "Votre mot de passe a été mis a jour avec succès";
+                Session::flash('success_message',$message);
+                return redirect()->back();
+            }else{
+                $message = "Votre mot de passe n'a pas été mis a jour";
+                Session::flash('error_message',$message);
+                return redirect()->back();
+            }
+        }
     }
 }

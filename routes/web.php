@@ -84,13 +84,20 @@ Route::namespace('front')->group(function(){
 
     Route::post('/delete-cart-item',[App\Http\Controllers\Front\ProductsController::class, 'deleteCartItem']);
 
-    Route::get('/login-register',[App\Http\Controllers\Front\UsersController::class, 'loginRegister']);
+    Route::get('/login-register',[App\Http\Controllers\Front\UsersController::class, 'loginRegister'])->name('login');
 
     Route::post('/login',[App\Http\Controllers\Front\UsersController::class, 'loginUser']);
     Route::post('/register',[App\Http\Controllers\Front\UsersController::class, 'registerUser']);
     Route::match(['get','post'],'/check-email',[App\Http\Controllers\Front\UsersController::class, 'checkEmail']);
     Route::get('/logout',[App\Http\Controllers\Front\UsersController::class, 'logoutUser']);
     Route::match(['get','post'],'/confirm/{code}',[App\Http\Controllers\Front\UsersController::class, 'confirmAccount']);
-    Route::match(['get','post'],'/forgot-password',[App\Http\Controllers\Front\UsersController::class, 'forgotPassword']);
-    Route::match(['get','post'],'/account',[App\Http\Controllers\Front\UsersController::class, 'account']);
+
+    Route::group(['middleware'=>['auth']],function(){
+        Route::match(['get','post'],'/forgot-password',[App\Http\Controllers\Front\UsersController::class, 'forgotPassword']);
+        Route::match(['get','post'],'/account',[App\Http\Controllers\Front\UsersController::class, 'account']);
+        Route::post('/check-user-pwd',[App\Http\Controllers\Front\UsersController::class, 'checkUserPassword']);
+        Route::post('/update-user-pwd',[App\Http\Controllers\Front\UsersController::class, 'updateUserPassword']);
+    });
+
+
 });

@@ -22,7 +22,6 @@ $(document).ready(function(){
         })
     })
 
-
     $('#getPrice').change(function(){
         var size = $(this).val();
         if(size==""){
@@ -95,8 +94,6 @@ $(document).ready(function(){
 
     })
 
-
-
 	$("#registerForm").validate({
 			rules: {
 				name: "required",
@@ -133,7 +130,6 @@ $(document).ready(function(){
 
 			}
 	});
-
 
 	$("#loginForm").validate({
         rules: {
@@ -191,6 +187,59 @@ $(document).ready(function(){
             }
 
         }
-});
+    });
+
+    $("#current_pwd").keyup(function(){
+        var current_pwd = $(this).val()
+        $.ajax({
+            type:'post',
+            url: '/check-user-pwd',
+            data: {current_pwd:current_pwd},
+            success:function(resp){
+                if(resp == "false"){
+                    $("#checkPwd").html("<font color='red'>Votre mot de passe est incorrect</font>")
+                }else if(resp == "true"){
+                    $("#checkPwd").html("<font color='green'>Votre mot de passe est correct</font>")
+                }
+            },error:function(){
+                alert("Erreur")
+            }
+        })
+    })
+
+    $("#passwordForm").validate({
+        rules: {
+            current_pwd: {
+                required: true,
+                minlength: 6,
+                maxlength: 20,
+            },
+            new_pwd: {
+                required: true,
+                minlength: 6,
+                maxlength: 20,
+            },
+            confirm_pwd: {
+                required: true,
+                minlength: 6,
+                maxlength: 20,
+                equalTo:"#new_pwd"
+            }
+        },
+        messages: {
+            current_pwd: {
+                required: "Veuillez entrer votre mot de passe",
+                accept: "Vous ne pouvez utiliser que des lettres"
+            },
+            new_pwd: {
+                required: "Veuillez saisir un nouveau mot de passe",
+                minlength: "Veuillez entrer un mot de passe valide"
+            },
+            confirm_pwd: {
+                equalTo: "Veuillez saisir le meme mot de passe"
+            }
+
+        }
+    });
 
 })
