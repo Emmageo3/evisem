@@ -51,7 +51,7 @@
 				    </div>
 			    </div>
                 <div class="control-group">
-				    <label class="control-label" for="state">Etat</label>
+				    <label class="control-label" for="state">Région</label>
 				    <div class="controls">
 				         <input class="span3"  type="text" id="state" name="state" value="{{ $userDetails['state'] }}">
 				    </div>
@@ -59,7 +59,12 @@
                 <div class="control-group">
 				    <label class="control-label" for="country">Pays</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="country" name="country" value="{{ $userDetails['country'] }}">
+                         <select name="country" id="country" class="span3">
+                             <option value="">Sélectionner</option>
+                             @foreach ($countries as $country)
+                                 <option value="{{ $country['country_name'] }}" @if($country['country_name']==$userDetails['country']) selected @endif>{{ $country['country_name'] }}</option>
+                             @endforeach
+                         </select>
 				    </div>
 			    </div>
                 <div class="control-group">
@@ -81,7 +86,7 @@
 				    </div>
 			    </div><br>
 			    <div class="controls">
-			        <button type="submit" class="btn block">Créer un compte</button>
+			        <button type="submit" class="btn block">Mettre a jour</button>
 			    </div>
 			</form>
 		</div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Country;
 use Auth;
 use Session;
 use Illuminate\Support\Facades\Mail;
@@ -186,8 +187,19 @@ class UsersController extends Controller
     {
         $user_id = Auth::user()->id;
         $userDetails = User::find($user_id)->toArray();
+
+        $countries = Country::where('status',1)->get()->toArray();
+
         if($request->isMethod('post')){
             $data = $request->all();
+
+            $rules = [
+                'name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'mobile' => 'required|numeric',
+                'admin_image' => 'image'
+            ];
+            $this->validate($request, $rules);
+
             $user = User::find($user_id);
 
             $user->name = $data['name'];
@@ -203,6 +215,6 @@ class UsersController extends Controller
             return redirect()->back();
 
         }
-        return view('front.users.account',compact('userDetails'));
+        return view('front.users.account',compact('userDetails','countries'));
     }
 }
