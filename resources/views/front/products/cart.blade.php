@@ -8,45 +8,12 @@
 		<li><a href="{{ url('/') }}">Accueil</a> <span class="divider">/</span></li>
 		<li class="active"> Panier</li>
     </ul>
-	<h3>  Panier [ <small>{{ count($userCartItems) }} produits </small>]
+	<h3>  Panier [ <span class="totalCartItems"> {{ totalCartItems() }}</span>  produits ]
         <a href="{{ url('/') }}" class="btn btn-large pull-right">
             <i class="icon-arrow-left"></i> Continuer mon shopping
         </a>
     </h3>
 	<hr class="soft"/>
-	<table class="table table-bordered">
-		<tr>
-            <th>Je me connecte </th>
-        </tr>
-		<tr>
-		    <td>
-			    <form class="form-horizontal">
-				    <div class="control-group">
-				        <label class="control-label" for="inputUsername">Nom d'utilisateur</label>
-				        <div class="controls">
-					        <input type="text" id="inputUsername" placeholder="Username">
-				        </div>
-				    </div>
-				    <div class="control-group">
-				        <label class="control-label" for="inputPassword1">Mot de passe</label>
-				        <div class="controls">
-					        <input type="password" id="inputPassword1" placeholder="Password">
-				        </div>
-				    </div>
-				    <div class="control-group">
-				        <div class="controls">
-					        <button type="submit" class="btn">Se connecter</button> OU <a href="register.html" class="btn">S'inscrire</a>
-				        </div>
-				    </div>
-                    <div class="control-group">
-                        <div class="controls">
-                        <a href="forgetpass.html" style="text-decoration:underline">Mot de passe oublié ?</a>
-                        </div>
-                    </div>
-			    </form>
-		    </td>
-		</tr>
-	</table>
 
     @if(Session::has('error_message'))
         <div class="alert alert-danger" role="alert" style="margin-top: 10px">

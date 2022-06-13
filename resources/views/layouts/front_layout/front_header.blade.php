@@ -11,7 +11,12 @@ $sections = Section::sections();
 			<div class="span6">Bienvenue!<strong> Emma</strong></div>
 			<div class="span6">
 				<div class="pull-right">
-					<a href="{{ url('/cart') }}"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Panier </span> </a>
+					<a href="{{ url('/cart') }}">
+                        <span class="btn btn-mini btn-primary">
+                            <i class="icon-shopping-cart icon-white"></i>
+                            [ <span class="totalCartItems">{{ totalCartItems() }}</span>  ]
+                        </span>
+                    </a>
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,7 @@ class UsersController extends Controller
                     $message->to($email)->subject('Confirmation de votre compte');
                 });
 
-                $message = "Veuillez consulter votre boite mail pour confirmer votre compte. Si vous ne le trouvez pas, consultez vos spam";
+                $message = "Veuillez consulter votre boite mail pour confirmer votre compte. Si vous ne le trouvez pas, consultez vos spams";
                 Session::flash('success_message',$message);
                 return redirect()->back();
 
