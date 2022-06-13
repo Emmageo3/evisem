@@ -212,7 +212,9 @@ class ProductsController extends Controller
             $data = $request->all();
             Cart::where('id',$data['cartid'])->delete();
             $userCartItems = Cart::userCartItems();
+            $totalCartItems = totalCartItems();
             return response()->json([
+                'totalCartItems'=>$totalCartItems,
                 'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))
             ]);
         }
