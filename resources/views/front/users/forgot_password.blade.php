@@ -29,7 +29,7 @@
 		<div class="span4">
 			<div class="well">
 			<h5>Mot de passe oublié ?</h5><br/>
-            Entrez votre e-mail pour changer de mot de passe
+            Entrez votre e-mail pour changer de mot de passe <br><br>
 			<form id="forgotPasswordForm" action="{{ url('/forgot-password') }}" method="post">
                 @csrf
                 <div class="control-group">

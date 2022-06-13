@@ -157,6 +157,40 @@ $(document).ready(function(){
             }
 
         }
+    });
+
+    $("#accountForm").validate({
+        rules: {
+            name: {
+                required: true,
+                accept: "[a-zA-Z]+"
+            },
+            mobile: {
+                required: true,
+                minlength: 9,
+                maxlength: 14,
+                digits: true,
+            }
+        },
+        messages: {
+            name: {
+                required: "Veuillez entrer votre nom complet",
+                accept: "Vous ne pouvez utiliser que des lettres"
+            },
+            mobile: {
+                required: "Veuillez entrer votre numéro de téléphone",
+                minlength: "Veuillez entrer un numéro de téléphone valide"
+            },
+            password: {
+                required: "Veuillez entrer un mot de passe",
+                minlength: "Votre mot de passe doit contenir au moins 6 caractères"
+            },
+            email: {
+                required: "Veuillez entrer une adresse email valide",
+                remote: "Cette adresse e-mail existe déja"
+            }
+
+        }
 });
 
 })
