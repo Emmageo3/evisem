@@ -93,7 +93,12 @@
                             <div class="form-group">
                                 <label for="amount">Montant</label>
                                 <input type="text" class="form-control" id="amount" name="amount"
-                                placeholder="Entrez le montant du coupon">
+                                placeholder="Entrez le montant du coupon"
+                                @if (!empty($coupondata['amount']))
+                                    value="{{ $coupondata['amount'] }}"
+                                @else
+                                    value="{{ old('amount') }}"
+                                @endif>
                             </div>
 
                             <div class="form-group">
@@ -128,7 +133,13 @@
 
                             <div class="form-group">
                                 <label for="expiry_date">Date d'expiration</label>
-                                <input type="text" class="form-control" name="expiry_date" id="expiry_date" placeholder="Entrez la date d'expiration du coupon" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                <input type="text" class="form-control" name="expiry_date" id="expiry_date"
+                                placeholder="Entrez la date d'expiration du coupon" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask
+                                @if (!empty($coupondata['expiry_date']))
+                                    value="{{ $coupondata['expiry_date'] }}"
+                                @else
+                                    value="{{ old('expiry_date') }}"
+                                @endif>
                             </div>
 
                         </div>
