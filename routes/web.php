@@ -60,6 +60,11 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::post('update-banner-status',[App\Http\Controllers\Admin\BannerController::class, 'updateBannerStatus']);
         Route::get('delete-banner/{id}',[App\Http\Controllers\Admin\BannerController::class, 'deleteBanner']);
         Route::match(['get', 'post'], 'add-edit-banner/{id?}',[App\Http\Controllers\Admin\BannerController::class, 'addEditBanner']);
+
+        Route::get('coupons',[App\Http\Controllers\Admin\CouponController::class, 'coupons']);
+        Route::post('update-coupon-status',[App\Http\Controllers\Admin\CouponController::class, 'updateCouponStatus']);
+        Route::get('delete-coupon/{id}',[App\Http\Controllers\Admin\CouponController::class, 'deleteCoupon']);
+        Route::match(['get', 'post'], 'add-edit-coupon/{id?}',[App\Http\Controllers\Admin\CouponController::class, 'addEditCoupon']);
     });
 
 });

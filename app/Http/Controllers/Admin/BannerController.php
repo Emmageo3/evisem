@@ -34,7 +34,7 @@ class BannerController extends Controller
     {
         Banner::where('id', $id)->delete();
 
-        $request->session()->flash('success_message', 'la sous-catégorie a été supprimée avec succes!');
+        $request->session()->flash('success_message', 'la bannière a été supprimée avec succes!');
         return redirect()->back();
     }
 

@@ -167,6 +167,33 @@ $(document).ready(function(){
         })
     })
 
+    $(".updateCouponStatus").click(function(){
+        var status = $(this).text();
+        var coupon_id = $(this).attr('coupon_id');
+        $.ajax({
+            type:'post',
+            url: '/admin/update-coupon-status',
+            data:{status:status,coupon_id:coupon_id},
+            success:function(resp){
+                if(resp['status']==0){
+                    $("#coupon-"+coupon_id).html("<a href='javascript:void(0)' class='updateCouponStatus'>Inactif</a>")
+                }else if(resp['status']==1){
+                    $("#coupon-"+coupon_id).html("<a href='javascript:void(0)' class='updateCouponStatus'>Actif</a>")
+                }
+            },error:function(){
+                alert("Erreur")
+            }
+        })
+    })
+
+    $("#manualCoupon").click(function(){
+        $("#couponField").show();
+    })
+
+    $("#automaticCoupon").click(function(){
+        $("#couponField").hide();
+    })
+
 
 
 

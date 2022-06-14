@@ -52,7 +52,7 @@ class ProductsController extends Controller
                         $categoryProducts->orderBy('id','Desc');
                     }
 
-                    $categoryProducts = $categoryProducts->paginate(30);
+                    $categoryProducts = $categoryProducts->paginate(9);
                 }
 
                 return view('front.products.ajax_listing', compact('categoryDetails','categoryProducts','url'));
