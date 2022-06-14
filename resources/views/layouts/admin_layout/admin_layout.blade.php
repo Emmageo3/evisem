@@ -76,6 +76,7 @@
 <script src="{{ url('plugins/jquery-knob/jquery.knob.min.js') }}"></script>
 <!-- daterangepicker -->
 <script src="{{ url('plugins/moment/moment.min.js') }}"></script>
+<script src="{{ url('plugins/inputmask/jquery.inputmask.min.js') }}"></script>
 <script src="{{ url('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ url('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
@@ -134,6 +135,14 @@
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>
+ <script>
+     //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+ </script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

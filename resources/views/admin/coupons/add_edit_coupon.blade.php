@@ -77,8 +77,28 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="coupon_type">Type de coupon</label><br>
+                                <span><input type="radio" name="coupon_type" value="Plusieurs fois">&nbsp;Plusieurs fois&nbsp;&nbsp;</span>
+                                &nbsp;&nbsp;
+                                <span><input type="radio" name="coupon_type" value="une fois">&nbsp;Une fois&nbsp;</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="amount_type">Type de montant</label><br>
+                                <span><input type="radio" name="amount_type" value="Pourcentage">&nbsp;Pourcentage (en %)&nbsp;&nbsp;</span>
+                                &nbsp;&nbsp;
+                                <span><input type="radio" name="amount_type" value="fixe">&nbsp;fixe (en Fcfa)&nbsp;</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="amount">Montant</label>
+                                <input type="text" class="form-control" id="amount" name="amount"
+                                placeholder="Entrez le montant du coupon">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="categories">Choisir une catégorie</label>
-                                <select name="categories[]" class="form-control select2bs4" style="width: 100%;">
+                                <select name="categories[]" class="form-control select2bs4" style="width: 100%;" multiple>
                                     <option value="">Sélectionner</option>
                                     @foreach ($categories as $section)
                                         <optgroup label="{{ $section['name'] }}"></optgroup>
@@ -96,8 +116,20 @@
                                   </select>
                             </div>
 
-                        </div>
-                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="users">Choisir un utilisateur</label>
+                                <select name="users[]" class="form-control select2bs4" style="width: 100%;" multiple data-live-search="true">
+                                    <option value="">Sélectionner</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user['email'] }}">{{ $user['email'] }}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expiry_date">Date d'expiration</label>
+                                <input type="text" class="form-control" name="expiry_date" id="expiry_date" placeholder="Entrez la date d'expiration du coupon" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            </div>
 
                         </div>
                     </div>

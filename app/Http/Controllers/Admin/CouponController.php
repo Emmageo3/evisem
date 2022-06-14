@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Models\Section;
+use App\Models\User;
 use Session;
 
 class CouponController extends Controller
@@ -49,9 +50,16 @@ class CouponController extends Controller
              $coupon = Coupon::find($id);
         }
 
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo "<pre>"; print_r($data); die;
+        }
+
         $categories = Section::with('categories')->get();
         $categories = json_decode(json_encode($categories),true);
 
-        return view('admin.coupons.add_edit_coupon', compact('title','coupon','categories'));
+        $users = User::select('email')->where('status',1)->get()->toArray();
+
+        return view('admin.coupons.add_edit_coupon', compact('title','coupon','categories','users'));
     }
 }
