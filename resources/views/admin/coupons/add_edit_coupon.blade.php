@@ -35,7 +35,7 @@
         @endif
 
         @if(Session::has('success_message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+            <div class="alert alert-success fade show" role="alert" style="margin-top: 10px">
                 {{ Session::get('success_message') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -65,9 +65,9 @@
 
                             <div class="form-group">
                                 <label for="coupon_option">Option de coupon</label><br>
-                                <span><input id="automaticCoupon" type="radio" name="coupon_option" value="Automatic">&nbsp;Coupon automatique&nbsp;&nbsp;</span>
+                                <span><input id="automaticCoupon" type="radio" name="coupon_option" value="automatic">&nbsp;Coupon automatique&nbsp;&nbsp;</span>
                                 &nbsp;&nbsp;
-                                <span><input id="manualCoupon" type="radio" name="coupon_option" value="manual">&nbsp;Coupon manuel&nbsp;</span>
+                                <span><input id="manualCoupon" type="radio" name="coupon_option" checked value="manual">&nbsp;Coupon manuel&nbsp;</span>
                             </div>
 
                             <div class="form-group" style="display: none" id="couponField">
@@ -80,12 +80,12 @@
                                 <label for="coupon_type">Type de coupon</label><br>
                                 <span><input type="radio" name="coupon_type" value="Plusieurs fois">&nbsp;Plusieurs fois&nbsp;&nbsp;</span>
                                 &nbsp;&nbsp;
-                                <span><input type="radio" name="coupon_type" value="une fois">&nbsp;Une fois&nbsp;</span>
+                                <span><input type="radio" name="coupon_type" checked value="une fois">&nbsp;Une fois&nbsp;</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="amount_type">Type de montant</label><br>
-                                <span><input type="radio" name="amount_type" value="Pourcentage">&nbsp;Pourcentage (en %)&nbsp;&nbsp;</span>
+                                <span><input type="radio" name="amount_type" checked value="Pourcentage">&nbsp;Pourcentage (en %)&nbsp;&nbsp;</span>
                                 &nbsp;&nbsp;
                                 <span><input type="radio" name="amount_type" value="fixe">&nbsp;fixe (en Fcfa)&nbsp;</span>
                             </div>
@@ -128,7 +128,7 @@
 
                             <div class="form-group">
                                 <label for="expiry_date">Date d'expiration</label>
-                                <input type="text" class="form-control" name="expiry_date" id="expiry_date" placeholder="Entrez la date d'expiration du coupon" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                <input type="text" class="form-control" name="expiry_date" id="expiry_date" placeholder="Entrez la date d'expiration du coupon" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                             </div>
 
                         </div>

@@ -45,14 +45,63 @@ class CouponController extends Controller
         if($id==""){
             $title = "Ajouter un coupon";
             $coupon = new Coupon;
+            $message = "Le coupon a été ajouté avec succès";
         } else {
              $title = "Modifier le coupon";
              $coupon = Coupon::find($id);
+             $message = "Le coupon a été modifié avec succès";
         }
 
         if($request->isMethod('post')){
             $data = $request->all();
-            echo "<pre>"; print_r($data); die;
+
+            $rules = [
+                'categories' => 'required',
+                'coupon_option' => 'required',
+                'coupon_type' => 'required',
+                'amount_type' => 'required',
+                'amount' => 'required|numeric'
+            ];
+
+            $customMessages = [
+                'categories.required' => 'Veuillez choisir une catégorie',
+                'coupon_option.required' => 'Veuillez cocher une option de coupon',
+                'coupon_type.required' => 'Veuillez choisir un type de coupon',
+                'amount_type.required' => 'Veuillez choisir un type de montant',
+                'amount.required' => 'Veuillez saisir le montant du coupon'
+            ];
+
+            $this->validate($request,$rules,$customMessages);
+
+            if(isset($data['users'])){
+                $users = implode(',',$data['users']);
+            }else{
+                $users = "";
+            }
+
+            if(isset($data['categories'])){
+                $categories = implode(',',$data['categories']);
+            }
+
+            if($data['coupon_option']=="automatic"){
+                $coupon_code = str_random(8);
+            }else{
+                $coupon_code = $data['coupon_code'];
+            }
+
+            $coupon->coupon_option = $data['coupon_option'];
+            $coupon->coupon_code = $coupon_code;
+            $coupon->categories = $categories;
+            $coupon->users = $users;
+            $coupon->coupon_type = $data['coupon_type'];
+            $coupon->amount_type = $data['amount_type'];
+            $coupon->amount = $data['amount'];
+            $coupon->expiry_date = $data['expiry_date'];
+            $coupon->status = 1;
+            $coupon->save();
+
+            Session::flash('success_message',$message);
+            return redirect('admin/coupons');
         }
 
         $categories = Section::with('categories')->get();
