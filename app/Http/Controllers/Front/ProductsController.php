@@ -11,9 +11,11 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Models\ProductsAttribute;
+use App\Models\User;
 use Session;
 use Auth;
-use App\Models\ProductsAttribute;
+
 
 class ProductsController extends Controller
 {
@@ -236,6 +238,58 @@ class ProductsController extends Controller
                     'totalCartItems' => $totalCartItems,
                     'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))]);
             }else{
+
+                $couponDetails = Coupon::where('coupon_code', $data['code'])->first();
+
+                if($couponDetails->status==0){
+                    $message = "Ce coupon n'est pas actif";
+                }
+
+                $expiry_date = $couponDetails->expiry_date;
+                $current_date = date('Y-m-d');
+                if($expiry_date<$current_date){
+                    $message = "Ce coupon a expiré";
+                }
+
+                $catArr = explode(",", $couponDetails->categories);
+                $userCartItems = Cart::userCartItems();
+                foreach ($userCartItems as $key => $item) {
+                    if(!in_array($item['product']['category_id'], $catArr)){
+                        $message = "Ce coupon ne correspond à aucune catégorie de produit de votre panier";
+                    }
+                }
+
+                $userArr = explode(",", $couponDetails->users);
+                foreach ($userArr as $key => $user) {
+                    $getUserId = User::select('id')->where('email',$user)->first()->toArray();
+                    $userId[] = $getUserId['id'];
+                }
+
+                $total_amount = 0;
+
+                foreach ($userCartItems as $key => $item) {
+                    if(!in_array($item['user_id'], $userId)){
+                        $message = "Ce coupon ne vous appartient pas";
+                    }
+
+                    $attrPrice = Product::getDiscountedAttrPrice($item['product_id'], $item['size']);
+                    $total_amount = $total_amount + ($attrPrice['final_price'] * $item['quantity']);
+                }
+
+                echo $total_amount; die;
+
+                if(isset($message)){
+                    $userCartItems = Cart::userCartItems();
+                    $totalCartItems = totalCartItems();
+                    return response()->json([
+                    'status'=>false,
+                    'message'=>$message,
+                    'totalCartItems'=>$totalCartItems,
+                    'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))
+                    ]);
+                } else{
+
+                }
 
             }
         }
