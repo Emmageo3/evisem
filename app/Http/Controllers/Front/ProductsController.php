@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Coupon;
 use Session;
 use Auth;
 use App\Models\ProductsAttribute;
@@ -217,6 +218,26 @@ class ProductsController extends Controller
                 'totalCartItems'=>$totalCartItems,
                 'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))
             ]);
+        }
+    }
+
+    public function applyCoupon(Request $request)
+    {
+        if($request->ajax()){
+            $data = $request->all();
+            $userCartItems = Cart::userCartItems();
+            $couponCount = Coupon::where('coupon_code', $data['code'])->count();
+            if($couponCount==0){
+                $userCartItems = Cart::userCartItems();
+                $totalCartItems = totalCartItems();
+                return response()->json([
+                    'status'=>false,
+                    'message'=>'Ce coupon est invalide',
+                    'totalCartItems' => $totalCartItems,
+                    'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))]);
+            }else{
+
+            }
         }
     }
 

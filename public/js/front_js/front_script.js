@@ -244,4 +244,30 @@ $(document).ready(function(){
         }
     });
 
+    $("#ApplyCoupon").submit(function(){
+        var user = $(this).attr("user")
+        if(user == 1){
+            //ne fais rien
+        }else {
+            alert("Vous ne pourrez bénéficier des bons de réduction qu'une fois connecté")
+            return false
+        }
+
+        var code  = $("#code").val();
+        $.ajax({
+            type: 'post',
+            data: {code:code},
+            url: '/apply-coupon',
+            success:function(resp){
+                if(resp.message != ""){
+                    alert(resp.message)
+                }
+                $(".totalCartItems").html(resp.totalCartItems)
+                $("#AppendCartItems").html(resp.view)
+            }, error:function(){
+                alert("Erreur")
+            }
+        })
+    })
+
 })

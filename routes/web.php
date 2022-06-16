@@ -102,6 +102,7 @@ Route::namespace('front')->group(function(){
         Route::match(['get','post'],'/account',[App\Http\Controllers\Front\UsersController::class, 'account']);
         Route::post('/check-user-pwd',[App\Http\Controllers\Front\UsersController::class, 'checkUserPassword']);
         Route::post('/update-user-pwd',[App\Http\Controllers\Front\UsersController::class, 'updateUserPassword']);
+        Route::post('/apply-coupon',[App\Http\Controllers\Front\ProductsController::class, 'applyCoupon']);
     });
 
 
