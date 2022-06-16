@@ -45,12 +45,17 @@ class CouponController extends Controller
         if($id==""){
             $title = "Ajouter un coupon";
             $coupon = new Coupon;
+            $selCats = array();
+            $selUsers = array();
+            $coupondata = array();
             $message = "Le coupon a été ajouté avec succès";
         } else {
             $title = "Modifier le coupon";
+            $coupon = Coupon::find($id);
             $coupondata = Coupon::find($id);
             $coupondata = json_decode(json_encode($coupondata), true);
-            $coupon = Coupon::find($id);
+            $selCats = explode(',',$coupon['categories']);
+            $selUsers = explode(',',$coupon['users']);
             $message = "Le coupon a été modifié avec succès";
         }
 
@@ -111,6 +116,6 @@ class CouponController extends Controller
 
         $users = User::select('email')->where('status',1)->get()->toArray();
 
-        return view('admin.coupons.add_edit_coupon', compact('title','coupon','categories','users','coupondata'));
+        return view('admin.coupons.add_edit_coupon', compact('title','coupon','categories','users','coupondata','selCats','selUsers'));
     }
 }

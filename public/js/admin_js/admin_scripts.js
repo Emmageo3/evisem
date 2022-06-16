@@ -130,23 +130,6 @@ $(document).ready(function(){
         })
     })
 
-    $(".confirmDelete").click(function(){
-        var record = $(this).attr("record")
-        var recordid = $(this).attr("recordid")
-        Swal.fire({
-            title: 'Etes-vous sur de vouloir supprimer ceci ?',
-            text: "Vous ne pourrez pas revenir en arriere!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, le supprimer!'
-          }).then((result) => {
-            if (result.value) {
-              window.location.href="/admin/delete-"+record+"/"+recordid;
-            }
-        })
-    })
 
     $(".updateBannerStatus").click(function(){
         var status = $(this).text();
@@ -220,6 +203,23 @@ $(document).ready(function(){
     });
 });
 
+$(document).on("click",".confirmDelete", function(){
+    var record = $(this).attr("record")
+    var recordid = $(this).attr("recordid")
+    Swal.fire({
+        title: 'Etes-vous sur de vouloir supprimer ceci ?',
+        text: "Vous ne pourrez pas revenir en arriere!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, le supprimer!'
+      }).then((result) => {
+        if (result.value) {
+          window.location.href="/admin/delete-"+record+"/"+recordid;
+        }
+    })
+})
 
 
 

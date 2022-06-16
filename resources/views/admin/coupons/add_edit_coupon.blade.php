@@ -62,32 +62,45 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
+                            @if(empty($coupon['coupon_code']))
+                                <div class="form-group">
+                                    <label for="coupon_option">Option de coupon</label><br>
+                                    <span><input id="automaticCoupon" type="radio" name="coupon_option" value="automatic">&nbsp;Coupon automatique&nbsp;&nbsp;</span>
+                                    &nbsp;&nbsp;
+                                    <span><input id="manualCoupon" type="radio" name="coupon_option" checked value="manual">&nbsp;Coupon manuel&nbsp;</span>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="coupon_option">Option de coupon</label><br>
-                                <span><input id="automaticCoupon" type="radio" name="coupon_option" value="automatic">&nbsp;Coupon automatique&nbsp;&nbsp;</span>
-                                &nbsp;&nbsp;
-                                <span><input id="manualCoupon" type="radio" name="coupon_option" checked value="manual">&nbsp;Coupon manuel&nbsp;</span>
-                            </div>
-
-                            <div class="form-group" style="display: none" id="couponField">
-                                <label for="coupon_code">Code</label>
-                                <input type="text" class="form-control" id="coupon_code" name="coupon_code"
-                                placeholder="Entrez le code du coupon">
-                            </div>
+                                <div class="form-group" style="display: none" id="couponField">
+                                    <label for="coupon_code">Code</label>
+                                    <input type="text" class="form-control" id="coupon_code" name="coupon_code"
+                                    placeholder="Entrez le code du coupon"
+                                    @if (!empty($coupondata['coupon_code']))
+                                        value="{{ $coupondata['coupon_code'] }}"
+                                    @else
+                                        value="{{ old('coupon_code') }}"
+                                    @endif>
+                                </div>
+                            @else
+                                <input type="hidden" name="coupon_option" value="{{ $coupon['coupon_option'] }}">
+                                <input type="hidden" name="coupon_code" value="{{ $coupon['coupon_code'] }}">
+                                <div class="form-group" id="couponField">
+                                    <label for="coupon_code">Code : </label>
+                                    <span>{{ $coupon['coupon_code'] }}</span>
+                                </div>
+                            @endif
 
                             <div class="form-group">
                                 <label for="coupon_type">Type de coupon</label><br>
-                                <span><input type="radio" name="coupon_type" value="Plusieurs fois">&nbsp;Plusieurs fois&nbsp;&nbsp;</span>
+                                <span><input type="radio" name="coupon_type" value="Plusieurs fois" @if(isset($coupon['coupon_type']) && $coupon['coupon_type'] == "Plusieurs fois") checked @endif>&nbsp;Plusieurs fois&nbsp;&nbsp;</span>
                                 &nbsp;&nbsp;
-                                <span><input type="radio" name="coupon_type" checked value="une fois">&nbsp;Une fois&nbsp;</span>
+                                <span><input type="radio" name="coupon_type" value="une fois" @if(isset($coupon['coupon_type']) && $coupon['coupon_type'] == "une fois") checked @endif>&nbsp;Une fois&nbsp;</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="amount_type">Type de montant</label><br>
-                                <span><input type="radio" name="amount_type" checked value="Pourcentage">&nbsp;Pourcentage (en %)&nbsp;&nbsp;</span>
+                                <span><input type="radio" name="amount_type"  value="Pourcentage" @if(isset($coupon['amount_type']) && $coupon['amount_type'] == "Pourcentage") checked @endif>&nbsp;Pourcentage (en %)&nbsp;&nbsp;</span>
                                 &nbsp;&nbsp;
-                                <span><input type="radio" name="amount_type" value="fixe">&nbsp;fixe (en Fcfa)&nbsp;</span>
+                                <span><input type="radio" name="amount_type" value="fixe" @if(isset($coupon['amount_type']) && $coupon['amount_type'] == "fixe") checked @endif>&nbsp;fixe (en Fcfa)&nbsp;</span>
                             </div>
 
                             <div class="form-group">
@@ -108,13 +121,10 @@
                                     @foreach ($categories as $section)
                                         <optgroup label="{{ $section['name'] }}"></optgroup>
                                         @foreach ($section['categories'] as $category)
-                                            <option value="{{ $category['id'] }}" @if(!empty(@old('category_id')) && $category['id'] == @old('category_id')) selected  @elseif(!empty($productdata['category_id']) && $productdata['category_id']==$category['id']) selected @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                                            <option value="{{ $category['id'] }}" @if (in_array($category['id'],$selCats)) selected @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                                             @foreach ($category['subcategories'] as $subcategory)
                                                 <option value="{{ $subcategory['id'] }}"
-                                                @if(!empty(@old('category_id')) && $subcategory['id'] == @old('category_id'))
-                                                selected @elseif (!empty($productdata['category_id']) && $productdata['category_id']==$subcategory['id'])
-                                                selected
-                                                @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $subcategory['category_name'] }}</option>
+                                                @if (in_array($subcategory['id'],$selCats)) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $subcategory['category_name'] }}</option>
                                             @endforeach
                                         @endforeach
                                     @endforeach
@@ -126,7 +136,7 @@
                                 <select name="users[]" class="form-control select2bs4" style="width: 100%;" multiple data-live-search="true">
                                     <option value="">Sélectionner</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user['email'] }}">{{ $user['email'] }}</option>
+                                        <option value="{{ $user['email'] }}" @if (in_array($user['email'],$selUsers)) selected @endif>{{ $user['email'] }}</option>
                                     @endforeach
                                   </select>
                             </div>
