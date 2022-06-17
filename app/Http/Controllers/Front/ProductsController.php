@@ -253,11 +253,7 @@ class ProductsController extends Controller
 
                 $catArr = explode(",", $couponDetails->categories);
                 $userCartItems = Cart::userCartItems();
-                foreach ($userCartItems as $key => $item) {
-                    if(!in_array($item['product']['category_id'], $catArr)){
-                        $message = "Ce coupon ne correspond à aucune catégorie de produit de votre panier";
-                    }
-                }
+
 
                 $userArr = explode(",", $couponDetails->users);
                 foreach ($userArr as $key => $user) {
@@ -268,6 +264,11 @@ class ProductsController extends Controller
                 $total_amount = 0;
 
                 foreach ($userCartItems as $key => $item) {
+
+                    if(!in_array($item['product']['category_id'], $catArr)){
+                        $message = "Ce coupon ne correspond à aucune catégorie de produit de votre panier";
+                    }
+
                     if(!in_array($item['user_id'], $userId)){
                         $message = "Ce coupon ne vous appartient pas";
                     }
@@ -276,18 +277,41 @@ class ProductsController extends Controller
                     $total_amount = $total_amount + ($attrPrice['final_price'] * $item['quantity']);
                 }
 
-                echo $total_amount; die;
-
                 if(isset($message)){
                     $userCartItems = Cart::userCartItems();
                     $totalCartItems = totalCartItems();
+                    $couponAmount = 0;
                     return response()->json([
                     'status'=>false,
                     'message'=>$message,
+                    'couponAmount'=>$couponAmount,
                     'totalCartItems'=>$totalCartItems,
                     'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))
                     ]);
                 } else{
+                    if($couponDetails->amount_type=="fixe"){
+                        $couponAmount = $couponDetails->amount;
+                    }else{
+                        $couponAmount = $total_amount * ($couponDetails->amount / 100);
+                    }
+
+                    $grand_total = $total_amount - $couponAmount;
+
+                    Session::put('couponAmount', $couponAmount);
+                    Session::put('couponCode', $data['code']);
+
+                    $message = "Votre coupon a été appliqué";
+                    $totalCartItems = totalCartItems();
+                    $userCartItems = Cart::userCartItems();
+
+                    return response()->json([
+                        'status'=>true,
+                        'message'=>$message,
+                        'totalCartItems'=>$totalCartItems,
+                        'couponAmount'=>$couponAmount,
+                        'grand_total'=>$grand_total,
+                        'view'=>(String)View::make('front.products.cart_items', compact('userCartItems'))
+                    ]);
 
                 }
 

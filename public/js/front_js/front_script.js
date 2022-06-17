@@ -264,6 +264,15 @@ $(document).ready(function(){
                 }
                 $(".totalCartItems").html(resp.totalCartItems)
                 $("#AppendCartItems").html(resp.view)
+                if(resp.couponAmount>=0){
+                    $(".couponAmount").html(resp.couponAmount + " Fcfa")
+                }else{
+                    $(".couponAmount").html("0 Fcfa")
+                }
+                if(resp.grand_total>=0){
+                    $(".grand_total").text(resp.grand_total+" Fcfa")
+                }
+
             }, error:function(){
                 alert("Erreur")
             }
