@@ -22,7 +22,6 @@ return new class extends Migration
             $table->float('category_discount');
             $table->text('description');
             $table->string('url');
-            $table->string('meta-title');
             $table->string('meta_description');
             $table->string('meta_keywords');
             $table->tinyInteger('status');

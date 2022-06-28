@@ -81,10 +81,6 @@ class CategoryController extends Controller
                 $data['description']="";
             }
 
-            if(empty($data['meta_title'])){
-                $data['meta_title']="";
-            }
-
             if(empty($data['meta_description'])){
                 $data['meta_description']="";
             }
@@ -100,7 +96,6 @@ class CategoryController extends Controller
             $category->category_discount = $data['category_discount'];
             $category->description = $data['description'];
             $category->url = $data['url'];
-            $category->meta_title = $data['meta_title'];
             $category->meta_description = $data['meta_description'];
             $category->meta_keywords = $data['meta_keywords'];
             $category->status = 1;

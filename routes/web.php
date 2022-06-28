@@ -71,7 +71,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
 
 Route::namespace('front')->group(function(){
     Route::get('/', [App\Http\Controllers\Front\IndexController::class, 'index']);
-    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+        $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
 
     foreach ($catUrls as $url) {
         Route::get('/'.$url, [App\Http\Controllers\Front\ProductsController::class, 'listing']);
@@ -89,7 +89,7 @@ Route::namespace('front')->group(function(){
 
     Route::post('/delete-cart-item',[App\Http\Controllers\Front\ProductsController::class, 'deleteCartItem']);
 
-    Route::get('/login-register',[App\Http\Controllers\Front\UsersController::class, 'loginRegister'])->name('login');
+    Route::get('/login-register',[App\Http\Controllers\Front\UsersController::class, 'loginRegister'])->name('login-register');
 
     Route::post('/login',[App\Http\Controllers\Front\UsersController::class, 'loginUser']);
     Route::post('/register',[App\Http\Controllers\Front\UsersController::class, 'registerUser']);

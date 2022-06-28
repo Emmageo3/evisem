@@ -254,11 +254,14 @@ class ProductsController extends Controller
                 $catArr = explode(",", $couponDetails->categories);
                 $userCartItems = Cart::userCartItems();
 
+                if(!empty($couponDetails->users)){
 
-                $userArr = explode(",", $couponDetails->users);
-                foreach ($userArr as $key => $user) {
-                    $getUserId = User::select('id')->where('email',$user)->first()->toArray();
-                    $userId[] = $getUserId['id'];
+                    $userArr = explode(",", $couponDetails->users);
+                    foreach ($userArr as $key => $user) {
+                        $getUserId = User::select('id')->where('email',$user)->first()->toArray();
+                        $userId[] = $getUserId['id'];
+                    }
+
                 }
 
                 $total_amount = 0;
@@ -269,9 +272,12 @@ class ProductsController extends Controller
                         $message = "Ce coupon ne correspond à aucune catégorie de produit de votre panier";
                     }
 
-                    if(!in_array($item['user_id'], $userId)){
-                        $message = "Ce coupon ne vous appartient pas";
+                    if(!empty($couponDetails->users)){
+                        if(!in_array($item['user_id'], $userId)){
+                            $message = "Ce coupon ne vous appartient pas";
+                        }
                     }
+
 
                     $attrPrice = Product::getDiscountedAttrPrice($item['product_id'], $item['size']);
                     $total_amount = $total_amount + ($attrPrice['final_price'] * $item['quantity']);

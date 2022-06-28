@@ -99,11 +99,6 @@
                     <textarea name="description" id="description" class="form-control">@if (!empty($categorydata['description'])) {{ $categorydata['description'] }} @else {{ old('description') }} @endif </textarea>
                   </div>
 
-                  <div class="form-group">
-                    <label for="meta_title">Meta titre</label>
-                    <textarea name="meta_title" id="meta_title" class="form-control">@if (!empty($categorydata['meta_title'])) {{ $categorydata['meta_title'] }} @else {{ old('meta_title') }} @endif
-                  </textarea>
-                  </div>
 
                   <div class="form-group">
                     <label for="meta_description">Meta description</label>
