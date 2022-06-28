@@ -102,8 +102,7 @@
 				            <div class="control-group">
 				                <label class="control-label"><strong> Méthode de paiement: </strong> </label>
 				                <div class="controls">
-				                    <input type="text" name="code" id="code" class="input-medium" placeholder="Entrez le code" required>
-				                    <button type="submit" class="btn"> Ajouter </button>
+
 				                </div>
 				            </div>
 				        </form>
@@ -139,7 +138,7 @@
 			  </tr>
             </table> -->
 	<a href="{{ url('/cart') }}" class="btn btn-large"><i class="icon-arrow-left"></i> Retourner au panier </a>
-	<a href="{{ url('checkout') }}" class="btn btn-large pull-right">Suivant <i class="icon-arrow-right"></i></a>
+	<a href="{{ url('checkout') }}" class="btn btn-large pull-right">Passer la commande <i class="icon-arrow-right"></i></a>
 
 </div>
 </div></div>
