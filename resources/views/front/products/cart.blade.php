@@ -81,8 +81,8 @@
 			  </td>
 			  </tr>
             </table> -->
-	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continuer mon shopping </a>
-	<a href="login.html" class="btn btn-large pull-right">Suivant <i class="icon-arrow-right"></i></a>
+	<a href="{{ url('/') }}" class="btn btn-large"><i class="icon-arrow-left"></i> Continuer mon shopping </a>
+	<a href="{{ url('checkout') }}" class="btn btn-large pull-right">Suivant <i class="icon-arrow-right"></i></a>
 
 </div>
 </div></div>

@@ -13,6 +13,7 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\ProductsAttribute;
 use App\Models\User;
+use App\Models\DeliveryAddress;
 use Session;
 use Auth;
 
@@ -323,6 +324,13 @@ class ProductsController extends Controller
 
             }
         }
+    }
+
+    public function checkout()
+    {
+        $userCartItems = Cart::userCartItems();
+        $deliveryAddresses = DeliveryAddress::deliveryAddresses();
+        return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
     }
 
 
