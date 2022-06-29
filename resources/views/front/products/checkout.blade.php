@@ -33,7 +33,7 @@
     @endif
 
     <table class="table table-bordered">
-		<tr><th> Adresses de livraison  </th></tr>
+		<tr><th><strong> Adresses de livraison </strong> | <a href="{{ url('add-edit-delivery-address') }}">Ajouter une adresse</a> </th></tr>
         @foreach($deliveryAddresses as $address)
 		 <tr>
 		 <td>

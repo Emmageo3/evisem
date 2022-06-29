@@ -14,6 +14,7 @@ use App\Models\Coupon;
 use App\Models\ProductsAttribute;
 use App\Models\User;
 use App\Models\DeliveryAddress;
+use App\Models\Country;
 use Session;
 use Auth;
 
@@ -331,6 +332,19 @@ class ProductsController extends Controller
         $userCartItems = Cart::userCartItems();
         $deliveryAddresses = DeliveryAddress::deliveryAddresses();
         return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
+    }
+
+    public function addEditDeliveryAddress($id=null,Request $request)
+    {
+        if($id ="")
+        {
+            $title = "Ajouter une adresse de livraison";
+        }else {
+            $title = "Modifier l'adresse de livraison";
+        }
+
+        $countries = Country::where('status',1)->get()->toArray();
+        return view('front.products.add_edit_delivery_address', compact('countries','title'));
     }
 
 
