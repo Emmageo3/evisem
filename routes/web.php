@@ -89,7 +89,7 @@ Route::namespace('front')->group(function(){
 
     Route::post('/delete-cart-item',[App\Http\Controllers\Front\ProductsController::class, 'deleteCartItem']);
 
-    Route::get('/login-register',[App\Http\Controllers\Front\UsersController::class, 'loginRegister'])->name('login-register');
+    Route::get('/login-register',[App\Http\Controllers\Front\UsersController::class, 'loginRegister'])->name('login');
 
     Route::post('/login',[App\Http\Controllers\Front\UsersController::class, 'loginUser']);
     Route::post('/register',[App\Http\Controllers\Front\UsersController::class, 'registerUser']);

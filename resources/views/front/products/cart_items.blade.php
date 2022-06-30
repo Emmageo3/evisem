@@ -54,7 +54,11 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="6" style="text-align:right"><strong>TOTAL ({{ $total_price }} Fcfa - {{ Session::get('couponAmount') }} Fcfa) =</strong></td>
+                <td colspan="6" style="text-align:right"><strong>TOTAL ({{ $total_price }} Fcfa  @if(Session::has('couponAmount'))
+                    - {{ Session::get('couponAmount') }} Fcfa
+                 @else
+                     0 Fcfa
+                 @endif =</strong></td>
                 <td class="label label-important" style="display:block"> <strong class="grand_total"> {{ $total_price - Session::get('couponAmount') }} Fcfa</strong></td>
             </tr>
     </tbody>

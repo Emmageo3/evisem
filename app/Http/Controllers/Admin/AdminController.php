@@ -13,6 +13,7 @@ use App\Models\Admin;
 
 class AdminController extends Controller
 {
+    //Connexion administrateur
     public function login(Request $request)
     {
         if($request->isMethod('post')){
@@ -35,12 +36,14 @@ class AdminController extends Controller
         return view('admin.admin_login');
     }
 
+    //Page d'accueil admin
     public function dashboard()
     {
         Session::put('page', 'dashboard');
         return view('admin.admin_dashboard');
     }
 
+    //Paramètres de l'admin
     public function settings()
     {
         Session::put('page', 'settings');
@@ -48,6 +51,7 @@ class AdminController extends Controller
         return view('admin.admin_settings',compact('adminDetails'));
     }
 
+    //Vérifier le mot de passe actuel
     public function checkCurrentPassword(Request $request)
     {
         $data = $request->all();
@@ -59,6 +63,7 @@ class AdminController extends Controller
         }
     }
 
+    //Mettre à jour le mot de passe
     public function updateCurrentPassword(Request $request)
     {
         if($request->isMethod('post')){
@@ -78,12 +83,14 @@ class AdminController extends Controller
         }
     }
 
+    //Déconnexion de l'admin
     public function logout()
     {
         Auth::guard('admin')->logout();
         return redirect('/admin');
     }
 
+    //Mettre à jour les détails de l'admin
     public function updateAdminDetails(Request $request)
     {
         Session::put('page', 'update-admin-details');
