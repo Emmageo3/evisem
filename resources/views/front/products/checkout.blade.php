@@ -130,8 +130,8 @@
                                     <label class="control-label"><strong> Méthode de paiement: </strong> </label>
                                     <div class="controls">
                                         <span>
-                                            <input type="radio" name="payment_method" id="COD" value="COD"><strong>Payer à la livraison</strong>&nbsp;&nbsp;
-                                            <input type="radio" name="payment_method" id="paypal" value="paypal"> <strong>Paypal</strong>
+                                            <input type="radio" name="payment_gateway" id="COD" value="COD"><strong>Payer à la livraison</strong>&nbsp;&nbsp;
+                                            <input type="radio" name="payment_gateway" id="paypal" value="paypal"> <strong>Paypal</strong>
                                         </span>
                                     </div>
                                 </div>

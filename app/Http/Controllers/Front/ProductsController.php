@@ -15,8 +15,11 @@ use App\Models\ProductsAttribute;
 use App\Models\User;
 use App\Models\DeliveryAddress;
 use App\Models\Country;
+use App\Models\Order;
+use App\Models\OrdersProduct;
 use Session;
 use Auth;
+use DB;
 
 
 class ProductsController extends Controller
@@ -336,12 +339,59 @@ class ProductsController extends Controller
                 Session::flash('error_message1', $message);
                 return redirect()->back();
             }
-            if(empty($data['payment_method'])){
+            if(empty($data['payment_gateway'])){
                 $message = "Veuillez sélectionner une méthode de paiement";
                 Session::flash('error_message2', $message);
                 return redirect()->back();
             }
-            print_r($data); die;
+
+            if($data['payment_gateway']=="COD"){
+                $payment_method = "COD";
+            }else{
+                $payment_method = "Prepaid";
+            }
+
+            $deliveryAddress = DeliveryAddress::where('id',$data['address_id'])->first()->toArray();
+
+            $order = new Order;
+            $order->user_id = Auth::user()->id;
+            $order->name = $deliveryAddress['name'];
+            $order->address = $deliveryAddress['address'];
+            $order->city = $deliveryAddress['city'];
+            $order->state = $deliveryAddress['state'];
+            $order->country = $deliveryAddress['country'];
+            $order->pincode = $deliveryAddress['pincode'];
+            $order->mobile = $deliveryAddress['mobile'];
+            $order->email = Auth::user()->email;
+            $order->shipping_charges = 1000;
+            $order->coupon_code = Session::get('coupon_code');
+            $order->coupon_amount = Session::get('coupon_amount');
+            $order->order_status = "new";
+            $order->payment_method = $payment_method;
+            $order->payment_gateway = $data['payment_gateway'];
+            $order->grand_total = Session::get('grand_total');
+            $order->save();
+
+            $order_id = DB::getPdo()->lastInsertId();
+
+            $cartItems = Cart::where('user_id', Auth::user()->id)->get()->toArray();
+            foreach ($cartItems as $key => $item) {
+                $cartItem  = new OrdersProduct;
+                $cartItem->order_id = $order_id;
+                $cartItem->user_id = Auth::user()->id;
+
+                $getProductDetails = Product::select('product_code', 'product_name', 'product_color')->where('id', $item['product_id'])->first()->toArray();
+                $cartItem->product_id = $item['product_id'];
+                $cartItem->product_code = $getProductDetails['product_code'];
+                $cartItem->product_name = $getProductDetails['product_name'];
+                $cartItem->product_color = $getProductDetails['product_color'];
+                $cartItem->product_size = $item['size'];
+                $getDiscountedAttrPrice = Product::getDiscountedAttrPrice($item['product_id'], $item['size']);
+                $cartItem->product_price = $getDiscountedAttrPrice['final_price'];
+                $cartItem->product_qty = $item['quantity'];
+                $cartItem->save();
+            }
+            echo "order placed"; die;
         }
         $userCartItems = Cart::userCartItems();
         $deliveryAddresses = DeliveryAddress::deliveryAddresses();
