@@ -66,7 +66,7 @@
                         <td>{{ $order['order_status'] }}</td>
                         <td>{{ $order['payment_method'] }}</td>
                         <td>
-                            <a title="voir les détails de la commande" href="{{ url('admin/add-attributes/'.$order['id']) }}"><i class="fas fa-plus"></i></a>
+                            <a title="voir les détails de la commande" href="{{ url('admin/orders/'.$order['id']) }}"><i class="fas fa-file"></i></a>
                         </td>
                     </tr>
                   @endforeach

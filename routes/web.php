@@ -67,6 +67,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::match(['get', 'post'], 'add-edit-coupon/{id?}',[App\Http\Controllers\Admin\CouponController::class, 'addEditCoupon']);
 
         Route::get('orders', [App\Http\Controllers\Admin\OrdersController::class, 'orders']);
+        Route::get('orders/{id}', [App\Http\Controllers\Admin\OrdersController::class, 'orderDetails']);
     });
 
 });
