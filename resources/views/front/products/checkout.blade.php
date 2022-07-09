@@ -41,9 +41,10 @@
 					<input type="radio" id="address{{ $address['id'] }}" name="address_id" value="{{ $address['id'] }}">
 				</div>
 				<div class="control-group">
-				  <label class="control-label" for="inputPassword1">{{ $address['name']}}, {{ $address['address'] }}, {{ $address['city'] }}, {{ $address['country'] }}</label>
+				  <label class="control-label" for="inputPassword1">{{ $address['name']}}, {{ $address['address'] }}, {{ $address['city'] }}-{{ $address['pincode'] }}, {{ $address['country'] }}, <span style="float: right">tel: {{ $address['mobile'] }}</span></label>
 				</div>
 		  </td>
+          <td><a href="{{ url('add-edit-delivery-address/'.$address['id']) }}">Modifier</a> | <a href="{{ url('delete-delivery-address/'.$address['id']) }}" class="addressDelete">Supprimer</a></td>
 		  </tr>
         @endforeach
 	</table>

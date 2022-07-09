@@ -30,30 +30,30 @@
 			<div class="well">
 			<h5>Informations</h5><br/>
             Entrez les détails de votre adresse <br><br>
-			<form id="deliveryAddressForm" action="{{ url('add-edit-delivery-address') }}" method="post">
+			<form id="deliveryAddressForm" @if(empty($address['id'])) action="{{ url('add-edit-delivery-address') }}" @else action="{{ url('add-edit-delivery-address/'.$address['id']) }}" @endif  method="post">
                 @csrf
 			    <div class="control-group">
 				    <label class="control-label" for="name">Nom complet</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="name" name="name">
+				         <input class="span3" value="{{ $address['name'] }}"  type="text" id="name" name="name">
 				    </div>
 			    </div>
                 <div class="control-group">
 				    <label class="control-label" for="address">Adresse</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="address" name="address">
+				         <input class="span3" value="{{ $address['address'] }}"  type="text" id="address" name="address">
 				    </div>
 			    </div>
                 <div class="control-group">
 				    <label class="control-label" for="city">Ville</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="city" name="city">
+				         <input class="span3" value="{{ $address['city'] }}"  type="text" id="city" name="city">
 				    </div>
 			    </div>
                 <div class="control-group">
 				    <label class="control-label" for="state">Région</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="state" name="state">
+				         <input class="span3" value="{{ $address['state'] }}"  type="text" id="state" name="state">
 				    </div>
 			    </div>
                 <div class="control-group">
@@ -62,7 +62,8 @@
                          <select name="country" id="country" class="span3">
                              <option value="">Sélectionner</option>
                              @foreach ($countries as $country)
-                                 <option value="{{ $country['country_name'] }}">{{ $country['country_name'] }}</option>
+                                 <option value="{{ $country['country_name'] }}"
+                                 @if($country['country_name']==$address['country']) selected  @endif>{{ $country['country_name'] }}</option>
                              @endforeach
                          </select>
 				    </div>
@@ -70,13 +71,13 @@
                 <div class="control-group">
 				    <label class="control-label" for="pincode">Numéro postal</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="pincode" name="pincode">
+				         <input class="span3" value="{{ $address['pincode'] }}"  type="text" id="pincode" name="pincode">
 				    </div>
 			    </div>
 				<div class="control-group">
 				    <label class="control-label" for="mobile">Numéro de téléphone</label>
 				    <div class="controls">
-				         <input class="span3"  type="text" id="mobile" name="mobile">
+				         <input class="span3" value="{{ $address['mobile'] }}"  type="text" id="mobile" name="mobile">
 				    </div>
 			    </div>
 			    <div class="controls">

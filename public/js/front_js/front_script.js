@@ -279,4 +279,11 @@ $(document).ready(function(){
         })
     })
 
+    $(document).on('click','.addressDelete', function(){
+        var result = confirm('Voulez vous vraiment supprimer cette adresse ?')
+        if(!result){
+            return false;
+        }
+    })
+
 })

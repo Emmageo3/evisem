@@ -342,8 +342,7 @@ class ProductsController extends Controller
             $message = "Votre adresse a été ajoutée avec succès";
         } else {
             $title = "Modifier l'adresse";
-            $addressdata = DeliveryAddress::find($id);
-            $addressdata = json_decode(json_encode($addressdata), true);
+            $address = DeliveryAddress::find($id);
             $message = "Votre adresse a été modifiée avec succès";
         }
 
@@ -377,7 +376,15 @@ class ProductsController extends Controller
         }
 
         $countries = Country::where('status',1)->get()->toArray();
-        return view('front.products.add_edit_delivery_address', compact('title','countries'));
+        return view('front.products.add_edit_delivery_address', compact('title','countries','address'));
+    }
+
+    public function deleteDeliveryAddress($id)
+    {
+        DeliveryAddress::where('id',$id)->delete();
+        $message = "L'adresse a été supprimée avec succés!";
+        Session::flash('success_message', $message);
+        return redirect()->back();
     }
 
 
