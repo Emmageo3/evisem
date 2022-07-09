@@ -1,3 +1,5 @@
+<?php use App\Models\Product; ?>
+
 @extends('layouts.front_layout.front_layout')
 @section('content')
 
@@ -10,7 +12,7 @@
 	<h3>commande numéro {{ $orderDetails['id'] }}</h3>
 	<hr class="soft"/>
 
-    <div class="row">
+    <div class="row" style="margin: 1rem">
         <div class="span4">
             <table class="table table-striped table-bordered">
                 <tr>
@@ -71,9 +73,10 @@
         </div>
     </div>
 
-        <div class="row">
+        <div class="row" style="margin: 1rem">
                 <table class="table table-striped table-bordered">
                     <tr>
+                        <th>Photo</th>
                         <th>Numéro du produit</th>
                         <th>Nom du produit</th>
                         <th>Taille</th>
@@ -82,6 +85,11 @@
                     </tr>
                     @foreach ($orderDetails['orders_products'] as $product)
                         <tr>
+                            <td><?php $getProductImage=Product::getProductImage($product['product_id'])
+                             ?>
+                             <a target="_blank" href="{{ url('product/'.$product['product_id']) }}"><img style="width: 80px" src="{{ $getProductImage }}" alt=""></a>
+
+                             </td>
                             <td>{{ $product['product_code'] }}</td>
                             <td>{{ $product['product_name'] }}</td>
                             <td>{{ $product['product_size'] }}</td>
