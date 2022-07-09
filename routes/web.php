@@ -65,6 +65,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function() {
         Route::post('update-coupon-status',[App\Http\Controllers\Admin\CouponController::class, 'updateCouponStatus']);
         Route::get('delete-coupon/{id}',[App\Http\Controllers\Admin\CouponController::class, 'deleteCoupon']);
         Route::match(['get', 'post'], 'add-edit-coupon/{id?}',[App\Http\Controllers\Admin\CouponController::class, 'addEditCoupon']);
+
+        Route::get('orders', [App\Http\Controllers\Admin\OrdersController::class, 'orders']);
     });
 
 });
