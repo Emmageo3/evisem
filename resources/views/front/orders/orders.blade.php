@@ -17,10 +17,11 @@
                         <th>Méthode de paiement</th>
                         <th>Total</th>
                         <th>Date</th>
+                        <th>Détails</th>
                     </tr>
                     @foreach ($orders as $order)
                         <tr>
-                            <td>{{ $order['id'] }}</td>
+                            <td><a style="text-decoration: underline" href="{{ url('orders/'.$order['id']) }}">#{{ $order['id'] }}</a></td>
                             <td>
                                 @foreach ($order['orders_products'] as $pro)
                                     {{ $pro['product_code'] }}<br>
@@ -29,6 +30,7 @@
                             <td>{{ $order['payment_method'] }}</td>
                             <td>{{ $order['grand_total'] }} Fcfa</td>
                             <td>{{ date('d-m-Y', strtotime($order['created_at']))  }}</td>
+                            <td><a href="{{ url('orders/'.$order['id']) }}">Voir les détails</a></td>
                         </tr>
                     @endforeach
                 </table>

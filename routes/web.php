@@ -108,6 +108,7 @@ Route::namespace('front')->group(function(){
         Route::get('/delete-delivery-address/{id}',[App\Http\Controllers\Front\ProductsController::class, 'deleteDeliveryAddress']);
         Route::get('/thanks', [App\Http\Controllers\Front\ProductsController::class, 'thanks']);
         Route::get('/orders', [App\Http\Controllers\Front\OrdersController::class, 'orders']);
+        Route::get('/orders/{id}', [App\Http\Controllers\Front\OrdersController::class, 'orderDetails']);
     });
 
 
