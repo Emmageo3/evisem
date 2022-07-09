@@ -334,13 +334,43 @@ class ProductsController extends Controller
         return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
     }
 
-    public function addEditDeliveryAddress($id=null,Request $request)
+    public function addEditDeliveryAddress($id=null, Request $request)
     {
         if($id ="")
         {
             $title = "Ajouter une adresse de livraison";
+            $adress = new DeliveryAddress;
         }else {
             $title = "Modifier l'adresse de livraison";
+            $addressdata = DeliveryAddress::find($id);
+            $addressdata = json_decode(json_encode($addressdata), true);
+        }
+
+        if($request->isMethod('post')){
+            $data = $request->all();
+
+            $rules = [
+                'name'=>'required',
+                'mobile'=>'required|numeric'
+            ];
+            $customMessages = [
+                'name.required'=>'Veuillez saisir votre nom complet',
+                'mobile.required'=>'Veuillez saisir un numéro de téléphone valide'
+            ];
+            $this->validate($request,$rules,$customMessages);
+
+            $address->name = $data['name'];
+            $address->address = $data['address'];
+            $address->city = $data['city'];
+            $address->state = $data['state'];
+            $address->country = $data['country'];
+            $address->pincode = $data['pincode'];
+            $address->mobile = $data['mobile'];
+            $address->save();
+
+            $message = "Votre adresse a été sauvegardée avec succés!";
+            Session::flash('success_message', $message);
+            return redirect()->back();
         }
 
         $countries = Country::where('status',1)->get()->toArray();
