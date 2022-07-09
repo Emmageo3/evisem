@@ -30,7 +30,7 @@
 			<div class="well">
 			<h5>Informations</h5><br/>
             Entrez les détails de votre adresse <br><br>
-			<form id="deliveryAddressForm" @if(empty($addressdata['id'])) action="{{ url('/admin/add-edit-delivery-address') }}" @else action="{{ url('/admin/add-edit-delivery-adress/'.$addressdata['id']) }}" @endif  method="post">
+			<form id="deliveryAddressForm" action="{{ url('add-edit-delivery-address') }}" method="post">
                 @csrf
 			    <div class="control-group">
 				    <label class="control-label" for="name">Nom complet</label>
@@ -62,7 +62,7 @@
                          <select name="country" id="country" class="span3">
                              <option value="">Sélectionner</option>
                              @foreach ($countries as $country)
-                                 <option value="{{ $country['country_name'] }}" @if($country['country_name']==$userDetails['country']) selected @endif>{{ $country['country_name'] }}</option>
+                                 <option value="{{ $country['country_name'] }}">{{ $country['country_name'] }}</option>
                              @endforeach
                          </select>
 				    </div>
@@ -80,7 +80,8 @@
 				    </div>
 			    </div>
 			    <div class="controls">
-			        <button type="submit" class="btn block">Mettre a jour</button>
+			        <button type="submit" class="btn block">Soumettre</button>
+                    <a style="float: right" class="btn block" href="{{ url('checkout') }}">Retour</a>
 			    </div>
 			</form>
 		</div>

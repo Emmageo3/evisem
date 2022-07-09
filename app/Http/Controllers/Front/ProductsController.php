@@ -334,31 +334,35 @@ class ProductsController extends Controller
         return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
     }
 
-    public function addEditDeliveryAddress($id=null, Request $request)
+    public function addEditDeliveryAddress(Request $request, $id=null)
     {
-        if($id ="")
-        {
-            $title = "Ajouter une adresse de livraison";
-            $adress = new DeliveryAddress;
-        }else {
-            $title = "Modifier l'adresse de livraison";
+        if($id==""){
+            $title = "Ajouter une adresse";
+            $address = new DeliveryAddress;
+            $message = "Votre adresse a été ajoutée avec succès";
+        } else {
+            $title = "Modifier l'adresse";
             $addressdata = DeliveryAddress::find($id);
             $addressdata = json_decode(json_encode($addressdata), true);
+            $message = "Votre adresse a été modifiée avec succès";
         }
 
         if($request->isMethod('post')){
             $data = $request->all();
 
             $rules = [
-                'name'=>'required',
-                'mobile'=>'required|numeric'
+                'name' => 'required',
+                'mobile' => 'required|numeric'
             ];
+
             $customMessages = [
-                'name.required'=>'Veuillez saisir votre nom complet',
-                'mobile.required'=>'Veuillez saisir un numéro de téléphone valide'
+                'name.required' => 'Veuillez saisir votre nom complet',
+                'mobile.required' => 'Veuillez saisir un numéro de téléphone valide',
             ];
+
             $this->validate($request,$rules,$customMessages);
 
+            $address->user_id = Auth::user()->id;
             $address->name = $data['name'];
             $address->address = $data['address'];
             $address->city = $data['city'];
@@ -368,13 +372,12 @@ class ProductsController extends Controller
             $address->mobile = $data['mobile'];
             $address->save();
 
-            $message = "Votre adresse a été sauvegardée avec succés!";
-            Session::flash('success_message', $message);
-            return redirect()->back();
+            Session::flash('success_message',$message);
+            return redirect('checkout');
         }
 
         $countries = Country::where('status',1)->get()->toArray();
-        return view('front.products.add_edit_delivery_address', compact('countries','title'));
+        return view('front.products.add_edit_delivery_address', compact('title','countries'));
     }
 
 

@@ -37,7 +37,7 @@ class CouponController extends Controller
         Coupon::where('id', $id)->delete();
 
         $request->session()->flash('success_message', 'le coupon a été supprimé avec succes!');
-        return redirect()->back();
+        return redirect('checkout');
     }
 
     public function addEditCoupon(Request $request, $id=null)
