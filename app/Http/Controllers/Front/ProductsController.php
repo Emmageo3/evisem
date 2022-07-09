@@ -327,8 +327,22 @@ class ProductsController extends Controller
         }
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if(empty($data['address_id'])){
+                $message ="Veuillez choisir une adresse de livraison";
+                Session::flash('error_message1', $message);
+                return redirect()->back();
+            }
+            if(empty($data['payment_method'])){
+                $message = "Veuillez sélectionner une méthode de paiement";
+                Session::flash('error_message2', $message);
+                return redirect()->back();
+            }
+            print_r($data); die;
+        }
         $userCartItems = Cart::userCartItems();
         $deliveryAddresses = DeliveryAddress::deliveryAddresses();
         return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
