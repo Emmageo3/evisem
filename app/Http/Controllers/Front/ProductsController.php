@@ -391,7 +391,17 @@ class ProductsController extends Controller
                 $cartItem->product_qty = $item['quantity'];
                 $cartItem->save();
             }
-            echo "order placed"; die;
+
+            Session::put('order_id', $order_id);
+
+            DB::commit();
+
+            if($data['payment_gateway']=="COD"){
+                return redirect('/thanks');
+            }else{
+                echo "bientot disponible";
+                $payment_method = "Paiement en ligne";
+            }
         }
         $userCartItems = Cart::userCartItems();
         $deliveryAddresses = DeliveryAddress::deliveryAddresses();
@@ -452,4 +462,14 @@ class ProductsController extends Controller
     }
 
 
+    public function thanks()
+    {
+        if(Session::has('order_id')){
+            Cart::where('user_id', Auth::user()->id)->delete();
+            return view('front.products.thanks');
+        }else{
+            return redirect('/cart');
+        }
+
+    }
 }
