@@ -7,6 +7,17 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
+            @if(Session::has('success_message'))
+            <div class="col-sm-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+                    {{ Session::get('success_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+                {{ Session::forget('success_message') }}
+            @endif
             <div class="col-sm-6">
                 <h1>Commandes</h1>
             </div>
@@ -135,12 +146,17 @@
                       <tbody>
                           <tr>
                               <td colspan="2">
-                                <select name="order_status" required>
-                                    <option>Sélectionner le statut</option>
-                                    <option>Nouveau</option>
-                                    <option>En cours</option>
-                                </select> &nbsp;&nbsp;
-                                <button type="submit">Mettre à jour</button>
+                                <form action="{{ url('admin/update-order-status') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="order_id" value="{{ $orderDetails['id'] }}">
+                                    <select name="order_status" required>
+                                        <option>Sélectionner le statut</option>
+                                        @foreach ($orderStatuses as $status)
+                                        <option value="{{ $status['name'] }}" @if(isset($orderDetails['order_status']) && $orderDetails['order_status'] == $status['name']) selected @endif>{{ $status['name'] }}</option>
+                                        @endforeach
+                                    </select> &nbsp;&nbsp;
+                                    <button type="submit">Mettre à jour</button>
+                                </form>
                               </td>
                           </tr>
                       </tbody>
