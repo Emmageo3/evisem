@@ -159,6 +159,15 @@
                                 </form>
                               </td>
                           </tr>
+                          <tr>
+                            <td colspan="2">
+                                @foreach ($orderLog as $log)
+                                    <strong>{{ $log['order_status'] }}</strong><br>
+                                   {{ date('F j Y, à H:i:s',strtotime($log['created_at'])) }}
+                                   <hr><br>
+                                @endforeach
+                            </td>
+                          </tr>
                       </tbody>
                     </table>
                   </div>

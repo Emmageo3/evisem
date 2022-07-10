@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\OrderStatus;
+use App\Models\OrdersLog;
 use Session;
 
 class OrdersController extends Controller
@@ -24,7 +25,8 @@ class OrdersController extends Controller
     $orderDetails = Order::with('orders_products')->where('id',$id)->first()->toArray();
     $userDetails = User::where('id',$orderDetails['user_id'])->first()->toArray();
     $orderStatuses = OrderStatus::where('status',1)->get()->toArray();
-    return view('admin.orders.order_details')->with(compact('orderDetails','userDetails','orderStatuses'));
+    $orderLog = OrdersLog::where('order_id', $id)->orderBy('id', 'Desc')->get()->toArray();
+    return view('admin.orders.order_details')->with(compact('orderDetails','userDetails','orderStatuses','orderLog'));
     }
 
     public function updateOrderStatus(Request $request)
@@ -50,6 +52,11 @@ class OrdersController extends Controller
                 Mail::send('emails.order_status', $messageData, function($message) use($email){
                     $message->to($email)->subject('Statut de votre commande - Evisem');
                 });
+
+            $log = new OrdersLog;
+            $log->order_id = $data['order_id'];
+            $log->order_status = $data['order_status'];
+            $log->save();
 
             return redirect()->back();
         }
