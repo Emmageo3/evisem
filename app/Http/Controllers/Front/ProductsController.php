@@ -347,6 +347,21 @@ class ProductsController extends Controller
 
             if($data['payment_gateway']=="COD"){
                 $payment_method = "COD";
+
+                $orderDetails = Order::with('order_products')->where('id', $order_id)->first()->toArray();
+
+                $email = Auth::user()->email;
+                $messageData = [
+                    'email'=> $email,
+                    'name' => Auth::user()->name,
+                    'order_id' => $order_id,
+                    'orderDetails' =>  $orderDetails
+                ];
+
+                Mail::send('emails.order', $messageData, function($message) use($email){
+                    $message->to($email)->subject('Commande enregistrée - Evisem');
+                });
+
             }else{
                 $payment_method = "Prepaid";
             }
