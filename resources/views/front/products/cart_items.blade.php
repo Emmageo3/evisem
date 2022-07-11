@@ -28,13 +28,9 @@
                         <button class="btn btn-danger btnItemDelete" type="button" data-cartid="{{ $item['id'] }}"><i class="icon-remove icon-white"></i></button>
                     </div>
                 </td>
-                <td>{{ $attrPrice['product_price'] }} Fcfa</td>
-                <td>{{ $attrPrice['discount'] }} Fcfa</td>
-                @if($attrPrice['discount']>0)
-                    <td>{{ $attrPrice['final_price'] * $item['quantity'] }} Fcfa</td>
-                @else
-                    <td>{{ $attrPrice['product_price']  * $item['quantity']}} Fcfa</td>
-                @endif
+                <td>{{ $attrPrice['product_price'] * $item['quantity'] }} Fcfa</td>
+                <td>- {{ $attrPrice['discount'] * $item['quantity'] }} Fcfa</td>
+                <td>{{ $attrPrice['final_price'] * $item['quantity'] }} Fcfa</td>
             </tr>
                 <?php $total_price = $total_price + ($attrPrice['final_price'] * $item['quantity']) ?>
         @endforeach

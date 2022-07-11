@@ -370,6 +370,8 @@ class ProductsController extends Controller
             $order->coupon_amount = Session::get('coupon_amount');
             $order->order_status = "new";
             $order->payment_method = $payment_method;
+            $order->courrier_name = "";
+            $order->tracking_number= "";
             $order->payment_gateway = $data['payment_gateway'];
             $order->grand_total = Session::get('grand_total');
             $order->save();
@@ -419,6 +421,14 @@ class ProductsController extends Controller
             }
         }
         $userCartItems = Cart::userCartItems();
+
+        if(count($userCartItems)==0)
+        {
+            $message = "Votre panier est vide. Veuillez ajouter des produits pour pouvoir commander";
+            Session::put('error_message1',$message);
+            return redirect('/cart');
+        }
+
         $deliveryAddresses = DeliveryAddress::deliveryAddresses();
         return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
     }

@@ -23,6 +23,14 @@
             </button>
         </div>
     @endif
+    @if(Session::has('error_message1'))
+        <div class="alert alert-danger" role="alert" style="margin-top: 10px">
+            Votre panier est vide. Veuillez ajouter des produits pour pouvoir commander
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     @if(Session::has('success_message'))
         <div class="alert alert-success" role="alert" style="margin-top: 10px">
             Ce produit a été ajouté au panier avec succès !
