@@ -26,6 +26,10 @@
         <div class="col-xs-12">
     		<div class="invoice-title">
     			<h2>Facture</h2><h3 class="pull-right">Commande # {{ $orderDetails['id'] }}</h3>
+                <br>
+                <span class="pull-right">
+                    <?php echo DNS1D::getBarcodeHTML($orderDetails['id'], 'C39') ?>
+                </span><br>
     		</div>
     		<hr>
     		<div class="row">
@@ -100,7 +104,8 @@
                                         Nom : {{ $product['product_name'] }} <br>
                                         Code : {{ $product['product_code'] }} <br>
                                         Taille : {{ $product['product_size'] }} <br>
-                                        Couleur : {{ $product['product_color'] }}
+                                        Couleur : {{ $product['product_color'] }} <br>
+                                        <?php echo DNS1D::getBarcodeHTML($product['product_code'], 'C39') ?>
                                     </td>
     								<td class="text-center">{{ $product['product_price'] }} Fcfa</td>
     								<td class="text-center">{{ $product['product_qty'] }}</td>
