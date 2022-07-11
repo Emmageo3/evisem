@@ -37,6 +37,10 @@ class OrdersController extends Controller
             Order::where('id',$data['order_id'])->update(['order_status'=>$data['order_status']]);
             Session::put('success_message','Le statut de la commande a été mis à jour avec succès!');
 
+            if(!empty($data['courrier_name']) && !empty($data['tracking_number'])){
+                Order::where('id',$data['order_id'])->update(['courrier_name'=>$data['courrier_name'], 'tracking_number'=>$data['tracking_number']]);
+            }
+
             $deliveryDetails = Order::select('email','name')->where('id', $data['order_id'])->first()->toArray();
             $orderDetails = Order::with('orders_products')->where('id', $data['order_id'])->first()->toArray();
 

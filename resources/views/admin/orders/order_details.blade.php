@@ -149,7 +149,7 @@
                                 <form action="{{ url('admin/update-order-status') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="order_id" value="{{ $orderDetails['id'] }}">
-                                    <select name="order_status" required>
+                                    <select name="order_status" id="order_status" required>
                                         <option>Sélectionner le statut</option>
                                         @foreach ($orderStatuses as $status)
                                         <option value="{{ $status['name'] }}" @if(isset($orderDetails['order_status']) && $orderDetails['order_status'] == $status['name']) selected @endif>{{ $status['name'] }}</option>
