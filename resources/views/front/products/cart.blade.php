@@ -30,6 +30,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        {{ Session::forget('error_message1') }}
     @endif
     @if(Session::has('success_message'))
         <div class="alert alert-success" role="alert" style="margin-top: 10px">

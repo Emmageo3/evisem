@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "informagenie/orange-sms": "^1.0",
         "intervention/image": "^2.7",

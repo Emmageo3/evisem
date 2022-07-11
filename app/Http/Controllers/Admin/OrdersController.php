@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\OrderStatus;
 use App\Models\OrdersLog;
 use Session;
+use Dompdf\Dompdf;
 
 class OrdersController extends Controller
 {
@@ -72,6 +73,25 @@ class OrdersController extends Controller
     {
         $orderDetails = Order::with('orders_products')->where('id',$id)->first()->toArray();
         $userDetails = User::where('id',$orderDetails['user_id'])->first()->toArray();
+
+        return view('admin.orders.order_invoice', compact('orderDetails', 'userDetails'));
+    }
+
+    public function printPdfInvoice($id)
+    {
+        $orderDetails = Order::with('orders_products')->where('id',$id)->first()->toArray();
+        $userDetails = User::where('id',$orderDetails['user_id'])->first()->toArray();
+
+        $output = "";
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($output);
+
+        $dompdf->setPaper('A4', 'landscape');
+
+        $dompdf->render();
+
+        $dompdf->stream();
 
         return view('admin.orders.order_invoice', compact('orderDetails', 'userDetails'));
     }
