@@ -224,7 +224,6 @@ $(document).on("click",".confirmDelete", function(){
 $("#courrier_name").hide()
 $("#tracking_number").hide()
 $("#order_status").on("change", function(){
-    alert(this.value)
     if(this.value=="En cours de livraison")
     {
         $("#courrier_name").show()

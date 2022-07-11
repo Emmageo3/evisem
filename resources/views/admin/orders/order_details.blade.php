@@ -52,6 +52,18 @@
                             <td>Statut</td>
                             <td>{{ $orderDetails['id'] }}</td>
                         </tr>
+                        @if(!empty($orderDetails['courrier_name']))
+                        <tr>
+                            <td>Nom du courrier</td>
+                            <td>{{ $orderDetails['courrier_name'] }}</td>
+                        </tr>
+                        @endif
+                        @if(!empty($orderDetails['tracking_number']))
+                        <tr>
+                            <td>Numéro de suivi</td>
+                            <td>{{ $orderDetails['tracking_number'] }}</td>
+                        </tr>
+                        @endif
                         <tr>
                             <td>Total</td>
                             <td>{{ $orderDetails['grand_total'] }} Fcfa</td>
@@ -155,8 +167,8 @@
                                         <option value="{{ $status['name'] }}" @if(isset($orderDetails['order_status']) && $orderDetails['order_status'] == $status['name']) selected @endif>{{ $status['name'] }}</option>
                                         @endforeach
                                     </select> &nbsp;&nbsp;
-                                    <input style="width: 120px" type="text" name="courrier_name" id="courrier_name" placeholder="courrier">
-                                    <input style="width: 120px" type="text" name="tracking_number" id="tracking_number" placeholder="numéro de suivi" >
+                                    <input style="width: 120px" type="text" name="courrier_name" @if(empty($orderDetails['courrier_name'])) id="courrier_name" @endif value="{{ $orderDetails['courrier_name'] }}" placeholder="courrier">
+                                    <input style="width: 120px" type="text" name="tracking_number" @if(empty($orderDetails['tracking_number'])) id="tracking_number" @endif value="{{ $orderDetails['tracking_number'] }}" placeholder="numéro de suivi" >
                                     <button type="submit">Mettre à jour</button>
                                 </form>
                               </td>

@@ -26,6 +26,18 @@
                     <td>Statut</td>
                     <td>{{ $orderDetails['id'] }}</td>
                 </tr>
+                @if(!empty($orderDetails['courrier_name']))
+                <tr>
+                    <td>Nom du courrier</td>
+                    <td>{{ $orderDetails['courrier_name'] }}</td>
+                </tr>
+                @endif
+                @if(!empty($orderDetails['tracking_number']))
+                <tr>
+                    <td>Numéro de suivi</td>
+                    <td>{{ $orderDetails['tracking_number'] }}</td>
+                </tr>
+                @endif
                 <tr>
                     <td>Total</td>
                     <td>{{ $orderDetails['grand_total'] }} Fcfa</td>

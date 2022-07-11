@@ -8,6 +8,10 @@
         <tr><td>Salut {{ $name }}, </td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td>Votre commande numéro {{ $order_id }} est <strong>{{ $order_status }}</strong> </td></tr>
+        @if(!empty($courrier_name) && !empty($tracking_number))
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>le nom du courrier est <strong>{{ $courrier_name }}</strong> et le numéro de suivi est <strong>{{ $tracking_number }}</strong></td></tr>
+        @endif
         <tr><td>&nbsp;</td></tr>
         <tr><td>
             <table style="width: 95%" cellpadding="5" cellspacing="5" bgcolor="#F7F4F4">
