@@ -257,6 +257,13 @@ class ProductsController extends Controller
                     $message = "Ce coupon a expiré";
                 }
 
+                if($couponDetails->coupon_type == "une fois"){
+                    $couponCount = Order::where(['coupon_code'=>$data['code'], 'user_id'=>Auth::user()->id])->count();
+                    if($couponCount >= 1){
+                        $message = "Vous avez déja utilisé ce coupon";
+                    }
+                }
+
                 $catArr = explode(",", $couponDetails->categories);
                 $userCartItems = Cart::userCartItems();
 
@@ -366,8 +373,8 @@ class ProductsController extends Controller
             $order->mobile = $deliveryAddress['mobile'];
             $order->email = Auth::user()->email;
             $order->shipping_charges = 1000;
-            $order->coupon_code = Session::get('coupon_code');
-            $order->coupon_amount = Session::get('coupon_amount');
+            $order->coupon_code = Session::get('couponCode');
+            $order->coupon_amount = Session::get('couponAmount');
             $order->order_status = "new";
             $order->payment_method = $payment_method;
             $order->courrier_name = "";

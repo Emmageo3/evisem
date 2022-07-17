@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>Statut</td>
-                    <td>{{ $orderDetails['id'] }}</td>
+                    <td>{{ $orderDetails['order_status'] }}</td>
                 </tr>
                 @if(!empty($orderDetails['courrier_name']))
                 <tr>
@@ -45,14 +45,6 @@
                 <tr>
                     <td>Taxes</td>
                     <td>{{ $orderDetails['shipping_charges'] }} Fcfa</td>
-                </tr>
-                <tr>
-                    <td>Coupon code</td>
-                    <td>{{ $orderDetails['coupon_code'] }}</td>
-                </tr>
-                <tr>
-                    <td>Montant du coupon</td>
-                    <td>{{ $orderDetails['coupon_amount'] }}</td>
                 </tr>
                 <tr>
                     <td>Méthode de paiement</td>

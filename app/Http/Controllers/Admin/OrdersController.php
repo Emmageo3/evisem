@@ -321,7 +321,7 @@ class OrdersController extends Controller
                                 <th class="unit">Couleur</th>
                                 <th class="qty">Prix</th>
                                 <th class="total">Quantité</th>
-                                <th class="total">Total/th>
+                                <th class="total">Total</th>
                             </tr>
                             </thead>
                             <tbody>';
@@ -357,7 +357,7 @@ class OrdersController extends Controller
                                 if($orderDetails['coupon_amount']>0){
                                     $output .= '<td>'.$orderDetails['coupon_amount'].'</td>';
                                 }else{
-                                    $output .= '.<td>O Fcfa</td>.';
+                                    $output .= '.<td>0 Fcfa</td>.';
                                 }
                                 $output .='
                             </tr>
