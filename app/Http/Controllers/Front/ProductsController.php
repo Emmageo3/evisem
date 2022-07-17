@@ -355,7 +355,8 @@ class ProductsController extends Controller
 
             if($data['payment_gateway']=="COD"){
                 $payment_method = "COD";
-
+            }else if($data['payment_gateway']=="Paypal"){
+                return redirect('paypal');
             }else{
                 $payment_method = "Prepaid";
             }
