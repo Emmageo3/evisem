@@ -12,7 +12,8 @@ class PaypalController extends Controller
     {
         if(Session::has('order_id')){
             Cart::where('user_id', Auth::user()->id)->delete();
-            return view('front.paypal.paypal');
+            $orderDetails = Order::where('id', Session::get('order_id')->first()->toArray());
+            return view('front.paypal.paypal', compact('orderDetails'));
         }else{
             return redirect('cart');
         }

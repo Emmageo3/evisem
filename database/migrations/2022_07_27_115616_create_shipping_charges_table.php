@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('type')->after('status');
+        Schema::create('shipping_charges', function (Blueprint $table) {
+            $table->id();
+            $table->string('zone');
+            $table->float('shipping_charges');
+            $table->tinyInteger('status');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('type');
-        });
+        Schema::dropIfExists('shipping_charges');
     }
 };
