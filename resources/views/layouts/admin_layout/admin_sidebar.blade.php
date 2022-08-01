@@ -168,6 +168,17 @@
                   <p>Commandes</p>
                 </a>
               </li>
+              @if (Session::get('page') == "shipping-charges")
+                  <?php $active = "active"; ?>
+              @else
+                  <?php $active=""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{ url('admin/view-shipping-charges') }}" class="nav-link {{ $active }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Frais de livraison</p>
+                </a>
+              </li>
             </ul>
           </li>
 
