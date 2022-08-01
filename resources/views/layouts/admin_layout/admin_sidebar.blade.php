@@ -168,7 +168,7 @@
                   <p>Commandes</p>
                 </a>
               </li>
-              @if (Session::get('page') == "shipping-charges")
+              @if (Session::get('page') == "shipping_charges")
                   <?php $active = "active"; ?>
               @else
                   <?php $active=""; ?>
