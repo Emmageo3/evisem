@@ -131,6 +131,8 @@ $(document).ready(function(){
     })
 
 
+
+
     $(".updateBannerStatus").click(function(){
         var status = $(this).text();
         var banner_id = $(this).attr('banner_id');
@@ -168,6 +170,26 @@ $(document).ready(function(){
             }
         })
     })
+
+    $(".updateShippingStatus").click(function(){
+        var status = $(this).text();
+        var coupon_id = $(this).attr('shipping_id');
+        $.ajax({
+            type:'post',
+            url: '/admin/update-shipping-status',
+            data:{status:status,shipping_id:shipping_id},
+            success:function(resp){
+                if(resp['status']==0){
+                    $("#shipping-"+shipping_id).html("<a href='javascript:void(0)' class='updateShippingStatus'>Inactif</a>")
+                }else if(resp['status']==1){
+                    $("#shipping-"+shipping_id).html("<a href='javascript:void(0)' class='updateShippingStatus'>Actif</a>")
+                }
+            },error:function(){
+                alert("Erreur")
+            }
+        })
+    })
+
 
     $("#manualCoupon").click(function(){
         $("#couponField").show();

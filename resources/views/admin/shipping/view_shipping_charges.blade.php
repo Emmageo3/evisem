@@ -54,13 +54,13 @@
                         <td>{{ $shipping['shipping_charges'] }} Fcfa</td>
                         <td>
                         @if($shipping['status']==1)
-                         <a href="javascript:void(0)" class="updateShippingStatus">Actif</a>
+                        <a href="javascript:void(0)" class="updateShippingStatus" id="shipping-{{ $shipping['id'] }}" shipping_id="{{ $shipping['id'] }}">Actif</a>
                          @else
-                         <a href="javascript:void(0)" class="updateShippingStatus">Inactif</a>
+                         <a href="javascript:void(0)" class="updateShippingStatus" id="shipping-{{ $shipping['id'] }}" shipping_id="{{ $shipping['id'] }}" >Inactif</a>
                          @endif
                         </td>
                         <td>
-                            <a title="mettre a jour les frais de livraison" href=""><i class="fas fa-edit"></i></a>
+                            <a title="mettre a jour les frais de livraison" href="{{ url('admin/edit-shipping-charges/'.$shipping['id']) }}"><i class="fas fa-edit"></i></a>
                             &nbsp;&nbsp;
                         </td>
                     </tr>
