@@ -173,7 +173,7 @@ $(document).ready(function(){
 
     $(".updateShippingStatus").click(function(){
         var status = $(this).text();
-        var coupon_id = $(this).attr('shipping_id');
+        var shipping_id = $(this).attr('shipping_id');
         $.ajax({
             type:'post',
             url: '/admin/update-shipping-status',
