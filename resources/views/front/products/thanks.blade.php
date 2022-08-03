@@ -13,6 +13,7 @@
         <h3>Votre commande a bien été enregistrée</h3>
         <p>Votre numéro de commande est {{ Session::get('order_id') }}.</p>
         <p>Le total est {{ Session::get('grand_total') }} Fcfa</p>
+        <p>La livraison est à 1000 Fcfa partout dans Dakar</p>
     </div>
 
 </div>

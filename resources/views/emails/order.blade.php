@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <td colspan="5" align="right">Total</td>
-                    <td>{{ $orderDetails['grand_total'] }} Fcfa</td>
+                    <td>{{ $orderDetails['grand_total'] + $orderDetails['shipping_charges'] }} Fcfa</td>
                 </tr>
             </table>
         </td></tr>

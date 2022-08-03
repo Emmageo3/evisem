@@ -39,9 +39,9 @@
 				    </div>
 			    </div>
                 <div class="control-group">
-				    <label class="control-label" for="address">Adresse</label>
+				    <label class="control-label" for="zone">Zone</label>
 				    <div class="controls">
-				         <input class="span3" value="{{ $address['address'] }}"  type="text" id="address" name="address">
+				         <input class="span3" value="{{ $address['zone'] }}"  type="text" id="zone" name="zone">
 				    </div>
 			    </div>
                 <div class="control-group">

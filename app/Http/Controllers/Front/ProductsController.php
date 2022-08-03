@@ -18,6 +18,7 @@ use App\Models\DeliveryAddress;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrdersProduct;
+use App\Models\ShippingCharge;
 use Session;
 use Auth;
 use DB;
@@ -438,6 +439,7 @@ class ProductsController extends Controller
         }
 
         $deliveryAddresses = DeliveryAddress::deliveryAddresses();
+
         return view('front.products.checkout', compact('userCartItems','deliveryAddresses'));
     }
 
@@ -470,7 +472,7 @@ class ProductsController extends Controller
 
             $address->user_id = Auth::user()->id;
             $address->name = $data['name'];
-            $address->address = $data['address'];
+            $address->zone = $data['zone'];
             $address->city = $data['city'];
             $address->state = $data['state'];
             $address->country = $data['country'];
